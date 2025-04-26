@@ -37,7 +37,10 @@ namespace QLDeAn
             this.grantee = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.searchGranteeBtn = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -50,7 +53,7 @@ namespace QLDeAn
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1201, 480);
+            this.dataGridView1.Size = new System.Drawing.Size(1201, 219);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -84,9 +87,9 @@ namespace QLDeAn
             this.tableLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLabel.Location = new System.Drawing.Point(27, 76);
             this.tableLabel.Name = "tableLabel";
-            this.tableLabel.Size = new System.Drawing.Size(82, 20);
+            this.tableLabel.Size = new System.Drawing.Size(68, 20);
             this.tableLabel.TabIndex = 6;
-            this.tableLabel.Text = "Privilege";
+            this.tableLabel.Text = "TABLE";
             this.tableLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // select
@@ -127,6 +130,31 @@ namespace QLDeAn
             this.searchGranteeBtn.UseVisualStyleBackColor = true;
             this.searchGranteeBtn.Click += new System.EventHandler(this.searchGranteeBtn_Click);
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(30, 365);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(1201, 226);
+            this.dataGridView2.TabIndex = 3;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(26, 342);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "COL";
+            this.label2.Click += new System.EventHandler(this.label1_Click);
+            // 
             // PrivilegeUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -135,14 +163,17 @@ namespace QLDeAn
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grantee);
             this.Controls.Add(this.select);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.tableLabel);
             this.Controls.Add(this.revokePrivilege);
             this.Controls.Add(this.grantPrivilege);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Name = "PrivilegeUI";
             this.Size = new System.Drawing.Size(1261, 620);
             this.Load += new System.EventHandler(this.UserAndRole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +189,7 @@ namespace QLDeAn
         private System.Windows.Forms.TextBox grantee;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button searchGranteeBtn;
+        public System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -24,6 +24,7 @@ namespace QLDeAn
         private void GrantPrivil_F_Load(object sender, EventArgs e)
         {
             conNow = LoginUI.con;
+            load_list_table();
         }
 
         private void userrolelabel_Click(object sender, EventArgs e) { }
@@ -63,7 +64,6 @@ namespace QLDeAn
                     {
                         roleuser.Enabled = false;
                         privil.Enabled = true;
-                        load_list_table();
                         //table.Enabled = true;
                         //column.Enabled = true;
 
@@ -227,7 +227,7 @@ namespace QLDeAn
 
                     //cập nhật lại Privilge
                     //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
-                    string sql = "select * from DBA_TAB_PRIVS ";
+                    string sql = "select * from USER_TAB_PRIVS  ";
 
 
                     OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
@@ -269,7 +269,7 @@ namespace QLDeAn
 
                     //cập nhật lại Privilge
                     //string sql = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
-                    string sql = "select * from DBA_COL_PRIVS ";
+                    string sql = "select * from DBA_COL_PRIVS  ";
 
 
                     OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
@@ -323,7 +323,7 @@ namespace QLDeAn
         }
         private void load_list_table()
         {
-            string query = "SELECT table_name FROM user_tables ORDER BY table_name ";
+            string query = "SELECT OBJECT_NAME FROM USER_OBJECTS WHERE object_type IN ('TABLE', 'VIEW') ORDER BY OBJECT_NAME ";
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = conNow;
             cmd.CommandText = query;

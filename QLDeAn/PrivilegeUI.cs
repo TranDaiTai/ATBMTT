@@ -17,6 +17,7 @@ namespace QLDeAn
         {
             InitializeComponent();
 
+
         }
 
         public static OracleConnection conNow = LoginUI.con;
@@ -28,7 +29,17 @@ namespace QLDeAn
 
         }
 
+        public void view_col_privil()
+        {
 
+            string sql = "select * from DBA_COL_PRIVS ";
+
+            OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
+            DataTable dt2 = new DataTable();
+            da.Fill(dt2);
+            dataGridView2.DataSource = dt2;
+            data_grid_view2 = dataGridView2;
+        }
         public void view_table_privil()
         {
             //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
@@ -72,6 +83,8 @@ namespace QLDeAn
         private void select_Click(object sender, EventArgs e)
         {
             view_table_privil();
+            view_col_privil();
+
         }
 
         private void searchGranteeBtn_Click(object sender, EventArgs e)
@@ -89,8 +102,15 @@ namespace QLDeAn
             DataTable dt1 = new DataTable();
             da.Fill(dt1);
             dataGridView1.DataSource = dt1;
-            data_grid_view1 = dataGridView1; 
-            
+            data_grid_view1 = dataGridView1;
+            string sql2 = $"select * from DBA_COL_PRIVS where GRANTEE = '{grantee.Text}'";
+
+            OracleDataAdapter da2 = new OracleDataAdapter(sql2, conNow);
+            DataTable dt2 = new DataTable();
+            da2.Fill(dt2);
+            dataGridView2.DataSource = dt2;
+            data_grid_view2 = dataGridView2;
+
         }
     }
 }
