@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 
@@ -24,6 +25,8 @@ namespace QLDeAn
         private void RevokePrivil_F_Load(object sender, EventArgs e)
         {
             conNow = LoginUI.con;
+            load_list_table();
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -81,7 +84,7 @@ namespace QLDeAn
                     OracleCommand cmd = new OracleCommand();
 
                     cmd.Connection = conNow;
-                    cmd.CommandText = "QLDA.revoke_privil";
+                    cmd.CommandText = "QLDL.revoke_privil";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     OracleParameter inParam1 = cmd.Parameters.Add("username", OracleDbType.Varchar2);
@@ -152,7 +155,9 @@ namespace QLDeAn
 
 
                         //cập nhật lại Privilge
-                        string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+                        //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+                        string sql = "select * from DBA_TAB_PRIVS ";
+
 
                         OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
                         DataTable dt1 = new DataTable();
@@ -160,7 +165,9 @@ namespace QLDeAn
                         PrivilegeUI.data_grid_view1.DataSource = dt1;
 
                         //cập nhật lại Privilge
-                        string sql2 = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
+                        //string sql2 = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
+                        string sql2 = "select * from DBA_COL_PRIVS ";
+
 
                         OracleDataAdapter da2 = new OracleDataAdapter(sql2, conNow);
                         DataTable dt2 = new DataTable();
@@ -207,6 +214,19 @@ namespace QLDeAn
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
 
+        }
+        public void load_list_table()
+        {
+            string query = "SELECT table_name FROM user_tables ORDER BY table_name ";
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conNow;
+            cmd.CommandText = query;
+            OracleDataReader reader = cmd.ExecuteReader();
+            TVcomboBox.Items.Clear(); // Xóa các mục hiện có trong listbox
+            while (reader.Read())
+            {
+                TVcomboBox.Items.Add(reader.GetString(0)); // cột đầu tiên
+            }
         }
     }
 }

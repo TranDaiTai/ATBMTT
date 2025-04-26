@@ -124,6 +124,7 @@ namespace QLDeAn
             this.userAndRoleUI1.Name = "userAndRoleUI1";
             this.userAndRoleUI1.Size = new System.Drawing.Size(1261, 620);
             this.userAndRoleUI1.TabIndex = 0;
+            this.userAndRoleUI1.Load += new System.EventHandler(this.userAndRoleUI1_Load);
             // 
             // tabPrivilege
             // 

@@ -31,7 +31,9 @@ namespace QLDeAn
 
         public void view_table_privil()
         {
-            string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+            //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+            string sql = "select * from USER_TAB_PRIVS  ";
+
 
             OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
             DataTable dt1 = new DataTable();
@@ -79,7 +81,9 @@ namespace QLDeAn
                 MessageBox.Show("Vui lòng nhập Grantee");
                 return;
             }
-            string sql = $"select * from DBA_TAB_PRIVS where (TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%') AND GRANTEE = '{grantee.Text}'";
+            //string sql = $"select * from DBA_TAB_PRIVS where (TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%') AND GRANTEE = '{grantee.Text}'";
+            string sql = $"select * from USER_TAB_PRIVS where GRANTEE = '{grantee.Text}'";
+
 
             OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
             DataTable dt1 = new DataTable();

@@ -83,6 +83,7 @@ namespace QLDeAn
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(308, 27);
             this.username.TabIndex = 3;
+            this.username.Text = "QLDL";
             this.username.TextChanged += new System.EventHandler(this.username_TextChanged);
             // 
             // password
@@ -93,6 +94,7 @@ namespace QLDeAn
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(308, 27);
             this.password.TabIndex = 4;
+            this.password.Text = "123456";
             this.password.UseSystemPasswordChar = true;
             this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
             // 
@@ -160,7 +162,7 @@ namespace QLDeAn
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_user);
             this.Controls.Add(this.title);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginUI";
             this.Text = "ĐĂNG NHẬP HỆ THỐNG";
             this.Load += new System.EventHandler(this.LoginUI_Load);

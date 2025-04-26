@@ -77,11 +77,6 @@ namespace QLDeAn
 
         }
 
-        private void userAndRoleUI1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void roleUI1_Load(object sender, EventArgs e)
         {
 
@@ -108,6 +103,11 @@ namespace QLDeAn
         }
 
         private void privilegeUI1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userAndRoleUI1_Load(object sender, EventArgs e)
         {
 
         }

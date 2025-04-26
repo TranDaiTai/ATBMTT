@@ -101,7 +101,7 @@ namespace QLDeAn
         {
             string sql;
             if (textFU.Text.Length == 0)
-                sql = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS";
+                sql = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS ";
             else
                 sql = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS WHERE USERNAME = \'" + textFU.Text + '\'';
             OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
@@ -140,6 +140,13 @@ namespace QLDeAn
         {
             view_users();
             view_roles();
+        }
+        
+        private void UserAndRoleUI_Load(object sender, EventArgs e)
+        {
+          
+            //view_users();
+            //view_roles();
         }
     }
 }

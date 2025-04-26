@@ -126,7 +126,7 @@ namespace QLDeAn
             this.withgrantoption.Enabled = false;
             this.withgrantoption.Location = new System.Drawing.Point(173, 184);
             this.withgrantoption.Name = "withgrantoption";
-            this.withgrantoption.Size = new System.Drawing.Size(175, 21);
+            this.withgrantoption.Size = new System.Drawing.Size(169, 20);
             this.withgrantoption.TabIndex = 19;
             this.withgrantoption.Text = "WITH GRANT OPTION";
             this.withgrantoption.UseVisualStyleBackColor = true;
@@ -200,6 +200,7 @@ namespace QLDeAn
             this.table.Size = new System.Drawing.Size(162, 24);
             this.table.TabIndex = 29;
             this.table.SelectedIndexChanged += new System.EventHandler(this.table_SelectedIndexChanged);
+            this.table.Click += new System.EventHandler(this.table_Click);
             // 
             // columnlabel
             // 
@@ -219,7 +220,7 @@ namespace QLDeAn
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(30, 208);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(398, 17);
+            this.label1.Size = new System.Drawing.Size(362, 16);
             this.label1.TabIndex = 31;
             this.label1.Text = "(*) Vui lòng nhấn nút \"Kiểm tra\" bên trên để có thể cấp quyền.";
             // 

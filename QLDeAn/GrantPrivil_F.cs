@@ -17,6 +17,7 @@ namespace QLDeAn
         {
             InitializeComponent();
         }
+      
 
         public static OracleConnection conNow;
         public static string result_roleuser;
@@ -42,7 +43,7 @@ namespace QLDeAn
                     var cmd = new OracleCommand();
 
                     cmd.Connection = conNow;
-                    cmd.CommandText = "QLDA.check_user_role_exist";
+                    cmd.CommandText = "QLDL.check_user_role_exist";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
@@ -62,6 +63,7 @@ namespace QLDeAn
                     {
                         roleuser.Enabled = false;
                         privil.Enabled = true;
+                        load_list_table();
                         //table.Enabled = true;
                         //column.Enabled = true;
 
@@ -215,7 +217,7 @@ namespace QLDeAn
                 //Các trường hợp cấp quyền
                 if (privil.Text.ToString() == "INSERT")
                 {
-                    cmd.CommandText = "QLDA.grant_insert_privilege";
+                    cmd.CommandText = "QLDL.grant_insert_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
@@ -224,7 +226,9 @@ namespace QLDeAn
                     cmd.ExecuteNonQuery();
 
                     //cập nhật lại Privilge
-                    string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+                    //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+                    string sql = "select * from DBA_TAB_PRIVS ";
+
 
                     OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
                     DataTable dt1 = new DataTable();
@@ -234,7 +238,7 @@ namespace QLDeAn
                 }
                 else if (privil.Text.ToString() == "DELETE")
                 {
-                    cmd.CommandText = "QLDA.grant_delete_privilege";
+                    cmd.CommandText = "QLDL.grant_delete_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
@@ -243,7 +247,9 @@ namespace QLDeAn
                     cmd.ExecuteNonQuery();
 
                     //cập nhật lại Privilge
-                    string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+                    //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%' ";
+                    string sql = "select * from DBA_TAB_PRIVS ";
+
 
                     OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
                     DataTable dt1 = new DataTable();
@@ -252,7 +258,7 @@ namespace QLDeAn
                 }
                 else if (privil.Text.ToString() == "UPDATE")
                 {
-                    cmd.CommandText = "QLDA.grant_update_privilege";
+                    cmd.CommandText = "QLDL.grant_update_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
@@ -262,7 +268,9 @@ namespace QLDeAn
                     cmd.ExecuteNonQuery();
 
                     //cập nhật lại Privilge
-                    string sql = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
+                    //string sql = "select * from DBA_COL_PRIVS where TABLE_NAME LIKE 'QLDA_%' ";
+                    string sql = "select * from DBA_COL_PRIVS ";
+
 
                     OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
                     DataTable dt1 = new DataTable();
@@ -271,7 +279,7 @@ namespace QLDeAn
                 }
                 else if (privil.Text.ToString() == "SELECT")
                 {
-                    cmd.CommandText = "QLDA.grant_select_privilege";
+                    cmd.CommandText = "QLDL.grant_select_privilege";
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("user_role", roleuser.Text.ToString());
@@ -282,7 +290,9 @@ namespace QLDeAn
                     cmd.ExecuteNonQuery();
 
                     //cập nhật lại Privilge
-                    string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%'";
+                    //string sql = "select * from DBA_TAB_PRIVS where TABLE_NAME LIKE 'QLDA_%' OR TABLE_NAME LIKE 'V_QLDA_%'";
+                    string sql = "select * from DBA_TAB_PRIVS ";
+
 
                     OracleDataAdapter da = new OracleDataAdapter(sql, conNow);
                     DataTable dt1 = new DataTable();
@@ -305,6 +315,24 @@ namespace QLDeAn
         private void Close_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void table_Click(object sender, EventArgs e)
+        {
+      
+        }
+        private void load_list_table()
+        {
+            string query = "SELECT table_name FROM user_tables ORDER BY table_name ";
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conNow;
+            cmd.CommandText = query;
+            OracleDataReader reader = cmd.ExecuteReader();
+            table.Items.Clear(); // Xóa các mục hiện có trong listbox
+            while (reader.Read())
+            {
+                table.Items.Add(reader.GetString(0)); // cột đầu tiên
+            }
         }
     }
 }

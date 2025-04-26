@@ -59,7 +59,7 @@ namespace QLDeAn
                 if (role.Text == "SYSDBA")
                     connectionString = @"DATA SOURCE = localhost:1521/XE;DBA Privilege=SYSDBA; USER ID=" + username.Text +";PASSWORD=" + password.Text;
                 else
-                    connectionString = @"DATA SOURCE = localhost:1521/XE; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
+                    connectionString = @"DATA SOURCE = localhost:1521/QLDULIEUNOIBO; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
 
                 con = new OracleConnection();
                 con.ConnectionString = connectionString;
@@ -70,16 +70,13 @@ namespace QLDeAn
 
                 if (role.Text == "SYSDBA" || role.Text == "ADMIN")
                 {
-
-                    OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
-                    command.ExecuteNonQuery();
                     MessageBox.Show("Connect với Oracle thành công");
                     DBAUI dba = new DBAUI();
                     dba.Show();
                 }
                 else
                 {
-                 
+                 // XU LY CHO NHUNG VAI TRO KHAC
                 }
                 
 

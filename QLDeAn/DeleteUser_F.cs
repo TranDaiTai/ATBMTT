@@ -43,9 +43,9 @@ namespace QLDeAn
                     var cmd = new OracleCommand();
 
                     cmd.Connection = conNow;
-                    cmd.CommandText = "QLDA.check_user_role_exist";
+                    cmd.CommandText = "QLDL.check_user_role_exist";
                     cmd.CommandType = CommandType.StoredProcedure;
-
+    
                     cmd.Parameters.Add("user_role", usernameBox.Text.ToString());
                     cmd.Parameters.Add("res", OracleDbType.Int32).Direction = ParameterDirection.Output;
 
@@ -64,7 +64,7 @@ namespace QLDeAn
                         var cmd1 = new OracleCommand();
 
                         cmd1.Connection = conNow;
-                        cmd1.CommandText = "QLDA.delete_user";
+                        cmd1.CommandText = "QLDL.delete_user";
                         cmd1.CommandType = CommandType.StoredProcedure;
                         cmd1.Parameters.Add("p_username", usernameBox.Text.ToString());
 
