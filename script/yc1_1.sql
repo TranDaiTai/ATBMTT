@@ -1,105 +1,59 @@
--- yêu cầu 1 
--- Tạo role cho từng vai trò
-CREATE ROLE NVCB;
-CREATE ROLE GV;
-CREATE ROLE NV_PDT;
-CREATE ROLE NV_PKT;
-CREATE ROLE NV_TCHC;
-CREATE ROLE NV_CTSV;
-CREATE ROLE TRGDV;
+--1. Tạo các vai trò tương ứng (roles)
+CREATE ROLE ROLE_GV;
+CREATE ROLE ROLE_NV_PDT;
+CREATE ROLE ROLE_NV_PKT;
+CREATE ROLE ROLE_NV_CTSV;
 
---Cấp quyền cho role NVCB
---Tạo policy function để giới hạn truy cập đến dòng của chính người dùng
+-- Vai trò nhân viên cơ bản
+CREATE ROLE ROLE_NVCB;
 
-CREATE OR REPLACE FUNCTION restrict_nhanvien_nvcb (
-    p_schema IN VARCHAR2,
-    p_object IN VARCHAR2
-) RETURN VARCHAR2 
-AS
-    USERNAME VARCHAR2(128);
+-- Vai trò trưởng đơn vị
+CREATE ROLE ROLE_TRGDV;
+
+-- Vai trò nhân viên tổ chức hành chính
+CREATE ROLE ROLE_TCHC;
+
+--2. Tạo view và policy phù hợp với từng vai trò
+--2.1. NVCB – Xem và sửa ĐT của chính mình
+-- View cho NVCB chỉ xem thông tin chính mình
+CREATE OR REPLACE VIEW VIEW_NHANVIEN_NVCB AS
+SELECT * FROM NHANVIEN
+WHERE SYS_CONTEXT('USERENV', 'SESSION_USER') = MANV;
+
+-- Cho phép sửa số điện thoại của chính mình bằng trigger
+CREATE OR REPLACE TRIGGER trg_update_dt_nv
+BEFORE UPDATE ON NHANVIEN
+FOR EACH ROW
+WHEN (OLD.MANV = SYS_CONTEXT('USERENV', 'SESSION_USER'))
 BEGIN
-    -- Lấy username của user hiện tại
-    USERNAME := SYS_CONTEXT('userenv', 'SESSION_USER');
-    -- Giới hạn truy cập đến dòng có MANV = USER (người dùng hiện tại)
-    RETURN 'MANV = ''' || USERNAME || '''';
+   IF :NEW.DT != :OLD.DT THEN
+      NULL; -- Cho phép cập nhật
+   ELSE
+      :NEW.DT := :OLD.DT; -- Không thay đổi gì
+   END IF;
 END;
 /
+-- Cấp quyền cho role
+GRANT SELECT, UPDATE (DT) ON VIEW_NVCB TO ROLE_NVCB;
+--2.2 Tất cả nhân viên thuộc các vai trò còn lại đều có quyền của vai trò “NVCB”
+GRANT ROLE_NVCB TO ROLE_GV;
+GRANT ROLE_NVCB TO ROLE_NV_PDT;
+GRANT ROLE_NVCB TO ROLE_NV_PKT;
+GRANT ROLE_NVCB TO ROLE_NV_CTSV;
+GRANT ROLE_NVCB TO ROLE_TRGDV;
+GRANT ROLE_NVCB TO ROLE_TCHC;
 
---Áp dụng policy VPD cho SELECT trên NHANVIEN
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'NHANVIEN',
-        policy_name     => 'NVCB_SELECT_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_nhanvien_nvcb',
-        statement_types  => 'SELECT',
-        sec_relevant_cols => 'MANV,HOTEN,PHAI,NGSINH,DT,VAITRO,MADV'
-    );
-END;
-/
+--2.3. TRGDV – Xem nhân viên đơn vị mình, ẩn lương & phụ cấp
+-- View ẩn LUONG và PHUCAP cho TRGDV
+CREATE OR REPLACE VIEW VIEW_NHANVIEN_TRGDV AS
+SELECT MANV, HOTEN, PHAI, NGSINH, DT, VAITRO, MADV
+FROM NHANVIEN
+WHERE MADV = (
+  SELECT MADV FROM DONVI WHERE TRGDV = SYS_CONTEXT('USERENV', 'SESSION_USER')
+);
 
---Áp dụng policy VPD cho UPDATE trên cột DT
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'NHANVIEN',
-        policy_name     => 'NVCB_UPDATE_DT_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_nhanvien_nvcb',
-        statement_types  => 'UPDATE',
-        sec_relevant_cols => 'DT',
-        sec_relevant_cols_opt => DBMS_RLS.ALL_ROWS
-    );
-END;
-/
+-- Cấp quyền cho role
+GRANT SELECT ON VIEW_TRGDV TO ROLE_TRGDV;
 
---Cấp quyền cho role NVCB
-GRANT SELECT ON QLDL.NHANVIEN TO NVCB;
-GRANT UPDATE (DT) ON QLDL.NHANVIEN TO NVCB;
---Cấp quyền cho các vai trò khác (kế thừa quyền NVCB)
-GRANT NVCB TO GV;
-GRANT NVCB TO NV_PDT;
-GRANT NVCB TO NV_PKT;
-GRANT NVCB TO NV_TCHC;
-GRANT NVCB TO NV_CTSV;
-GRANT NVCB TO TRGDV;
-
--- Cấp quyền cho role trgdv
---Tạo policy function cho TRGDV
-CREATE OR REPLACE FUNCTION restrict_nhanvien_trgdv (
-    p_schema IN VARCHAR2,
-    p_object IN VARCHAR2
-) RETURN VARCHAR2 AS
-    v_madv VARCHAR2(5);
-BEGIN
-    -- Lấy MADV của đơn vị mà người dùng là trưởng (TRGDV)
-    SELECT MADV INTO v_madv
-    FROM QLDL.DONVI
-    WHERE TRGDV = SYS_CONTEXT('userenv', 'SESSION_USER');
-    
-    -- Giới hạn truy cập đến các nhân viên thuộc đơn vị đó
-    RETURN 'MADV = ''' || v_madv || '''';
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN '1=0'; -- Không cho phép truy cập nếu không tìm thấy đơn vị
-END;
-/
---Áp dụng policy VPD cho SELECT của TRGDV
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'NHANVIEN',
-        policy_name     => 'TRGDV_SELECT_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_nhanvien_trgdv',
-        statement_types  => 'SELECT',
-        sec_relevant_cols => 'MANV,HOTEN,PHAI,NGSINH,DT,VAITRO,MADV'
-    );
-END;
-/
-
-
--- Cấp quyền cho role NV_TCHC
-GRANT SELECT, INSERT, UPDATE, DELETE ON QLDL.NHANVIEN TO NV_TCHC;
-
+--2.4. NV TCHC – Toàn quyền trên NHANVIEN
+GRANT SELECT, INSERT, UPDATE, DELETE ON NHANVIEN TO ROLE_TCHC;

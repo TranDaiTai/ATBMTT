@@ -1,35 +1,17 @@
---Tạo policy VPD cho từng vai trò
---Policy cho GV
-CREATE OR REPLACE FUNCTION restrict_momon_gv (
-    p_schema IN VARCHAR2,
-    p_object IN VARCHAR2
-) RETURN VARCHAR2 AS
-BEGIN
-    RETURN 'MAGV = ''' || SYS_CONTEXT('USERENV', 'SESSION_USER') || '''';
-END;
-/ 
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'MOMON',
-        policy_name     => 'GV_MOMON_SELECT_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_momon_gv',
-        statement_types  => 'SELECT',
-        sec_relevant_cols => 'MAMM,MAHP,MAGV,HK,NAM'
-    );
-END;
-/
---Policy cho NV_PDT:
-CREATE OR REPLACE FUNCTION restrict_momon_nv_pdt (
-    p_schema IN VARCHAR2,
-    p_object IN VARCHAR2
-) RETURN VARCHAR2 AS
+--Tạo các view và cấp quyền theo vai trò
+--2.1. Giảng viên (GV) – Xem phân công giảng dạy của chính mình
+CREATE OR REPLACE VIEW VIEW_MOMON_GV AS
+SELECT * FROM MOMON
+WHERE MAGV = SYS_CONTEXT('USERENV', 'SESSION_USER');
+
+GRANT SELECT ON VIEW_MOMON_GV TO ROLE_GV;
+
+--2.2. Nhân viên PĐT – Toàn quyền trên học kỳ hiện tại
+--Function trả về học kỳ hiện tại
+CREATE OR REPLACE FUNCTION CURRENT_HK RETURN NUMBER IS
     v_month NUMBER := EXTRACT(MONTH FROM SYSDATE);
-    v_year  NUMBER := EXTRACT(YEAR FROM SYSDATE);
     v_hk    NUMBER;
 BEGIN
-    -- Xác định học kỳ theo tháng
     IF v_month BETWEEN 9 AND 12 THEN
         v_hk := 1;
     ELSIF v_month BETWEEN 1 AND 4 THEN
@@ -37,93 +19,46 @@ BEGIN
     ELSE
         v_hk := 3;
     END IF;
-
-    RETURN 'HK = ' || v_hk || ' AND NAM = ' || v_year;
-END;
-
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'MOMON',
-        policy_name     => 'NV_PDT_MOMON_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_momon_nv_pdt',
-        statement_types  => 'SELECT,INSERT,UPDATE,DELETE',
-        update_check     => TRUE -- Kiểm tra dữ liệu mới khi UPDATE/INSERT
-    );
+    RETURN v_hk;
 END;
 /
---Policy cho TRGDV:
-CREATE OR REPLACE FUNCTION restrict_momon_trgdv (
-    p_schema IN VARCHAR2,
-    p_object IN VARCHAR2
-) RETURN VARCHAR2 AS
-    v_madv VARCHAR2(5);
+--Function trả về năm học hiện tại
+CREATE OR REPLACE FUNCTION CURRENT_NAM RETURN NUMBER IS
+    v_month NUMBER := EXTRACT(MONTH FROM SYSDATE);
+    v_year  NUMBER := EXTRACT(YEAR FROM SYSDATE);
+    v_nam   NUMBER;
 BEGIN
-    -- Lấy MADV của đơn vị mà người dùng là trưởng
-    SELECT MADV INTO v_madv
-    FROM QLDL.DONVI
-    WHERE TRGDV = sys_context('userenv', 'SESSION_USER');
-    
-    -- Giới hạn truy cập đến các dòng MOMON có MAHP thuộc đơn vị đó
-    RETURN 'MAGV IN (SELECT MAGV FROM QLDL.NHANVIEN WHERE MADV = ''' || v_madv || ''')';
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN '1=0'; -- Không cho phép truy cập nếu không phải trưởng đơn vị
+    IF v_month BETWEEN 9 AND 12 THEN
+        v_nam := v_year;
+    ELSE
+        v_nam := v_year - 1;
+    END IF;
+    RETURN v_nam;
 END;
 /
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'MOMON',
-        policy_name     => 'TRGDV_MOMON_SELECT_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_momon_trgdv',
-        statement_types  => 'SELECT',
-        sec_relevant_cols => 'MAMM,MAHP,MAGV,HK,NAM'
-    );
-END;
-/
---Policy cho SINHVIEN
-CREATE OR REPLACE FUNCTION restrict_momon_sinhvien (
-    p_schema IN VARCHAR2,
-    p_object IN VARCHAR2
-) RETURN VARCHAR2 AS
-    v_khoa VARCHAR2(5);
-BEGIN
-    -- Lấy KHOA của sinh viên từ bảng SINHVIEN
-    SELECT KHOA INTO v_khoa
-    FROM QLDL.SINHVIEN
-    WHERE MASV = sys_context('userenv', 'SESSION_USER');
-    
-    -- Giới hạn truy cập đến các dòng MOMON có MAHP thuộc khoa của sinh viên
-    RETURN 'MAHP IN (SELECT MAHP FROM QLDL.HOCPHAN WHERE MADV = ''' || v_khoa || ''')';
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN '1=0'; -- Không cho phép truy cập nếu không phải sinh viên
-END;
-/
-BEGIN
-    DBMS_RLS.ADD_POLICY (
-        object_schema   => 'QLDL',
-        object_name     => 'MOMON',
-        policy_name     => 'SINHVIEN_MOMON_SELECT_POLICY',
-        function_schema => 'QLDL',
-        policy_function => 'restrict_momon_sinhvien',
-        statement_types  => 'SELECT',
-        sec_relevant_cols => 'MAMM,MAHP,MAGV,HK,NAM'
-    );
-END;
-/
---Cấp quyền cho các role
--- Quyền cho GV
-GRANT SELECT ON QLDL.MOMON TO GV;
+CREATE OR REPLACE VIEW VIEW_MOMON_PDT AS
+SELECT * FROM MOMON
+WHERE HK = CURRENT_HK() AND NAM = CURRENT_NAM();
 
--- Quyền cho NV_PDT
-GRANT SELECT, INSERT, UPDATE, DELETE ON QLDL.MOMON TO NV_PDT;
+-- Cấp toàn quyền trên dữ liệu hiện tại
+GRANT SELECT, INSERT, UPDATE, DELETE ON VIEW_MOMON_PDT TO ROLE_NV_PDT;
 
--- Quyền cho TRGDV
-GRANT SELECT ON QLDL.MOMON TO TRGDV;
+-- 2.3. Trưởng đơn vị (TRGDV) – Xem các giảng viên thuộc đơn vị mình
+CREATE OR REPLACE VIEW VIEW_MOMON_TRGDV AS
+SELECT M.*
+FROM MOMON M
+JOIN NHANVIEN GV ON M.MAGV = GV.MANV
+JOIN DONVI D ON GV.MADV = D.MADV
+WHERE D.TRGDV = SYS_CONTEXT('USERENV', 'SESSION_USER');
 
--- Quyền cho SINHVIEN
-GRANT SELECT ON QLDL.MOMON TO SINHVIEN;
+GRANT SELECT ON VIEW_MOMON_TRGDV TO ROLE_TRGDV;
+
+-- 2.4. Sinh viên – Xem học phần mở do khoa mình phụ trách
+CREATE OR REPLACE VIEW VIEW_MOMON_SV AS
+SELECT M.*
+FROM MOMON M
+JOIN HOCPHAN HP ON M.MAHP = HP.MAHP
+JOIN SINHVIEN SV ON SYS_CONTEXT('USERENV', 'SESSION_USER') = SV.MASV
+WHERE HP.MADV = SV.KHOA;
+
+GRANT SELECT ON VIEW_MOMON_SV TO ROLE_SINHVIEN;
