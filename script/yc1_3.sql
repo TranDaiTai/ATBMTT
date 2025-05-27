@@ -1,25 +1,14 @@
---Hàm tổng POLICY_SINHVIEN – phân luồng
-CREATE OR REPLACE FUNCTION POLICY_SINHVIEN (
-    schema_name IN VARCHAR2,
-    table_name  IN VARCHAR2
-)
-RETURN VARCHAR2
-IS
-    v_user VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
-    v_count NUMBER;
-BEGIN
-    -- Kiểm tra có trong bảng SINHVIEN không
-    SELECT COUNT(*) INTO v_count
-    FROM SINHVIEN
-    WHERE MASV = v_user;
+GRANT EXECUTE ON DBMS_RLS TO QLDL;
 
-    IF v_count = 1 THEN
-        RETURN POLICY_SINHVIEN_SV(schema_name, table_name);
-    ELSE
-        RETURN POLICY_SINHVIEN_NV(schema_name, table_name);
-    END IF;
-END;
-/
+CONNECT QLDL/123456@localhost:1521/QLDULIEUNOIBO;
+ALTER SESSION SET CONTAINER = QLDulieuNoiBo;
+alter session set CURRENT_SCHEMA = QLDL;
+
+
+CREATE OR REPLACE VIEW QLDL.V_SINHVIEN AS
+SELECT *
+FROM QLDL.SINHVIEN;
+
 
 -- POLICY_SINHVIEN_SV – hàm cho sinh viên
 CREATE OR REPLACE FUNCTION POLICY_SINHVIEN_SV (
@@ -32,7 +21,7 @@ IS
     v_exists NUMBER;
 BEGIN
     SELECT COUNT(*) INTO v_exists
-    FROM SINHVIEN
+    FROM QLDL.SINHVIEN
     WHERE MASV = v_user;
 
     IF v_exists = 1 THEN
@@ -74,11 +63,35 @@ END;
 /
 
 
+
+--Hàm tổng POLICY_SINHVIEN – phân luồng
+CREATE OR REPLACE FUNCTION POLICY_SINHVIEN (
+    schema_name IN VARCHAR2,
+    table_name  IN VARCHAR2
+)
+RETURN VARCHAR2
+IS
+    v_user VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+    v_count NUMBER;
+BEGIN
+    -- Kiểm tra có trong bảng SINHVIEN không
+    SELECT COUNT(*) INTO v_count
+    FROM QLDL.SINHVIEN
+    WHERE MASV = v_user;
+
+    IF v_count = 1 THEN
+        RETURN POLICY_SINHVIEN_SV(schema_name, table_name);
+    ELSE
+        RETURN POLICY_SINHVIEN_NV(schema_name, table_name);
+    END IF;
+END;
+/
+
 -- add policy to table SINHVIEN
 BEGIN
   DBMS_RLS.ADD_POLICY (
     object_schema   => 'QLDL',  -- hoặc schema của em
-    object_name     => 'SINHVIEN',
+    object_name     => 'V_SINHVIEN',
     policy_name     => 'POLICY_ACCESS_SINHVIEN',
     function_schema => 'QLDL',  -- hoặc schema của hàm
     policy_function => 'POLICY_SINHVIEN',
@@ -87,7 +100,6 @@ BEGIN
   );
 END;
 /
-
 
 --Tạo Trigger kiểm soát cập nhật trường TINHTRANG
 --Sinh viên không được sửa TINHTRANG.
@@ -123,22 +135,45 @@ CREATE OR REPLACE TRIGGER trg_sv_limit_update
 BEFORE UPDATE ON SINHVIEN
 FOR EACH ROW
 DECLARE
-    v_user  VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
-    v_count NUMBER;
+    v_user VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
 BEGIN
-    SELECT COUNT(*) INTO v_count FROM SINHVIEN WHERE MASV = v_user;
-
-    IF v_count = 1 THEN
-        -- Là sinh viên → chỉ được sửa DCHI, DT
-        IF :OLD.MASV = v_user THEN
-            IF (:OLD.HOTEN <> :NEW.HOTEN OR
-                :OLD.PHAI <> :NEW.PHAI OR
-                :OLD.NGSINH <> :NEW.NGSINH OR
-                :OLD.KHOA <> :NEW.KHOA OR
-                :OLD.TINHTRANG <> :NEW.TINHTRANG) THEN
-                RAISE_APPLICATION_ERROR(-20003, 'Sinh viên chỉ được sửa ĐCHI, ĐT');
-            END IF;
+    IF :OLD.MASV = v_user THEN
+        IF (:OLD.HOTEN != :NEW.HOTEN OR
+            :OLD.PHAI != :NEW.PHAI OR
+            :OLD.NGSINH != :NEW.NGSINH OR
+            :OLD.KHOA != :NEW.KHOA OR
+            :OLD.TINHTRANG != :NEW.TINHTRANG) THEN
+            RAISE_APPLICATION_ERROR(-20003, 'Sinh viên chỉ được sửa ĐCHI, ĐT');
         END IF;
     END IF;
 END;
 /
+
+
+-- Dành cho sinh viên: chỉ cần SELECT, UPDATE (có VPD + trigger kiểm soát trường)
+GRANT SELECT, UPDATE ON QLDL.V_SINHVIEN TO ROLE_SINHVIEN;
+
+-- Dành cho giảng viên: chỉ SELECT (VPD kiểm soát theo KHOA)
+GRANT SELECT ON QLDL.V_SINHVIEN TO ROLE_GV;
+
+-- Dành cho nhân viên PCTSV: toàn quyền INSERT, UPDATE, DELETE
+GRANT SELECT, INSERT, UPDATE, DELETE ON QLDL.SINHVIEN TO ROLE_NV_CTSV;
+
+-- Dành cho nhân viên PĐT: toàn quyền INSERT, UPDATE, DELETE
+GRANT SELECT, INSERT, UPDATE, DELETE ON QLDL.SINHVIEN TO ROLE_NV_PDT;
+
+-- Kết nối dưới SYS hoặc user có quyền DBA
+GRANT EXECUTE ON QLDL.POLICY_SINHVIEN TO public;
+GRANT EXECUTE ON QLDL.POLICY_SINHVIEN_SV TO public;
+GRANT EXECUTE ON QLDL.POLICY_SINHVIEN_NV TO public;
+
+--BEGIN
+--  DBMS_RLS.DROP_POLICY (
+--    object_schema => 'QLDL',
+--    object_name   => 'V_SINHVIEN',
+--    policy_name   => 'POLICY_ACCESS_SINHVIEN'
+--  );
+--END;
+
+
+
