@@ -117,7 +117,7 @@ END;
 BEGIN
   DBMS_RLS.ADD_POLICY (
     object_schema   => 'QLDL',
-    object_name     => 'DANGKY',
+    object_name     => 'V_DANGKY',
     policy_name     => 'POLICY_ACCESS_DANGKY',
     function_schema => 'QLDL',
     policy_function => 'POLICY_DANGKY',
@@ -153,6 +153,9 @@ BEGIN
     END;
 END;
 /
+
+
+
 --Gán quyền truy cập
 -- SV
 GRANT SELECT, INSERT, UPDATE, DELETE ON QLDL.V_DANGKY TO ROLE_SINHVIEN;
