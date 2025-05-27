@@ -117,7 +117,7 @@ END;
 BEGIN
   DBMS_RLS.ADD_POLICY (
     object_schema   => 'QLDL',
-    object_name     => 'V_DANGKY',
+    object_name     => 'DANGKY',
     policy_name     => 'POLICY_ACCESS_DANGKY',
     function_schema => 'QLDL',
     policy_function => 'POLICY_DANGKY',
@@ -126,6 +126,7 @@ BEGIN
   );
 END;
 /
+
 --Tạo trigger kiểm soát
 --a. Không cho SV/NV PĐT cập nhật điểm (DIEM_CC, DIEM_GK, DIEM_CK)
 CREATE OR REPLACE TRIGGER trg_block_update_diem
@@ -154,7 +155,54 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE TRIGGER trg_block_update_MAMM
+BEFORE UPDATE OF MAMM ON DANGKY
+FOR EACH ROW
+DECLARE
+    v_user       VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+    v_role       VARCHAR2(30);
+    v_is_sv      NUMBER;
+    v_is_pdt     NUMBER;
+    v_hocky_mh   NUMBER;
+    v_namhoc_mh  NUMBER;
+    v_sys_month  NUMBER := EXTRACT(MONTH FROM SYSDATE);
+    v_sys_day    NUMBER := EXTRACT(DAY FROM SYSDATE);
+BEGIN
+    -- Lấy học kỳ và năm học từ bảng MOMON
+    SELECT HK, NAM INTO v_hocky_mh, v_namhoc_mh
+    FROM MOMON
+    WHERE MAMM = :OLD.MAMM;
 
+    -- Kiểm tra sinh viên
+    SELECT COUNT(*) INTO v_is_sv FROM SINHVIEN WHERE MASV = v_user;
+    IF v_is_sv = 1 THEN
+        IF NOT (v_hocky_mh = CURRENT_HK() AND v_namhoc_mh = CURRENT_NAM()) THEN
+            RAISE_APPLICATION_ERROR(-20021, 'Chỉ được sửa trong học kỳ hiện tại');
+        ELSIF NOT (v_sys_month IN (1, 5, 9) AND v_sys_day <= 14) THEN
+            RAISE_APPLICATION_ERROR(-20022, 'Chỉ được sửa trong 14 ngày đầu học kỳ');
+        END IF;
+        RETURN;
+    END IF;
+
+    -- Kiểm tra NV PĐT
+    BEGIN
+        SELECT COUNT(*) INTO v_is_pdt 
+        FROM NHANVIEN 
+        WHERE MANV = v_user AND VAITRO = 'NV PĐT';
+
+        IF v_is_pdt = 1 THEN
+            IF NOT (v_hocky_mh = CURRENT_HK() AND v_namhoc_mh = CURRENT_NAM()) THEN
+                RAISE_APPLICATION_ERROR(-20023, 'Chỉ được cập nhật học kỳ hiện tại');
+            ELSIF NOT (v_sys_month IN (1, 5, 9) AND v_sys_day <= 14) THEN
+                RAISE_APPLICATION_ERROR(-20024, 'Chỉ được sửa trong 14 ngày đầu học kỳ');
+            END IF;
+            RETURN;
+        END IF;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN NULL;
+    END;
+END;
+/
 
 --Gán quyền truy cập
 -- SV
