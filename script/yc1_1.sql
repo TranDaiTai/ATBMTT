@@ -1,3 +1,5 @@
+CONNECT QLDL/123456@localhost:1521/QLDULIEUNOIBO;
+
 --1. Tạo các vai trò tương ứng (roles)
 CREATE ROLE ROLE_GV;
 CREATE ROLE ROLE_NV_PDT;

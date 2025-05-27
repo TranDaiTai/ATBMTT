@@ -1,3 +1,6 @@
+CONNECT QLDL/123456@localhost:1521/QLDULIEUNOIBO;
+
+
 --Tạo các view và cấp quyền theo vai trò
 --2.1. Giảng viên (GV) – Xem phân công giảng dạy của chính mình
 CREATE OR REPLACE VIEW VIEW_MOMON_GV AS
