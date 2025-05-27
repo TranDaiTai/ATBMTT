@@ -1,33 +1,33 @@
 --Kết nối vào CDB (root container)
---ALTER SESSION SET CONTAINER = CDB$ROOT;
-----chỉ định thư mục mặc định nơi Oracle sẽ tạo các tệp dữ liệu (datafile) cho PDB mới;
---BEGIN
---   DECLARE
---      v_path VARCHAR2(400); -- Biến để lưu đường dẫn
---   BEGIN
---      -- Lấy đường dẫn từ dba_data_files và gán vào biến
---      SELECT SUBSTR(file_name, 1, INSTR(file_name, '\', -1)-1)
---      INTO v_path
---      FROM dba_data_files 
---      WHERE tablespace_name = 'SYSTEM' 
---      AND ROWNUM = 1;
---
---      -- Thực thi lệnh ALTER SYSTEM với giá trị từ biến
---      EXECUTE IMMEDIATE 
---         'ALTER SYSTEM SET DB_CREATE_FILE_DEST = ''' || v_path || '''';
---   END;
---END;
---/
----- Tạo PDB mới với tên QLDuLieuNoiBo
---CREATE PLUGGABLE DATABASE QLDulieuNoiBo
---   ADMIN USER QLDL IDENTIFIED BY 123456;
---
----- Mở PDB để sử dụng
---ALTER PLUGGABLE DATABASE QLDulieuNoiBo OPEN;
---
----- Chuyển session sang PDB mới
---ALTER SESSION SET CONTAINER = QLDulieuNoiBo;
----- Cấp quyền 
+ALTER SESSION SET CONTAINER = CDB$ROOT;
+--chỉ định thư mục mặc định nơi Oracle sẽ tạo các tệp dữ liệu (datafile) cho PDB mới;
+BEGIN
+  DECLARE
+     v_path VARCHAR2(400); -- Biến để lưu đường dẫn
+  BEGIN
+     -- Lấy đường dẫn từ dba_data_files và gán vào biến
+     SELECT SUBSTR(file_name, 1, INSTR(file_name, '\', -1)-1)
+     INTO v_path
+     FROM dba_data_files 
+     WHERE tablespace_name = 'SYSTEM' 
+     AND ROWNUM = 1;
+
+     -- Thực thi lệnh ALTER SYSTEM với giá trị từ biến
+     EXECUTE IMMEDIATE 
+        'ALTER SYSTEM SET DB_CREATE_FILE_DEST = ''' || v_path || '''';
+  END;
+END;
+/
+-- Tạo PDB mới với tên QLDuLieuNoiBo
+CREATE PLUGGABLE DATABASE QLDulieuNoiBo
+  ADMIN USER QLDL IDENTIFIED BY 123456;
+
+-- Mở PDB để sử dụng
+ALTER PLUGGABLE DATABASE QLDulieuNoiBo OPEN;
+
+-- Chuyển session sang PDB mới
+ALTER SESSION SET CONTAINER = QLDulieuNoiBo;
+-- Cấp quyền 
 GRANT UNLIMITED TABLESPACE TO QLDL;
 GRANT CONNECT TO QLDL WITH ADMIN OPTION;
 GRANT SELECT ANY DICTIONARY TO QLDL;
@@ -114,45 +114,5 @@ CREATE TABLE DANGKY (
 ALTER TABLE DONVI
 ADD CONSTRAINT fk_trgdv FOREIGN KEY (TRGDV) REFERENCES NHANVIEN(MANV);
 
--- Tạo các role tương ứng với các vai trò
-CREATE ROLE ROLE_NVCB;
-CREATE ROLE ROLE_GV;
-CREATE ROLE ROLE_NV_PDT;
-CREATE ROLE ROLE_NV_PKT;
-CREATE ROLE ROLE_NV_TCHC;
-CREATE ROLE ROLE_NV_CTSV;
-CREATE ROLE ROLE_TRGDV;
-
--- Chỉ cần quyền đọc chung
-GRANT SELECT ON NHANVIEN TO ROLE_NVCB;
-GRANT SELECT ON SINHVIEN TO ROLE_NVCB;
-GRANT SELECT ON HOCPHAN TO ROLE_NVCB;
-
--- Xem danh sách môn dạy, sinh viên lớp mình
-GRANT SELECT ON MOMON TO ROLE_GV;
-GRANT SELECT ON SINHVIEN TO ROLE_GV;
-
--- Nhập điểm vào bảng DANGKY
-GRANT SELECT, UPDATE (DIEMTH, DIEMQT, DIEMCK, DIEMTK) ON DANGKY TO ROLE_GV;
-
--- Toàn quyền với môn học, mở môn và đăng ký
-GRANT SELECT, INSERT, UPDATE, DELETE ON HOCPHAN TO ROLE_NV_PDT;
-GRANT SELECT, INSERT, UPDATE, DELETE ON MOMON TO ROLE_NV_PDT;
-GRANT SELECT, INSERT, UPDATE, DELETE ON DANGKY TO ROLE_NV_PDT;
-GRANT SELECT, INSERT, UPDATE, DELETE ON SINHVIEN TO ROLE_NV_PDT;
-
--- Xem thông tin điểm
-GRANT SELECT ON DANGKY TO ROLE_NV_PKT;
-
--- Quản lý thông tin nhân viên
-GRANT SELECT, INSERT, UPDATE, DELETE ON NHANVIEN TO ROLE_NV_TCHC;
-
--- Xem thông tin sinh viên
-GRANT SELECT ON SINHVIEN TO ROLE_NV_CTSV;
-
--- Xem thông tin đơn vị, nhân viên, sinh viên
-GRANT SELECT ON DONVI TO ROLE_TRGDV;
-GRANT SELECT ON NHANVIEN TO ROLE_TRGDV;
-GRANT SELECT ON SINHVIEN TO ROLE_TRGDV;
 
 
