@@ -4,10 +4,13 @@
 -- This script sets up auditing for the X_UNIVERSITY database system
 -- It requires connection as QLDL/123456@localhost:1521/QLDULIEUNOIBO or appropriate privileges
 
--- Connect to the correct PDB
-CONNECT QLDL/123456@localhost:1521/QLDULIEUNOIBO;
+-- -- Connect to the correct PDB
+-- CONNECT QLDL/123456@localhost:1521/QLDULIEUNOIBO;
 ALTER SESSION SET CONTAINER = QLDulieuNoiBo;
 ALTER SESSION SET CURRENT_SCHEMA = QLDL;
+
+
+GRANT ADMINISTER DATABASE TRIGGER TO QLDL;
 
 -- =============================================
 -- 0. CREATE APPLICATION CONTEXT (IF DOESN'T EXIST)
@@ -94,14 +97,18 @@ BEGIN
 END;
 /
 
+
 -- =============================================
 -- 1. SYSTEM-WIDE AUDIT SETTINGS
 -- =============================================
+-- cần kết nối với CDB$ROOT để thay đổi cấu hình hệ thống
+ALTER SESSION SET CONTAINER = CDB$ROOT;
 ALTER SYSTEM SET audit_sys_operations=TRUE SCOPE=SPFILE;
 
 -- =============================================
 -- 2. STANDARD AUDIT CONFIGURATION
 -- =============================================
+ALTER SESSION SET CONTAINER = QLDulieuNoiBo;
 AUDIT SELECT ON QLDL.DANGKY BY ACCESS;
 COMMIT;
 
@@ -305,7 +312,10 @@ COMMIT;
 -- 4. VERIFY AUDIT CONFIGURATION
 -- =============================================
 -- Check if standard audit is enabled
-SELECT * FROM DBA_STMT_AUDIT_OPTS WHERE OWNER='QLDL' AND OBJECT_NAME='DANGKY';
+-- SELECT * FROM DBA_STMT_AUDIT_OPTS WHERE OWNER='QLDL' AND OBJECT_NAME='DANGKY'; 
+-- cái trên không tồn tại, dùng cái này thay thế
+SELECT * FROM DBA_OBJ_AUDIT_OPTS WHERE OBJECT_NAME = 'DANGKY' AND OWNER = 'QLDL';
+
 
 -- Check if fine-grained audit policies are enabled
 SELECT POLICY_NAME, ENABLED FROM DBA_AUDIT_POLICIES WHERE OBJECT_SCHEMA='QLDL';
