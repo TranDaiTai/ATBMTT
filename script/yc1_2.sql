@@ -32,9 +32,9 @@ CREATE OR REPLACE FUNCTION CURRENT_NAM RETURN NUMBER IS
     v_nam   NUMBER;
 BEGIN
     IF v_month BETWEEN 9 AND 12 THEN
-        v_nam := v_year;
+        v_nam := v_year +1 ;
     ELSE
-        v_nam := v_year - 1;
+        v_nam := v_year ;
     END IF;
     RETURN v_nam;
 END;
@@ -66,4 +66,6 @@ WHERE HP.MADV = SV.KHOA;
 
 
 CREATE ROLE ROLE_SINHVIEN;
+
+
 GRANT SELECT ON VIEW_MOMON_SV TO ROLE_SINHVIEN;

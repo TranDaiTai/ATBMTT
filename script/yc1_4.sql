@@ -117,7 +117,7 @@ END;
 BEGIN
   DBMS_RLS.ADD_POLICY (
     object_schema   => 'QLDL',
-    object_name     => 'DANGKY',
+    object_name     => 'V_DANGKY',
     policy_name     => 'POLICY_ACCESS_DANGKY',
     function_schema => 'QLDL',
     policy_function => 'POLICY_DANGKY',
@@ -130,7 +130,7 @@ END;
 -- BEGIN
 --   DBMS_RLS.DROP_POLICY (
 --     object_schema   => 'QLDL',
---     object_name     => 'DANGKY',
+--     object_name     => 'V_DANGKY',
 --     policy_name     => 'POLICY_ACCESS_DANGKY'
 --   );
 -- END;
@@ -212,6 +212,104 @@ BEGIN
     END;
 END;
 /
+
+CREATE OR REPLACE TRIGGER trg_block_insert_MAMM
+BEFORE INSERT ON DANGKY
+FOR EACH ROW
+DECLARE
+    v_user       VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+    v_is_sv      NUMBER;
+    v_is_pdt     NUMBER;
+    v_hocky_mh   NUMBER;
+    v_namhoc_mh  NUMBER;
+    v_sys_month  NUMBER := EXTRACT(MONTH FROM SYSDATE);
+    v_sys_day    NUMBER := EXTRACT(DAY FROM SYSDATE);
+BEGIN
+    -- Lấy học kỳ và năm học từ bảng MOMON dựa vào MAMM mới
+    SELECT HK, NAM INTO v_hocky_mh, v_namhoc_mh
+    FROM MOMON
+    WHERE MAMM = :NEW.MAMM;
+
+    -- Kiểm tra sinh viên
+    SELECT COUNT(*) INTO v_is_sv FROM SINHVIEN WHERE MASV = v_user;
+    IF v_is_sv = 1 THEN
+        IF NOT (v_hocky_mh = CURRENT_HK() AND v_namhoc_mh = CURRENT_NAM()) THEN
+            RAISE_APPLICATION_ERROR(-20041, 'Sinh viên chỉ được thêm trong học kỳ hiện tại');
+        ELSIF NOT (v_sys_month IN (1, 5, 9) AND v_sys_day <= 14) THEN
+            RAISE_APPLICATION_ERROR(-20042, 'Sinh viên chỉ được thêm trong 14 ngày đầu học kỳ');
+        END IF;
+        RETURN;
+    END IF;
+
+    -- Kiểm tra NV PĐT
+    BEGIN
+        SELECT COUNT(*) INTO v_is_pdt
+        FROM NHANVIEN
+        WHERE MANV = v_user AND VAITRO = 'NV PĐT';
+
+        IF v_is_pdt = 1 THEN
+            IF NOT (v_hocky_mh = CURRENT_HK() AND v_namhoc_mh = CURRENT_NAM()) THEN
+                RAISE_APPLICATION_ERROR(-20043, 'NV PĐT chỉ được thêm trong học kỳ hiện tại');
+            ELSIF NOT (v_sys_month IN (1, 5, 9) AND v_sys_day <= 14) THEN
+                RAISE_APPLICATION_ERROR(-20044, 'NV PĐT chỉ được thêm trong 14 ngày đầu học kỳ');
+            END IF;
+            RETURN;
+        END IF;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN NULL;
+    END;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_block_delete_MAMM
+BEFORE DELETE ON DANGKY
+FOR EACH ROW
+DECLARE
+    v_user       VARCHAR2(30) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+    v_is_sv      NUMBER;
+    v_is_pdt     NUMBER;
+    v_hocky_mh   NUMBER;
+    v_namhoc_mh  NUMBER;
+    v_sys_month  NUMBER := EXTRACT(MONTH FROM SYSDATE);
+    v_sys_day    NUMBER := EXTRACT(DAY FROM SYSDATE);
+BEGIN
+    -- Lấy học kỳ và năm học từ bảng MOMON dựa vào MAMM cũ
+    SELECT HK, NAM INTO v_hocky_mh, v_namhoc_mh
+    FROM MOMON
+    WHERE MAMM = :OLD.MAMM;
+
+    -- Kiểm tra sinh viên
+    SELECT COUNT(*) INTO v_is_sv FROM SINHVIEN WHERE MASV = v_user;
+    IF v_is_sv = 1 THEN
+        IF NOT (v_hocky_mh = CURRENT_HK() AND v_namhoc_mh = CURRENT_NAM()) THEN
+            RAISE_APPLICATION_ERROR(-20051, 'Sinh viên chỉ được xóa trong học kỳ hiện tại');
+        ELSIF NOT (v_sys_month IN (1, 5, 9) AND v_sys_day <= 14) THEN
+            RAISE_APPLICATION_ERROR(-20052, 'Sinh viên chỉ được xóa trong 14 ngày đầu học kỳ');
+        END IF;
+        RETURN;
+    END IF;
+
+    -- Kiểm tra NV PĐT
+    BEGIN
+        SELECT COUNT(*) INTO v_is_pdt
+        FROM NHANVIEN
+        WHERE MANV = v_user AND VAITRO = 'NV PĐT';
+
+        IF v_is_pdt = 1 THEN
+            IF NOT (v_hocky_mh = CURRENT_HK() AND v_namhoc_mh = CURRENT_NAM()) THEN
+                RAISE_APPLICATION_ERROR(-20053, 'NV PĐT chỉ được xóa trong học kỳ hiện tại');
+            ELSIF NOT (v_sys_month IN (1, 5, 9) AND v_sys_day <= 14) THEN
+                RAISE_APPLICATION_ERROR(-20054, 'NV PĐT chỉ được xóa trong 14 ngày đầu học kỳ');
+            END IF;
+            RETURN;
+        END IF;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN NULL;
+    END;
+END;
+/
+
+
 
 --Gán quyền truy cập
 -- SV
