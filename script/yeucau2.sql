@@ -17,10 +17,15 @@ EXEC LBACSYS.OLS_ENFORCEMENT.ENABLE_OLS;
 ALTER SESSION SET CURRENT_SCHEMA = QLDL;
 -- làm xong rồi thoát ra vô lại vẫn tiếp tục ở container QLDulieuNoiBo và schema QLDL
 --tao bảng THONGBAO
-CREATE TABLE THONGBAO (
+CREATE TABLE THONGBAO(
     ID_THONGBAO NUMBER PRIMARY KEY,
-    NOIDUNG VARCHAR2(4000)
+    NOIDUNG     VARCHAR2(4000),
+    ThoiGian TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    DiaDiem NVARCHAR2(50)
 );
+
+
+
 
 -- Thêm sequence để tự động tạo ID_THONGBAO
 CREATE SEQUENCE thongbao_seq START WITH 1 INCREMENT BY 1;
@@ -43,15 +48,21 @@ UPDATE QLDL.SINHVIEN SET COSO = 'Cơ sở 2' WHERE KHOA IN ('HOA', 'VLY');
 --------
 ------
 CONNECT lbacsys/123456@localhost:1521/QLDULIEUNOIBO;
+
+
 --Tạo chính sách OLS Tạo chính sách OLS với tên THONGBAO_POLICY.
+
 BEGIN
     SA_SYSDBA.CREATE_POLICY (
         policy_name    => 'THONGBAO_POLICY',
         column_name    => 'LABEL',
-        default_options => 'READ_CONTROL,WRITE_CONTROL,LABEL_DEFAULT'
+        default_options => 'NO_CONTROL'
     );
 END;
 /
+
+
+
 -- Tạo Levels
 BEGIN
     SA_COMPONENTS.CREATE_LEVEL (
@@ -109,16 +120,15 @@ BEGIN
     SA_COMPONENTS.CREATE_GROUP (
         policy_name => 'THONGBAO_POLICY',
         group_num   => 3,
-        short_name  => 'ALL_COSO',
-        long_name   => 'Tất cả cơ sở'
+        short_name  => 'COSO2',
+        long_name   => 'Cơ sở 2'
     );
 
     SA_COMPONENTS.CREATE_GROUP (
         policy_name => 'THONGBAO_POLICY',
         group_num   => 1,
         short_name  => 'COSO1',
-        long_name   => 'Cơ sở 1',
-        parent_name => 'ALL_COSO'
+        long_name   => 'Cơ sở 1'
     );
 
 END;
@@ -203,32 +213,46 @@ BEGIN
     SA_LABEL_ADMIN.CREATE_LABEL (
         policy_name => 'THONGBAO_POLICY',
         label_tag   => 1009,
-        label_value => 'TRUONGDV:HOA:ALL_COSO'
+        label_value => 'TRUONGDV:HOA:COSO1,COSO2'
     );
 END;
 /
+
 
 
 --Áp dụng chính sách OLS cho bảng THONGBAO
 -- tự gián nhãn cho bảng THONGBAO column LABEL 
-BEGIN
-    SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
-        policy_name    => 'THONGBAO_POLICY',
-        schema_name    => 'QLDL',
-        table_name     => 'THONGBAO',
-        table_options  => 'READ_CONTROL,WRITE_CONTROL,LABEL_DEFAULT'
-    );
-END;
-/
+-- BEGIN
+--     SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+--         policy_name    => 'THONGBAO_POLICY',
+--         schema_name    => 'QLDL',
+--         table_name     => 'THONGBAO',
+--        TABLE_OPTIONS  => NULL
+--     );
+-- END;
+-- /   
 
 -- BEGIN
 --     SA_POLICY_ADMIN.REMOVE_TABLE_POLICY (
 --         policy_name => 'THONGBAO_POLICY',
 --         schema_name => 'QLDL',
---         table_name  => 'THONGBAO'
+--         table_name  => 'THONGBAO',
+--         DROP_COLUMN => FALSE
 --     );
 -- END;
 -- /
+
+
+BEGIN
+    SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
+        policy_name    => 'THONGBAO_POLICY',
+        schema_name    => 'QLDL',
+        table_name     => 'THONGBAO',
+        TABLE_OPTIONS  => 'READ_CONTROL, WRITE_CONTROL, CHECK_CONTROL'
+    );
+END;
+/   
+
 
 
 --Gán nhãn cho người dùng
@@ -291,3 +315,32 @@ SA_LABEL_ADMIN.CREATE_LABEL  (
   label_value     => 'NHANVIEN:HANHCHINH:COSO1');
 END;
 / 
+-- kiểm tra  các nhãn đã tạo
+-- SELECT * FROM dba_sa_labels WHERE policy_name = 'THONGBAO_POLICY';
+
+--Gán nhãn mặc định và phạm vi nhãn mà user QLDL có thể xử lý
+
+BEGIN
+    SA_USER_ADMIN.SET_USER_LABELS(
+        policy_name => 'THONGBAO_POLICY',
+        user_name   => 'QLDL',
+        max_read_label => 'TRUONGDV:TOAN,LY,HOA,HANHCHINH:COSO1,COSO2',
+        max_write_label => 'TRUONGDV:TOAN,LY,HOA,HANHCHINH:COSO1,COSO2'
+    );
+END;
+/
+-- kiểm tra nhãn mặc định và phạm vi nhãn của user QLDL
+--SELECT * FROM dba_sa_user_labels WHERE policy_name = 'THONGBAO_POLICY';
+
+-- BEGIN
+--   SA_USER_ADMIN.SET_USER_PRIVS(
+--     policy_name => 'THONGBAO_POLICY',
+--     user_name   => 'QLDL',
+--     privileges  => 'FULL' -- hoặc 'READ,WRITE' nếu bạn muốn hạn chế hơn
+--   );
+-- END;
+-- /
+
+
+grant select, insert, update, delete on QLDL.THONGBAO to ROLE_NVCB;
+grant select, insert, update, delete on QLDL.THONGBAO to ROLE_SINHVIEN;
