@@ -221,6 +221,15 @@ BEGIN
 END;
 /
 
+-- BEGIN
+--     SA_POLICY_ADMIN.REMOVE_TABLE_POLICY (
+--         policy_name => 'THONGBAO_POLICY',
+--         schema_name => 'QLDL',
+--         table_name  => 'THONGBAO'
+--     );
+-- END;
+-- /
+
 
 --Gán nhãn cho người dùng
 --Gán nhãn cho các user (u1, u2, ..., u8) dựa trên mô tả. Dựa trên dữ liệu mẫu, ánh xạ các user như sau:

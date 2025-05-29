@@ -127,6 +127,15 @@ BEGIN
 END;
 /
 
+-- BEGIN
+--   DBMS_RLS.DROP_POLICY (
+--     object_schema   => 'QLDL',
+--     object_name     => 'DANGKY',
+--     policy_name     => 'POLICY_ACCESS_DANGKY'
+--   );
+-- END;
+-- /
+
 --Tạo trigger kiểm soát
 --a. Không cho SV/NV PĐT cập nhật điểm (DIEM_CC, DIEM_GK, DIEM_CK)
 CREATE OR REPLACE TRIGGER trg_block_update_diem
@@ -223,3 +232,5 @@ GRANT EXECUTE ON QLDL.POLICY_DANGKY_SV TO PUBLIC;
 GRANT EXECUTE ON QLDL.POLICY_DANGKY_GV TO PUBLIC;
 GRANT EXECUTE ON QLDL.POLICY_DANGKY_NV_PDT TO PUBLIC;
 GRANT EXECUTE ON QLDL.POLICY_DANGKY_NV_PKT TO PUBLIC;
+
+

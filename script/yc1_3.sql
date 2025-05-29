@@ -101,6 +101,15 @@ BEGIN
 END;
 /
 
+--BEGIN
+--  DBMS_RLS.DROP_POLICY (
+--    object_schema => 'QLDL',
+--    object_name   => 'V_SINHVIEN',
+--    policy_name   => 'POLICY_ACCESS_SINHVIEN'
+--  );
+--END;
+
+
 --Tạo Trigger kiểm soát cập nhật trường TINHTRANG
 --Sinh viên không được sửa TINHTRANG.
 --NV PCTSV không được sửa TINHTRANG.
@@ -167,13 +176,6 @@ GRANT EXECUTE ON QLDL.POLICY_SINHVIEN TO public;
 GRANT EXECUTE ON QLDL.POLICY_SINHVIEN_SV TO public;
 GRANT EXECUTE ON QLDL.POLICY_SINHVIEN_NV TO public;
 
---BEGIN
---  DBMS_RLS.DROP_POLICY (
---    object_schema => 'QLDL',
---    object_name   => 'V_SINHVIEN',
---    policy_name   => 'POLICY_ACCESS_SINHVIEN'
---  );
---END;
 
 
 
