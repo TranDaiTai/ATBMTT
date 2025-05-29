@@ -48,7 +48,7 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE USER ' || p_username || ' IDENTIFIED BY "' || p_password || '"';
 
     -- Grant connect và resource cơ bản
-    EXECUTE IMMEDIATE 'GRANT CONNECT, RESOURCE TO ' || p_username;
+    EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || p_username;
 
     -- Grant role tương ứng
     EXECUTE IMMEDIATE 'GRANT ' || v_role_name || ' TO ' || p_username;
