@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -131,40 +131,40 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateRole_F.cs">
+    <Compile Include="VIEW_DBA\CreateRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateRole_F.Designer.cs">
+    <Compile Include="VIEW_DBA\CreateRole_F.Designer.cs">
       <DependentUpon>CreateRole_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateUser_F.cs">
+    <Compile Include="VIEW_DBA\CreateUser_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateUser_F.Designer.cs">
+    <Compile Include="VIEW_DBA\CreateUser_F.Designer.cs">
       <DependentUpon>CreateUser_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBAUI.cs">
+    <Compile Include="VIEW_DBA\DBAUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DBAUI.Designer.cs">
+    <Compile Include="VIEW_DBA\DBAUI.Designer.cs">
       <DependentUpon>DBAUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeleteRole_F.cs">
+    <Compile Include="VIEW_DBA\DeleteRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteRole_F.Designer.cs">
+    <Compile Include="VIEW_DBA\DeleteRole_F.Designer.cs">
       <DependentUpon>DeleteRole_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeleteUser_F.cs">
+    <Compile Include="VIEW_DBA\DeleteUser_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteUser_F.Designer.cs">
+    <Compile Include="VIEW_DBA\DeleteUser_F.Designer.cs">
       <DependentUpon>DeleteUser_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="GrantRole_F.cs">
+    <Compile Include="VIEW_DBA\GrantRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GrantRole_F.Designer.cs">
+    <Compile Include="VIEW_DBA\GrantRole_F.Designer.cs">
       <DependentUpon>GrantRole_F.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginUI.cs">
@@ -173,30 +173,38 @@
     <Compile Include="LoginUI.Designer.cs">
       <DependentUpon>LoginUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrivilegeUI.cs">
+    <Compile Include="Model\DangKy.cs" />
+    <Compile Include="Model\DonVi.cs" />
+    <Compile Include="Model\HocPhan.cs" />
+    <Compile Include="Model\MoMon.cs" />
+    <Compile Include="Model\NhanVien.cs" />
+    <Compile Include="Model\SinhVien.cs" />
+    <Compile Include="Model\ThongBao.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="VIEW_DBA\PrivilegeUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PrivilegeUI.Designer.cs">
+    <Compile Include="VIEW_DBA\PrivilegeUI.Designer.cs">
       <DependentUpon>PrivilegeUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GrantPrivil_F.cs">
+    <Compile Include="VIEW_DBA\GrantPrivil_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GrantPrivil_F.Designer.cs">
+    <Compile Include="VIEW_DBA\GrantPrivil_F.Designer.cs">
       <DependentUpon>GrantPrivil_F.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RevokePrivil_F.cs">
+    <Compile Include="VIEW_DBA\RevokePrivil_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RevokePrivil_F.Designer.cs">
+    <Compile Include="VIEW_DBA\RevokePrivil_F.Designer.cs">
       <DependentUpon>RevokePrivil_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="RevokeRole_F.cs">
+    <Compile Include="VIEW_DBA\RevokeRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RevokeRole_F.Designer.cs">
+    <Compile Include="VIEW_DBA\RevokeRole_F.Designer.cs">
       <DependentUpon>RevokeRole_F.cs</DependentUpon>
     </Compile>
     <Compile Include="RoleUI.cs">
@@ -205,49 +213,49 @@
     <Compile Include="RoleUI.Designer.cs">
       <DependentUpon>RoleUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateRole_F.cs">
+    <Compile Include="VIEW_DBA\UpdateRole_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateRole_F.Designer.cs">
+    <Compile Include="VIEW_DBA\UpdateRole_F.Designer.cs">
       <DependentUpon>UpdateRole_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateUser_F.cs">
+    <Compile Include="VIEW_DBA\UpdateUser_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateUser_F.Designer.cs">
+    <Compile Include="VIEW_DBA\UpdateUser_F.Designer.cs">
       <DependentUpon>UpdateUser_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserAndRoleUI.cs">
+    <Compile Include="VIEW_DBA\UserAndRoleUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserAndRoleUI.Designer.cs">
+    <Compile Include="VIEW_DBA\UserAndRoleUI.Designer.cs">
       <DependentUpon>UserAndRoleUI.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CreateRole_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\CreateRole_F.resx">
       <DependentUpon>CreateRole_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateUser_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\CreateUser_F.resx">
       <DependentUpon>CreateUser_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DBAUI.resx">
+    <EmbeddedResource Include="VIEW_DBA\DBAUI.resx">
       <DependentUpon>DBAUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteRole_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\DeleteRole_F.resx">
       <DependentUpon>DeleteRole_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteUser_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\DeleteUser_F.resx">
       <DependentUpon>DeleteUser_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GrantRole_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\GrantRole_F.resx">
       <DependentUpon>GrantRole_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUI.resx">
       <DependentUpon>LoginUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrivilegeUI.resx">
+    <EmbeddedResource Include="VIEW_DBA\PrivilegeUI.resx">
       <DependentUpon>PrivilegeUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GrantPrivil_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\GrantPrivil_F.resx">
       <DependentUpon>GrantPrivil_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -259,22 +267,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RevokePrivil_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\RevokePrivil_F.resx">
       <DependentUpon>RevokePrivil_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RevokeRole_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\RevokeRole_F.resx">
       <DependentUpon>RevokeRole_F.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleUI.resx">
       <DependentUpon>RoleUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateRole_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\UpdateRole_F.resx">
       <DependentUpon>UpdateRole_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateUser_F.resx">
+    <EmbeddedResource Include="VIEW_DBA\UpdateUser_F.resx">
       <DependentUpon>UpdateUser_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserAndRoleUI.resx">
+    <EmbeddedResource Include="VIEW_DBA\UserAndRoleUI.resx">
       <DependentUpon>UserAndRoleUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />

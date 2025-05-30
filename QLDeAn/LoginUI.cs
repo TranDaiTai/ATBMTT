@@ -57,9 +57,9 @@ namespace QLDeAn
             {
                 string connectionString = "";
                 if (role.Text == "SYSDBA")
-                    connectionString = @"DATA SOURCE = localhost:1521/XE;DBA Privilege=SYSDBA; USER ID=" + username.Text +";PASSWORD=" + password.Text;
+                    connectionString = @"DATA SOURCE = localhost:1522/XE;DBA Privilege=SYSDBA; USER ID=" + username.Text +";PASSWORD=" + password.Text;
                 else
-                    connectionString = @"DATA SOURCE = localhost:1521/QLDULIEUNOIBO; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
+                    connectionString = @"DATA SOURCE = localhost:1522/QLDULIEUNOIBO; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
 
                 con = new OracleConnection();
                 con.ConnectionString = connectionString;
