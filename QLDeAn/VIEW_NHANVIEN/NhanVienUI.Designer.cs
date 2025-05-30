@@ -44,27 +44,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TB_COSO = new System.Windows.Forms.TextBox();
+            this.TB_MADV = new System.Windows.Forms.TextBox();
+            this.TB_VAITRO = new System.Windows.Forms.TextBox();
+            this.TB_DT = new System.Windows.Forms.TextBox();
+            this.TB_PHUCAP = new System.Windows.Forms.TextBox();
+            this.TB_LUONG = new System.Windows.Forms.TextBox();
+            this.TB_NGAYSINH = new System.Windows.Forms.TextBox();
             this.TB_PHAI = new System.Windows.Forms.TextBox();
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_MANHANVIEN = new System.Windows.Forms.TextBox();
             this.TP_QUANLYNHANVIEN = new System.Windows.Forms.TabPage();
             this.nhanvieN_QUANLYNHANVIEN1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYNHANVIEN();
             this.TP_QUANLYMONHOC = new System.Windows.Forms.TabPage();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.nhanvieN_QUANLYMONHOC1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYMONHOC();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TP_QUANLYSINHVIEN = new System.Windows.Forms.TabPage();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TP_DANGKYHP = new System.Windows.Forms.TabPage();
+            this.nhanvieN_QUANLYMONHOC2 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYMONHOC();
+            this.nhanvieN_DANGKYHOCPHAN1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_DANGKYHOCPHAN();
             this.tabControl1.SuspendLayout();
             this.TP_THONGTINNHANVIEN.SuspendLayout();
             this.GB_THÔNGTINCANHAN_GV.SuspendLayout();
             this.TP_QUANLYNHANVIEN.SuspendLayout();
             this.TP_QUANLYMONHOC.SuspendLayout();
+            this.TP_DANGKYHP.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -72,7 +76,8 @@
             this.tabControl1.Controls.Add(this.TP_THONGTINNHANVIEN);
             this.tabControl1.Controls.Add(this.TP_QUANLYNHANVIEN);
             this.tabControl1.Controls.Add(this.TP_QUANLYMONHOC);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.TP_QUANLYSINHVIEN);
+            this.tabControl1.Controls.Add(this.TP_DANGKYHP);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -122,13 +127,13 @@
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label3);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label2);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label1);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox7);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox6);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox5);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox4);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox3);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox2);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox1);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_COSO);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_MADV);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_VAITRO);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DT);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_PHUCAP);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_LUONG);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_NGAYSINH);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_PHAI);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_HOTEN);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_MANHANVIEN);
@@ -240,61 +245,61 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã nhân viên";
             // 
-            // textBox7
+            // TB_COSO
             // 
-            this.textBox7.Location = new System.Drawing.Point(162, 327);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(127, 22);
-            this.textBox7.TabIndex = 1;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_COSO.Location = new System.Drawing.Point(162, 327);
+            this.TB_COSO.Name = "TB_COSO";
+            this.TB_COSO.Size = new System.Drawing.Size(127, 22);
+            this.TB_COSO.TabIndex = 1;
+            this.TB_COSO.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox6
+            // TB_MADV
             // 
-            this.textBox6.Location = new System.Drawing.Point(22, 327);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(134, 22);
-            this.textBox6.TabIndex = 1;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_MADV.Location = new System.Drawing.Point(22, 327);
+            this.TB_MADV.Name = "TB_MADV";
+            this.TB_MADV.Size = new System.Drawing.Size(134, 22);
+            this.TB_MADV.TabIndex = 1;
+            this.TB_MADV.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox5
+            // TB_VAITRO
             // 
-            this.textBox5.Location = new System.Drawing.Point(162, 267);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(127, 22);
-            this.textBox5.TabIndex = 1;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_VAITRO.Location = new System.Drawing.Point(162, 267);
+            this.TB_VAITRO.Name = "TB_VAITRO";
+            this.TB_VAITRO.Size = new System.Drawing.Size(127, 22);
+            this.TB_VAITRO.TabIndex = 1;
+            this.TB_VAITRO.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox4
+            // TB_DT
             // 
-            this.textBox4.Location = new System.Drawing.Point(22, 267);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(134, 22);
-            this.textBox4.TabIndex = 1;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_DT.Location = new System.Drawing.Point(22, 267);
+            this.TB_DT.Name = "TB_DT";
+            this.TB_DT.Size = new System.Drawing.Size(134, 22);
+            this.TB_DT.TabIndex = 1;
+            this.TB_DT.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox3
+            // TB_PHUCAP
             // 
-            this.textBox3.Location = new System.Drawing.Point(162, 209);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(127, 22);
-            this.textBox3.TabIndex = 1;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_PHUCAP.Location = new System.Drawing.Point(162, 209);
+            this.TB_PHUCAP.Name = "TB_PHUCAP";
+            this.TB_PHUCAP.Size = new System.Drawing.Size(127, 22);
+            this.TB_PHUCAP.TabIndex = 1;
+            this.TB_PHUCAP.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // TB_LUONG
             // 
-            this.textBox2.Location = new System.Drawing.Point(22, 209);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(134, 22);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_LUONG.Location = new System.Drawing.Point(22, 209);
+            this.TB_LUONG.Name = "TB_LUONG";
+            this.TB_LUONG.Size = new System.Drawing.Size(134, 22);
+            this.TB_LUONG.TabIndex = 1;
+            this.TB_LUONG.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox1
+            // TB_NGAYSINH
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 153);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 22);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TB_NGAYSINH.Location = new System.Drawing.Point(144, 153);
+            this.TB_NGAYSINH.Name = "TB_NGAYSINH";
+            this.TB_NGAYSINH.Size = new System.Drawing.Size(141, 22);
+            this.TB_NGAYSINH.TabIndex = 1;
+            this.TB_NGAYSINH.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // TB_PHAI
             // 
@@ -349,12 +354,6 @@
             this.TP_QUANLYMONHOC.Text = "Quản lý môn học";
             this.TP_QUANLYMONHOC.UseVisualStyleBackColor = true;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // nhanvieN_QUANLYMONHOC1
             // 
             this.nhanvieN_QUANLYMONHOC1.Location = new System.Drawing.Point(0, 0);
@@ -362,15 +361,47 @@
             this.nhanvieN_QUANLYMONHOC1.Size = new System.Drawing.Size(950, 499);
             this.nhanvieN_QUANLYMONHOC1.TabIndex = 0;
             // 
-            // tabPage1
+            // TP_QUANLYSINHVIEN
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(960, 499);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "Quản lý sinh viên";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.TP_QUANLYSINHVIEN.Location = new System.Drawing.Point(4, 25);
+            this.TP_QUANLYSINHVIEN.Name = "TP_QUANLYSINHVIEN";
+            this.TP_QUANLYSINHVIEN.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_QUANLYSINHVIEN.Size = new System.Drawing.Size(960, 499);
+            this.TP_QUANLYSINHVIEN.TabIndex = 3;
+            this.TP_QUANLYSINHVIEN.Text = "Quản lý sinh viên";
+            this.TP_QUANLYSINHVIEN.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // TP_DANGKYHP
+            // 
+            this.TP_DANGKYHP.Controls.Add(this.nhanvieN_DANGKYHOCPHAN1);
+            this.TP_DANGKYHP.Controls.Add(this.nhanvieN_QUANLYMONHOC2);
+            this.TP_DANGKYHP.Location = new System.Drawing.Point(4, 25);
+            this.TP_DANGKYHP.Name = "TP_DANGKYHP";
+            this.TP_DANGKYHP.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_DANGKYHP.Size = new System.Drawing.Size(960, 499);
+            this.TP_DANGKYHP.TabIndex = 4;
+            this.TP_DANGKYHP.Text = "Đăng ký học phần";
+            this.TP_DANGKYHP.UseVisualStyleBackColor = true;
+            // 
+            // nhanvieN_QUANLYMONHOC2
+            // 
+            this.nhanvieN_QUANLYMONHOC2.Location = new System.Drawing.Point(117, 55);
+            this.nhanvieN_QUANLYMONHOC2.Name = "nhanvieN_QUANLYMONHOC2";
+            this.nhanvieN_QUANLYMONHOC2.Size = new System.Drawing.Size(8, 8);
+            this.nhanvieN_QUANLYMONHOC2.TabIndex = 0;
+            // 
+            // nhanvieN_DANGKYHOCPHAN1
+            // 
+            this.nhanvieN_DANGKYHOCPHAN1.Location = new System.Drawing.Point(1, 0);
+            this.nhanvieN_DANGKYHOCPHAN1.Name = "nhanvieN_DANGKYHOCPHAN1";
+            this.nhanvieN_DANGKYHOCPHAN1.Size = new System.Drawing.Size(956, 484);
+            this.nhanvieN_DANGKYHOCPHAN1.TabIndex = 1;
             // 
             // NhanVienUI
             // 
@@ -386,6 +417,7 @@
             this.GB_THÔNGTINCANHAN_GV.PerformLayout();
             this.TP_QUANLYNHANVIEN.ResumeLayout(false);
             this.TP_QUANLYMONHOC.ResumeLayout(false);
+            this.TP_DANGKYHP.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -408,13 +440,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TB_COSO;
+        private System.Windows.Forms.TextBox TB_MADV;
+        private System.Windows.Forms.TextBox TB_VAITRO;
+        private System.Windows.Forms.TextBox TB_DT;
+        private System.Windows.Forms.TextBox TB_PHUCAP;
+        private System.Windows.Forms.TextBox TB_LUONG;
+        private System.Windows.Forms.TextBox TB_NGAYSINH;
         private System.Windows.Forms.TextBox TB_PHAI;
         private System.Windows.Forms.TextBox TB_HOTEN;
         private System.Windows.Forms.TextBox TB_MANHANVIEN;
@@ -422,6 +454,9 @@
         private NHANVIEN_QUANLYNHANVIEN nhanvieN_QUANLYNHANVIEN1;
         private System.Windows.Forms.TabPage TP_QUANLYMONHOC;
         private NHANVIEN_QUANLYMONHOC nhanvieN_QUANLYMONHOC1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage TP_QUANLYSINHVIEN;
+        private System.Windows.Forms.TabPage TP_DANGKYHP;
+        private NHANVIEN_DANGKYHOCPHAN nhanvieN_DANGKYHOCPHAN1;
+        private NHANVIEN_QUANLYMONHOC nhanvieN_QUANLYMONHOC2;
     }
 }

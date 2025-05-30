@@ -42,20 +42,20 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TB_COSO = new System.Windows.Forms.TextBox();
+            this.TB_MADV = new System.Windows.Forms.TextBox();
+            this.TB_VAITRO = new System.Windows.Forms.TextBox();
+            this.TB_DT = new System.Windows.Forms.TextBox();
+            this.TB_PHUCAP = new System.Windows.Forms.TextBox();
+            this.TB_LUONG = new System.Windows.Forms.TextBox();
+            this.TB_NGSINH = new System.Windows.Forms.TextBox();
             this.TB_PHAI = new System.Windows.Forms.TextBox();
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_MANHANVIEN = new System.Windows.Forms.TextBox();
             this.GB_THÔNGTINCANHAN_GV = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BTN_CAPNHAT = new System.Windows.Forms.Button();
+            this.BTN_XOA = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupNhanVien.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -188,54 +188,55 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã nhân viên";
             // 
-            // textBox7
+            // TB_COSO
             // 
-            this.textBox7.Location = new System.Drawing.Point(162, 327);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(127, 22);
-            this.textBox7.TabIndex = 1;
+            this.TB_COSO.Location = new System.Drawing.Point(162, 327);
+            this.TB_COSO.Name = "TB_COSO";
+            this.TB_COSO.Size = new System.Drawing.Size(127, 22);
+            this.TB_COSO.TabIndex = 1;
             // 
-            // textBox6
+            // TB_MADV
             // 
-            this.textBox6.Location = new System.Drawing.Point(22, 327);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(134, 22);
-            this.textBox6.TabIndex = 1;
+            this.TB_MADV.Location = new System.Drawing.Point(22, 327);
+            this.TB_MADV.Name = "TB_MADV";
+            this.TB_MADV.Size = new System.Drawing.Size(134, 22);
+            this.TB_MADV.TabIndex = 1;
             // 
-            // textBox5
+            // TB_VAITRO
             // 
-            this.textBox5.Location = new System.Drawing.Point(162, 267);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(127, 22);
-            this.textBox5.TabIndex = 1;
+            this.TB_VAITRO.Location = new System.Drawing.Point(162, 267);
+            this.TB_VAITRO.Name = "TB_VAITRO";
+            this.TB_VAITRO.Size = new System.Drawing.Size(127, 22);
+            this.TB_VAITRO.TabIndex = 1;
             // 
-            // textBox4
+            // TB_DT
             // 
-            this.textBox4.Location = new System.Drawing.Point(22, 267);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(134, 22);
-            this.textBox4.TabIndex = 1;
+            this.TB_DT.Location = new System.Drawing.Point(22, 267);
+            this.TB_DT.Name = "TB_DT";
+            this.TB_DT.Size = new System.Drawing.Size(134, 22);
+            this.TB_DT.TabIndex = 1;
             // 
-            // textBox3
+            // TB_PHUCAP
             // 
-            this.textBox3.Location = new System.Drawing.Point(162, 209);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(127, 22);
-            this.textBox3.TabIndex = 1;
+            this.TB_PHUCAP.Location = new System.Drawing.Point(162, 209);
+            this.TB_PHUCAP.Name = "TB_PHUCAP";
+            this.TB_PHUCAP.Size = new System.Drawing.Size(127, 22);
+            this.TB_PHUCAP.TabIndex = 1;
             // 
-            // textBox2
+            // TB_LUONG
             // 
-            this.textBox2.Location = new System.Drawing.Point(22, 209);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(134, 22);
-            this.textBox2.TabIndex = 1;
+            this.TB_LUONG.Location = new System.Drawing.Point(22, 209);
+            this.TB_LUONG.Name = "TB_LUONG";
+            this.TB_LUONG.Size = new System.Drawing.Size(134, 22);
+            this.TB_LUONG.TabIndex = 1;
+            this.TB_LUONG.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // textBox1
+            // TB_NGSINH
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 153);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 22);
-            this.textBox1.TabIndex = 1;
+            this.TB_NGSINH.Location = new System.Drawing.Point(144, 153);
+            this.TB_NGSINH.Name = "TB_NGSINH";
+            this.TB_NGSINH.Size = new System.Drawing.Size(141, 22);
+            this.TB_NGSINH.TabIndex = 1;
             // 
             // TB_PHAI
             // 
@@ -271,13 +272,13 @@
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label3);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label2);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label1);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox7);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox6);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox5);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox4);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox3);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox2);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.textBox1);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_COSO);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_MADV);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_VAITRO);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DT);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_PHUCAP);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_LUONG);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_NGSINH);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_PHAI);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_HOTEN);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_MANHANVIEN);
@@ -290,32 +291,32 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.BTN_CAPNHAT);
+            this.panel2.Controls.Add(this.BTN_XOA);
             this.panel2.Location = new System.Drawing.Point(6, 366);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 48);
             this.panel2.TabIndex = 1;
             // 
-            // button2
+            // BTN_CAPNHAT
             // 
-            this.button2.Location = new System.Drawing.Point(162, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "CẬP NHẬT";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.BTN_CAPNHAT.Location = new System.Drawing.Point(162, 12);
+            this.BTN_CAPNHAT.Name = "BTN_CAPNHAT";
+            this.BTN_CAPNHAT.Size = new System.Drawing.Size(123, 23);
+            this.BTN_CAPNHAT.TabIndex = 0;
+            this.BTN_CAPNHAT.Text = "CẬP NHẬT";
+            this.BTN_CAPNHAT.UseVisualStyleBackColor = true;
+            this.BTN_CAPNHAT.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button1
+            // BTN_XOA
             // 
-            this.button1.Location = new System.Drawing.Point(18, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "XOÁ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BTN_XOA.Location = new System.Drawing.Point(18, 12);
+            this.BTN_XOA.Name = "BTN_XOA";
+            this.BTN_XOA.Size = new System.Drawing.Size(138, 23);
+            this.BTN_XOA.TabIndex = 0;
+            this.BTN_XOA.Text = "XOÁ";
+            this.BTN_XOA.UseVisualStyleBackColor = true;
+            this.BTN_XOA.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -360,20 +361,20 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TB_COSO;
+        private System.Windows.Forms.TextBox TB_MADV;
+        private System.Windows.Forms.TextBox TB_VAITRO;
+        private System.Windows.Forms.TextBox TB_DT;
+        private System.Windows.Forms.TextBox TB_PHUCAP;
+        private System.Windows.Forms.TextBox TB_LUONG;
+        private System.Windows.Forms.TextBox TB_NGSINH;
         private System.Windows.Forms.TextBox TB_PHAI;
         private System.Windows.Forms.TextBox TB_HOTEN;
         private System.Windows.Forms.TextBox TB_MANHANVIEN;
         private System.Windows.Forms.GroupBox GB_THÔNGTINCANHAN_GV;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BTN_XOA;
+        private System.Windows.Forms.Button BTN_CAPNHAT;
     }
 }

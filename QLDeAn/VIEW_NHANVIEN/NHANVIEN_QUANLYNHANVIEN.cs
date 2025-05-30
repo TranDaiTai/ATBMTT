@@ -26,5 +26,10 @@ namespace QLDeAn.VIEW_NHANVIEN
         {
 
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

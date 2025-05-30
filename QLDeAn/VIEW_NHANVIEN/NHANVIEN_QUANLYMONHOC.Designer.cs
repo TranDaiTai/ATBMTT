@@ -34,16 +34,16 @@
             this.BTN_THÊM = new System.Windows.Forms.Button();
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_PHAI = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TB_HOCKI = new System.Windows.Forms.TextBox();
+            this.TB_NAM = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.TB_MANHANVIEN = new System.Windows.Forms.TextBox();
             this.GB_MONHOCDUOCCHON = new System.Windows.Forms.GroupBox();
             this.groupMONHOC.SuspendLayout();
@@ -104,21 +104,21 @@
             this.TB_PHAI.Size = new System.Drawing.Size(263, 22);
             this.TB_PHAI.TabIndex = 1;
             // 
-            // textBox2
+            // TB_HOCKI
             // 
-            this.textBox2.Location = new System.Drawing.Point(22, 209);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(134, 22);
-            this.textBox2.TabIndex = 1;
+            this.TB_HOCKI.Location = new System.Drawing.Point(22, 209);
+            this.TB_HOCKI.Name = "TB_HOCKI";
+            this.TB_HOCKI.ReadOnly = true;
+            this.TB_HOCKI.Size = new System.Drawing.Size(134, 22);
+            this.TB_HOCKI.TabIndex = 1;
             // 
-            // textBox3
+            // TB_NAM
             // 
-            this.textBox3.Location = new System.Drawing.Point(162, 209);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(127, 22);
-            this.textBox3.TabIndex = 1;
+            this.TB_NAM.Location = new System.Drawing.Point(162, 209);
+            this.TB_NAM.Name = "TB_NAM";
+            this.TB_NAM.ReadOnly = true;
+            this.TB_NAM.Size = new System.Drawing.Size(127, 22);
+            this.TB_NAM.TabIndex = 1;
             // 
             // label1
             // 
@@ -174,15 +174,6 @@
             this.panel2.Size = new System.Drawing.Size(300, 48);
             this.panel2.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(18, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "XOÁ";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(162, 12);
@@ -191,6 +182,15 @@
             this.button2.TabIndex = 0;
             this.button2.Text = "CẬP NHẬT";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(18, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "XOÁ";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // TB_MANHANVIEN
             // 
@@ -208,8 +208,8 @@
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label3);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label2);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label1);
-            this.GB_MONHOCDUOCCHON.Controls.Add(this.textBox3);
-            this.GB_MONHOCDUOCCHON.Controls.Add(this.textBox2);
+            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_NAM);
+            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_HOCKI);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_PHAI);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_HOTEN);
             this.GB_MONHOCDUOCCHON.Location = new System.Drawing.Point(621, 17);
@@ -247,8 +247,7 @@
         private System.Windows.Forms.Button BTN_THÊM;
         private System.Windows.Forms.TextBox TB_HOTEN;
         private System.Windows.Forms.TextBox TB_PHAI;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox TB_HOCKI;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -259,5 +258,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox TB_MANHANVIEN;
         private System.Windows.Forms.GroupBox GB_MONHOCDUOCCHON;
+        private System.Windows.Forms.TextBox TB_NAM;
     }
 }

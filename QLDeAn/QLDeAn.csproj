@@ -243,6 +243,12 @@
     <Compile Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.Designer.cs">
       <DependentUpon>NhanVienUI_ChinhsuaTT.cs</DependentUpon>
     </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.Designer.cs">
+      <DependentUpon>NHANVIEN_DANGKYHOCPHAN.cs</DependentUpon>
+    </Compile>
     <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYMONHOC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -254,6 +260,18 @@
     </Compile>
     <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYNHANVIEN.Designer.cs">
       <DependentUpon>NHANVIEN_QUANLYNHANVIEN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYSINHVIEN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYSINHVIEN.Designer.cs">
+      <DependentUpon>NHANVIEN_QUANLYSINHVIEN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NhanVien_ThongBao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NhanVien_ThongBao.Designer.cs">
+      <DependentUpon>NhanVien_ThongBao.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="VIEW_DBA\View_UserandRoleUI\CreateRole_F.resx">
       <DependentUpon>CreateRole_F.cs</DependentUpon>
@@ -315,11 +333,20 @@
     <EmbeddedResource Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.resx">
       <DependentUpon>NhanVienUI_ChinhsuaTT.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.resx">
+      <DependentUpon>NHANVIEN_DANGKYHOCPHAN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_QUANLYMONHOC.resx">
       <DependentUpon>NHANVIEN_QUANLYMONHOC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_QUANLYNHANVIEN.resx">
       <DependentUpon>NHANVIEN_QUANLYNHANVIEN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_QUANLYSINHVIEN.resx">
+      <DependentUpon>NHANVIEN_QUANLYSINHVIEN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NhanVien_ThongBao.resx">
+      <DependentUpon>NhanVien_ThongBao.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
