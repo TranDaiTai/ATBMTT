@@ -132,6 +132,42 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\DangKy\DangKyGVDao.cs" />
+    <Compile Include="DataAccess\DangKy\DangKyNVCTSVDao.cs" />
+    <Compile Include="DataAccess\DangKy\DangKyNVPDTDao.cs" />
+    <Compile Include="DataAccess\DangKy\DangKyNVPKTDao.cs" />
+    <Compile Include="DataAccess\DangKy\DangKySVDao.cs" />
+    <Compile Include="DataAccess\DangKy\DangKyTRGDVDao.cs" />
+    <Compile Include="DataAccess\DangKy\IDangKyDao.cs" />
+    <Compile Include="DataAccess\DonVi\DonViNVCTSVDao.cs" />
+    <Compile Include="DataAccess\DonVi\DonViSVDao.cs" />
+    <Compile Include="DataAccess\DonVi\DonViTRGDVDao.cs" />
+    <Compile Include="DataAccess\DonVi\IDonViDao.cs" />
+    <Compile Include="DataAccess\HocPhan\HocPhanNVCTSVDao.cs" />
+    <Compile Include="DataAccess\HocPhan\HocPhanSVDao.cs" />
+    <Compile Include="DataAccess\HocPhan\HocPhanTRGDVDao.cs" />
+    <Compile Include="DataAccess\HocPhan\IHocPhanDao.cs" />
+    <Compile Include="DataAccess\IBaseDao.cs" />
+    <Compile Include="DataAccess\MoMon\IMoMonDao.cs" />
+    <Compile Include="DataAccess\MoMon\MoMonGVDao.cs" />
+    <Compile Include="DataAccess\MoMon\MoMonNVCTSVDao.cs" />
+    <Compile Include="DataAccess\MoMon\MoMonNVPDTDao.cs" />
+    <Compile Include="DataAccess\MoMon\MoMonSVDao.cs" />
+    <Compile Include="DataAccess\MoMon\MoMonTRGDVDao.cs" />
+    <Compile Include="DataAccess\NhanVien\INhanVienDao.cs" />
+    <Compile Include="DataAccess\NhanVien\NhanVienNVCBDao.cs" />
+    <Compile Include="DataAccess\NhanVien\NhanVienNVCTSVDao.cs" />
+    <Compile Include="DataAccess\NhanVien\NhanVienNVTCHCDao.cs" />
+    <Compile Include="DataAccess\NhanVien\NhanVienSVDao.cs" />
+    <Compile Include="DataAccess\NhanVien\NhanVienTRGDVDao.cs" />
+    <Compile Include="DataAccess\SinhVien\ISinhVienDao.cs" />
+    <Compile Include="DataAccess\SinhVien\SinhVienGVDao.cs" />
+    <Compile Include="DataAccess\SinhVien\SinhVienNVCTSVDao.cs" />
+    <Compile Include="DataAccess\SinhVien\SinhVienNVPDTDao.cs" />
+    <Compile Include="DataAccess\SinhVien\SinhVienSVDao.cs" />
+    <Compile Include="DataAccess\SinhVien\SinhVienTRGDVDao.cs" />
+    <Compile Include="DataAccess\ThongBao\IThongBaoDao.cs" />
+    <Compile Include="DataAccess\ThongBao\ThongBaoXAdminDao.cs" />
     <Compile Include="VIEW_DBA\View_UserandRoleUI\CreateRole_F.cs">
       <SubType>Form</SubType>
     </Compile>

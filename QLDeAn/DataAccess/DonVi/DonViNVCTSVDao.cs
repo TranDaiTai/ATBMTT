@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QLDeAn.DataAccess.DonVi
+{
+    class DonViNVCTSVDao : IDonViDao
+    {
+        public bool Add(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<object> Load(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(object obj)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
