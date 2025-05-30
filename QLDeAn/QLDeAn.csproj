@@ -231,6 +231,30 @@
     <Compile Include="VIEW_DBA\View_UserandRoleUI\UserAndRoleUI.Designer.cs">
       <DependentUpon>UserAndRoleUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="VIEW_NHANVIEN\NhanVienUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NhanVienUI.Designer.cs">
+      <DependentUpon>NhanVienUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.Designer.cs">
+      <DependentUpon>NhanVienUI_ChinhsuaTT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYMONHOC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYMONHOC.Designer.cs">
+      <DependentUpon>NHANVIEN_QUANLYMONHOC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYNHANVIEN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIEN_QUANLYNHANVIEN.Designer.cs">
+      <DependentUpon>NHANVIEN_QUANLYNHANVIEN.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="VIEW_DBA\View_UserandRoleUI\CreateRole_F.resx">
       <DependentUpon>CreateRole_F.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +309,18 @@
     <EmbeddedResource Include="VIEW_DBA\View_UserandRoleUI\UserAndRoleUI.resx">
       <DependentUpon>UserAndRoleUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NhanVienUI.resx">
+      <DependentUpon>NhanVienUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.resx">
+      <DependentUpon>NhanVienUI_ChinhsuaTT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_QUANLYMONHOC.resx">
+      <DependentUpon>NHANVIEN_QUANLYMONHOC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_QUANLYNHANVIEN.resx">
+      <DependentUpon>NHANVIEN_QUANLYNHANVIEN.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include=".editorconfig" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
@@ -322,6 +358,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

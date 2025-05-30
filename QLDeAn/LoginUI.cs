@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
+using QLDeAn.Model;
 
 namespace QLDeAn
 {
@@ -57,7 +58,7 @@ namespace QLDeAn
             {
                 string connectionString = "";
                 if (role.Text == "SYSDBA")
-                    connectionString = @"DATA SOURCE = localhost:1522/XE;DBA Privilege=SYSDBA; USER ID=" + username.Text +";PASSWORD=" + password.Text;
+                    connectionString = @"DATA SOURCE = localhost:1522/XE;DBA Privilege=SYSDBA; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
                 else
                     connectionString = @"DATA SOURCE = localhost:1522/QLDULIEUNOIBO; USER ID=" + username.Text + ";PASSWORD=" + password.Text;
 
@@ -74,11 +75,50 @@ namespace QLDeAn
                     DBAUI dba = new DBAUI();
                     dba.Show();
                 }
-                else
+                else if (role.Text == "NHÂN VIÊN")
                 {
-                 // XU LY CHO NHUNG VAI TRO KHAC
+                    // dùng trong cdb nếu muốn bỏ cái C##
+                    //OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
+                    //command.ExecuteNonQuery();
+                    string sqlRole = "SELECT VAITRO FROM QLDL.VIEW_NHANVIEN_NVCB WHERE MANV = :manv";
+                   
+                    OracleCommand command_role = new OracleCommand(sqlRole, con);
+                    command_role.Parameters.Add(new OracleParameter("manv", username.Text));
+                    OracleDataReader dr = command_role.ExecuteReader();
+
+                    //this.Hide();
+
+                    //MessageBox.Show("Connect với Oracle thành công");
+                    //NhanVienUI NVUI = new NhanVienUI();
+                    //switch (roleUser)
+                    //{
+                    //    case "Nhân viên":
+                    //        NVUI.Text = "NHÂN VIÊN";
+                    //        break;
+                    //    case "Quản lý":
+                    //        NVUI.Text = "QUẢN LÝ";
+                    //        break;
+                    //    case "Trưởng phòng":
+                    //        NVUI.Text = "TRƯỞNG PHÒNG";
+                    //        break;
+                    //    case "Tài chính":
+                    //        NVUI.Text = "TÀI CHÍNH";
+                    //        break;
+                    //    case "Nhân sự":
+                    //        NVUI.Text = "NHÂN SỰ";
+                    //        break;
+                    //    case "Trưởng dự án":
+                    //        NVUI.Text = "TRƯỞNG DỰ ÁN";
+                    //        break;
+                    //    case "Giám đốc":
+                    //        NVUI.Text = "GIÁM ĐỐC";
+                    //        break;
+                    //}
+
+                    //NVUI.Show();
+                    //dr.Close();
                 }
-                
+
 
                 this.Hide();
             }

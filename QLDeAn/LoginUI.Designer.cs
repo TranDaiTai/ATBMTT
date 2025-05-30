@@ -117,7 +117,9 @@ namespace QLDeAn
             this.role.FormattingEnabled = true;
             this.role.Items.AddRange(new object[] {
             "SYSDBA",
-            "ADMIN"});
+            "ADMIN",
+            "NHÂN VIÊN",
+            "SINH VIÊN"});
             this.role.Location = new System.Drawing.Point(493, 350);
             this.role.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.role.Name = "role";
