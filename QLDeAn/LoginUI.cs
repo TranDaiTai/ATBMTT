@@ -25,7 +25,7 @@ namespace QLDeAn
         public static OracleConnection con;
         public static String userUser;
         public static String passUser;
-        public static String roleUser;
+        public static String roleUser ;
         private void LoginUI_Load(object sender, EventArgs e) 
         {
             
@@ -82,7 +82,7 @@ namespace QLDeAn
                     // dùng trong cdb nếu muốn bỏ cái C##
                     //OracleCommand command = new OracleCommand("alter session set \"_ORACLE_SCRIPT\"=true", con);
                     //command.ExecuteNonQuery();
-                    string sqlRole = "SELECT VAITRO FROM QLDL.VIEW_NHANVIEN_NVCB WHERE MANV = :manv";
+                    string sqlRole = "SELECT VAITRO FROM QLDL.VIEW_NHANVIEN_NVCB";
                    
                     OracleCommand command_role = new OracleCommand(sqlRole, con);
                     command_role.Parameters.Add(new OracleParameter("manv", username.Text));
@@ -92,13 +92,14 @@ namespace QLDeAn
                     if (dr.Read())
                     {
                         roleUser = dr.GetString(0); 
+                        NhanVienUI.roleUser = roleUser; // Lưu vai trò vào biến tĩnh để sử dụng trong NhanVienUI
                     }
                     dr.Close();
                     //this.Hide();
 
                     MessageBox.Show("Connect với Oracle thành công");
                     NhanVienUI NVUI = new NhanVienUI();
-                    switch (roleUser)
+                    switch (NhanVienUI.roleUser)
                     {
                         case "NVCB":
                             NVUI.Text = "NHÂN VIÊN";
@@ -120,6 +121,9 @@ namespace QLDeAn
                             break;
                         case "TRGDV":
                             NVUI.Text = "Trường đơn vị";
+                            break;
+                         default:
+                            NVUI.Text = "Nhân viên Không xác định";
                             break;
                     }
 

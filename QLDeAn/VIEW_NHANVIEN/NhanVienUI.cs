@@ -17,9 +17,10 @@ namespace QLDeAn.VIEW_NHANVIEN
         public NhanVienUI()
         {
             InitializeComponent();
-            SetTabsByRole(LoginUI.roleUser);
+            SetTabsByRole();
             NHANVIENUI_LOAD();
         }
+        public static String roleUser;
         public static OracleConnection conNow;
         private bool isLogout = false;
 
@@ -50,7 +51,7 @@ namespace QLDeAn.VIEW_NHANVIEN
         {
 
         }
-        private void SetTabsByRole(string role)
+        private void SetTabsByRole()
         {
             // Đầu tiên hiện tất cả tab (nếu cần)
             foreach (TabPage tab in tabControl1.TabPages)
@@ -60,7 +61,8 @@ namespace QLDeAn.VIEW_NHANVIEN
 
             tabControl1.TabPages.Add(TP_THONGTINNHANVIEN);
             tabControl1.TabPages.Add(TP_THONGBAO);
-
+            string role = LoginUI.roleUser;
+            Console.WriteLine(role);
             // Tùy role mà add lại các tab được phép
             if (role == "GV")
             {
@@ -69,7 +71,7 @@ namespace QLDeAn.VIEW_NHANVIEN
                 tabControl1.TabPages.Add(TP_DANGKYHP);
 
             }
-            else if (role == "TRGĐV")
+            else if (role == "TRGDV")
             {
                 tabControl1.TabPages.Add(TP_QUANLYNHANVIEN);
                 tabControl1.TabPages.Add(TP_QUANLYMONHOC);
