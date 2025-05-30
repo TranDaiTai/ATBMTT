@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using QLDeAn.Model;
+using QLDeAn.VIEW_NHANVIEN;
+
 
 namespace QLDeAn
 {
@@ -86,37 +88,43 @@ namespace QLDeAn
                     command_role.Parameters.Add(new OracleParameter("manv", username.Text));
                     OracleDataReader dr = command_role.ExecuteReader();
 
+
+                    if (dr.Read())
+                    {
+                        roleUser = dr.GetString(0); 
+                    }
+
                     //this.Hide();
 
-                    //MessageBox.Show("Connect với Oracle thành công");
-                    //NhanVienUI NVUI = new NhanVienUI();
-                    //switch (roleUser)
-                    //{
-                    //    case "Nhân viên":
-                    //        NVUI.Text = "NHÂN VIÊN";
-                    //        break;
-                    //    case "Quản lý":
-                    //        NVUI.Text = "QUẢN LÝ";
-                    //        break;
-                    //    case "Trưởng phòng":
-                    //        NVUI.Text = "TRƯỞNG PHÒNG";
-                    //        break;
-                    //    case "Tài chính":
-                    //        NVUI.Text = "TÀI CHÍNH";
-                    //        break;
-                    //    case "Nhân sự":
-                    //        NVUI.Text = "NHÂN SỰ";
-                    //        break;
-                    //    case "Trưởng dự án":
-                    //        NVUI.Text = "TRƯỞNG DỰ ÁN";
-                    //        break;
-                    //    case "Giám đốc":
-                    //        NVUI.Text = "GIÁM ĐỐC";
-                    //        break;
-                    //}
+                    MessageBox.Show("Connect với Oracle thành công");
+                    NhanVienUI NVUI = new NhanVienUI();
+                    switch (roleUser)
+                    {
+                        case "NVCB":
+                            NVUI.Text = "NHÂN VIÊN";
+                            break;
+                        case "GV":
+                            NVUI.Text = "Giáo viên";
+                            break;
+                        case "NV PĐT":
+                            NVUI.Text = "Phòng Đào Tạo";
+                            break;
+                        case "NV PKT":
+                            NVUI.Text = "Phòng Khảo Thí";
+                            break;
+                        case "NV TCHC":
+                            NVUI.Text = "Tổ chức hành chính";
+                            break;
+                        case "NV CTSV":
+                            NVUI.Text = "Cộng tác sinh viên";
+                            break;
+                        case "TRGDV":
+                            NVUI.Text = "Trường đơn vị";
+                            break;
+                    }
 
-                    //NVUI.Show();
-                    //dr.Close();
+                    NVUI.Show();
+                    dr.Close();
                 }
 
 
