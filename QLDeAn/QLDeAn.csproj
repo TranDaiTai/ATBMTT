@@ -273,6 +273,36 @@
     <Compile Include="VIEW_NHANVIEN\NhanVien_ThongBao.Designer.cs">
       <DependentUpon>NhanVien_ThongBao.cs</DependentUpon>
     </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI.Designer.cs">
+      <DependentUpon>SINHVIENUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_LICHSUDANGKY.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_LICHSUDANGKY.Designer.cs">
+      <DependentUpon>SINHVIENUI_LICHSUDANGKY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_MOMON.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_MOMON.Designer.cs">
+      <DependentUpon>SINHVIENUI_MOMON.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_THONGBAO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_THONGBAO.Designer.cs">
+      <DependentUpon>SINHVIENUI_THONGBAO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_THONGTINSINHVIEN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_THONGTINSINHVIEN.Designer.cs">
+      <DependentUpon>SINHVIENUI_THONGTINSINHVIEN.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="VIEW_DBA\View_UserandRoleUI\CreateRole_F.resx">
       <DependentUpon>CreateRole_F.cs</DependentUpon>
     </EmbeddedResource>
@@ -348,6 +378,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NhanVien_ThongBao.resx">
       <DependentUpon>NhanVien_ThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI.resx">
+      <DependentUpon>SINHVIENUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI_LICHSUDANGKY.resx">
+      <DependentUpon>SINHVIENUI_LICHSUDANGKY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI_MOMON.resx">
+      <DependentUpon>SINHVIENUI_MOMON.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI_THONGBAO.resx">
+      <DependentUpon>SINHVIENUI_THONGBAO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI_THONGTINSINHVIEN.resx">
+      <DependentUpon>SINHVIENUI_THONGTINSINHVIEN.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
