@@ -447,6 +447,7 @@
             this.Name = "NhanVienUI";
             this.Text = "Nhân Viên";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NhanVienUI_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NhanVienUI_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.TP_THONGTINNHANVIEN.ResumeLayout(false);
             this.GB_THÔNGTINCANHAN_GV.ResumeLayout(false);

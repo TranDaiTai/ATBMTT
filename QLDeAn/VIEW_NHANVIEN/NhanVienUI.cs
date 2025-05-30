@@ -21,6 +21,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             NHANVIENUI_LOAD();
         }
         public static OracleConnection conNow;
+        private bool isLogout = false;
 
         private void NHANVIENUI_LOAD()
         {
@@ -99,14 +100,14 @@ namespace QLDeAn.VIEW_NHANVIEN
 
         private void NhanVienUI_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LoginUI.con.Dispose();
-            LoginUI.con.Close();
-            OracleConnection.ClearPool(conNow);
+         
+
 
         }
 
         private void btn_dangxuat_Click(object sender, EventArgs e)
         {
+            isLogout = true; // Đánh dấu đã đăng xuất để không thực hiện lại khi form đóng
             try
             {
                 LoginUI.con.Dispose();
@@ -131,6 +132,19 @@ namespace QLDeAn.VIEW_NHANVIEN
         private void Xinchao_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void NhanVienUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (isLogout)
+            {
+                isLogout = false; // Đặt lại trạng thái đăng xuất
+                return; // Nếu đã đăng xuất thì không cần làm gì thêm
+            }
+            LoginUI.con.Dispose();
+            LoginUI.con.Close();
+            OracleConnection.ClearPool(conNow);
+            Application.Exit(); // Đóng toàn bộ ứng dụng nếu không đăng xuất
         }
     }
 }
