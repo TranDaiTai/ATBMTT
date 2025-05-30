@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TP_THONGTINNHANVIEN = new System.Windows.Forms.TabPage();
-            this.BTN_THOÁT = new System.Windows.Forms.Button();
             this.BTN_CHINHSUATT = new System.Windows.Forms.Button();
             this.GB_THÔNGTINCANHAN_GV = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,20 +54,25 @@
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_MANHANVIEN = new System.Windows.Forms.TextBox();
             this.TP_QUANLYNHANVIEN = new System.Windows.Forms.TabPage();
-            this.nhanvieN_QUANLYNHANVIEN1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYNHANVIEN();
             this.TP_QUANLYMONHOC = new System.Windows.Forms.TabPage();
-            this.nhanvieN_QUANLYMONHOC1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYMONHOC();
             this.TP_QUANLYSINHVIEN = new System.Windows.Forms.TabPage();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TP_DANGKYHP = new System.Windows.Forms.TabPage();
-            this.nhanvieN_QUANLYMONHOC2 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYMONHOC();
+            this.TP_THONGBAO = new System.Windows.Forms.TabPage();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btn_dangxuat = new System.Windows.Forms.Button();
+            this.Xinchao = new System.Windows.Forms.Label();
+            this.nhanvieN_QUANLYNHANVIEN1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYNHANVIEN();
+            this.nhanvieN_QUANLYMONHOC1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYMONHOC();
             this.nhanvieN_DANGKYHOCPHAN1 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_DANGKYHOCPHAN();
+            this.nhanvieN_QUANLYMONHOC2 = new QLDeAn.VIEW_NHANVIEN.NHANVIEN_QUANLYMONHOC();
+            this.nhanVien_ThongBao1 = new QLDeAn.VIEW_NHANVIEN.NhanVien_ThongBao();
             this.tabControl1.SuspendLayout();
             this.TP_THONGTINNHANVIEN.SuspendLayout();
             this.GB_THÔNGTINCANHAN_GV.SuspendLayout();
             this.TP_QUANLYNHANVIEN.SuspendLayout();
             this.TP_QUANLYMONHOC.SuspendLayout();
             this.TP_DANGKYHP.SuspendLayout();
+            this.TP_THONGBAO.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -78,6 +82,7 @@
             this.tabControl1.Controls.Add(this.TP_QUANLYMONHOC);
             this.tabControl1.Controls.Add(this.TP_QUANLYSINHVIEN);
             this.tabControl1.Controls.Add(this.TP_DANGKYHP);
+            this.tabControl1.Controls.Add(this.TP_THONGBAO);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -86,7 +91,6 @@
             // 
             // TP_THONGTINNHANVIEN
             // 
-            this.TP_THONGTINNHANVIEN.Controls.Add(this.BTN_THOÁT);
             this.TP_THONGTINNHANVIEN.Controls.Add(this.BTN_CHINHSUATT);
             this.TP_THONGTINNHANVIEN.Controls.Add(this.GB_THÔNGTINCANHAN_GV);
             this.TP_THONGTINNHANVIEN.Location = new System.Drawing.Point(4, 25);
@@ -96,15 +100,6 @@
             this.TP_THONGTINNHANVIEN.TabIndex = 0;
             this.TP_THONGTINNHANVIEN.Text = "Thông tin cá nhân";
             this.TP_THONGTINNHANVIEN.UseVisualStyleBackColor = true;
-            // 
-            // BTN_THOÁT
-            // 
-            this.BTN_THOÁT.Location = new System.Drawing.Point(492, 440);
-            this.BTN_THOÁT.Name = "BTN_THOÁT";
-            this.BTN_THOÁT.Size = new System.Drawing.Size(75, 23);
-            this.BTN_THOÁT.TabIndex = 2;
-            this.BTN_THOÁT.Text = "Thoát";
-            this.BTN_THOÁT.UseVisualStyleBackColor = true;
             // 
             // BTN_CHINHSUATT
             // 
@@ -336,13 +331,6 @@
             this.TP_QUANLYNHANVIEN.Text = "Quản lý nhân viên";
             this.TP_QUANLYNHANVIEN.UseVisualStyleBackColor = true;
             // 
-            // nhanvieN_QUANLYNHANVIEN1
-            // 
-            this.nhanvieN_QUANLYNHANVIEN1.Location = new System.Drawing.Point(6, 0);
-            this.nhanvieN_QUANLYNHANVIEN1.Name = "nhanvieN_QUANLYNHANVIEN1";
-            this.nhanvieN_QUANLYNHANVIEN1.Size = new System.Drawing.Size(947, 505);
-            this.nhanvieN_QUANLYNHANVIEN1.TabIndex = 0;
-            // 
             // TP_QUANLYMONHOC
             // 
             this.TP_QUANLYMONHOC.Controls.Add(this.nhanvieN_QUANLYMONHOC1);
@@ -354,13 +342,6 @@
             this.TP_QUANLYMONHOC.Text = "Quản lý môn học";
             this.TP_QUANLYMONHOC.UseVisualStyleBackColor = true;
             // 
-            // nhanvieN_QUANLYMONHOC1
-            // 
-            this.nhanvieN_QUANLYMONHOC1.Location = new System.Drawing.Point(0, 0);
-            this.nhanvieN_QUANLYMONHOC1.Name = "nhanvieN_QUANLYMONHOC1";
-            this.nhanvieN_QUANLYMONHOC1.Size = new System.Drawing.Size(950, 499);
-            this.nhanvieN_QUANLYMONHOC1.TabIndex = 0;
-            // 
             // TP_QUANLYSINHVIEN
             // 
             this.TP_QUANLYSINHVIEN.Location = new System.Drawing.Point(4, 25);
@@ -370,12 +351,6 @@
             this.TP_QUANLYSINHVIEN.TabIndex = 3;
             this.TP_QUANLYSINHVIEN.Text = "Quản lý sinh viên";
             this.TP_QUANLYSINHVIEN.UseVisualStyleBackColor = true;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // TP_DANGKYHP
             // 
@@ -389,12 +364,56 @@
             this.TP_DANGKYHP.Text = "Đăng ký học phần";
             this.TP_DANGKYHP.UseVisualStyleBackColor = true;
             // 
-            // nhanvieN_QUANLYMONHOC2
+            // TP_THONGBAO
             // 
-            this.nhanvieN_QUANLYMONHOC2.Location = new System.Drawing.Point(117, 55);
-            this.nhanvieN_QUANLYMONHOC2.Name = "nhanvieN_QUANLYMONHOC2";
-            this.nhanvieN_QUANLYMONHOC2.Size = new System.Drawing.Size(8, 8);
-            this.nhanvieN_QUANLYMONHOC2.TabIndex = 0;
+            this.TP_THONGBAO.Controls.Add(this.nhanVien_ThongBao1);
+            this.TP_THONGBAO.Location = new System.Drawing.Point(4, 25);
+            this.TP_THONGBAO.Name = "TP_THONGBAO";
+            this.TP_THONGBAO.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_THONGBAO.Size = new System.Drawing.Size(960, 499);
+            this.TP_THONGBAO.TabIndex = 5;
+            this.TP_THONGBAO.Text = "Thông Báo";
+            this.TP_THONGBAO.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // btn_dangxuat
+            // 
+            this.btn_dangxuat.Location = new System.Drawing.Point(873, 5);
+            this.btn_dangxuat.Name = "btn_dangxuat";
+            this.btn_dangxuat.Size = new System.Drawing.Size(100, 23);
+            this.btn_dangxuat.TabIndex = 1;
+            this.btn_dangxuat.Text = "Đăng Xuất";
+            this.btn_dangxuat.UseVisualStyleBackColor = true;
+            this.btn_dangxuat.Click += new System.EventHandler(this.btn_dangxuat_Click);
+            // 
+            // Xinchao
+            // 
+            this.Xinchao.AutoSize = true;
+            this.Xinchao.Location = new System.Drawing.Point(724, 12);
+            this.Xinchao.Name = "Xinchao";
+            this.Xinchao.Size = new System.Drawing.Size(66, 16);
+            this.Xinchao.TabIndex = 2;
+            this.Xinchao.Text = "Xin Chao: ";
+            this.Xinchao.Click += new System.EventHandler(this.Xinchao_Click);
+            // 
+            // nhanvieN_QUANLYNHANVIEN1
+            // 
+            this.nhanvieN_QUANLYNHANVIEN1.Location = new System.Drawing.Point(6, 0);
+            this.nhanvieN_QUANLYNHANVIEN1.Name = "nhanvieN_QUANLYNHANVIEN1";
+            this.nhanvieN_QUANLYNHANVIEN1.Size = new System.Drawing.Size(947, 505);
+            this.nhanvieN_QUANLYNHANVIEN1.TabIndex = 0;
+            // 
+            // nhanvieN_QUANLYMONHOC1
+            // 
+            this.nhanvieN_QUANLYMONHOC1.Location = new System.Drawing.Point(0, 0);
+            this.nhanvieN_QUANLYMONHOC1.Name = "nhanvieN_QUANLYMONHOC1";
+            this.nhanvieN_QUANLYMONHOC1.Size = new System.Drawing.Size(950, 499);
+            this.nhanvieN_QUANLYMONHOC1.TabIndex = 0;
             // 
             // nhanvieN_DANGKYHOCPHAN1
             // 
@@ -403,14 +422,31 @@
             this.nhanvieN_DANGKYHOCPHAN1.Size = new System.Drawing.Size(956, 484);
             this.nhanvieN_DANGKYHOCPHAN1.TabIndex = 1;
             // 
+            // nhanvieN_QUANLYMONHOC2
+            // 
+            this.nhanvieN_QUANLYMONHOC2.Location = new System.Drawing.Point(117, 55);
+            this.nhanvieN_QUANLYMONHOC2.Name = "nhanvieN_QUANLYMONHOC2";
+            this.nhanvieN_QUANLYMONHOC2.Size = new System.Drawing.Size(8, 8);
+            this.nhanvieN_QUANLYMONHOC2.TabIndex = 0;
+            // 
+            // nhanVien_ThongBao1
+            // 
+            this.nhanVien_ThongBao1.Location = new System.Drawing.Point(3, 0);
+            this.nhanVien_ThongBao1.Name = "nhanVien_ThongBao1";
+            this.nhanVien_ThongBao1.Size = new System.Drawing.Size(961, 499);
+            this.nhanVien_ThongBao1.TabIndex = 0;
+            // 
             // NhanVienUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 554);
+            this.Controls.Add(this.Xinchao);
+            this.Controls.Add(this.btn_dangxuat);
             this.Controls.Add(this.tabControl1);
             this.Name = "NhanVienUI";
             this.Text = "Nhân Viên";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NhanVienUI_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.TP_THONGTINNHANVIEN.ResumeLayout(false);
             this.GB_THÔNGTINCANHAN_GV.ResumeLayout(false);
@@ -418,7 +454,9 @@
             this.TP_QUANLYNHANVIEN.ResumeLayout(false);
             this.TP_QUANLYMONHOC.ResumeLayout(false);
             this.TP_DANGKYHP.ResumeLayout(false);
+            this.TP_THONGBAO.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -427,7 +465,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TabPage TP_THONGTINNHANVIEN;
-        private System.Windows.Forms.Button BTN_THOÁT;
         private System.Windows.Forms.Button BTN_CHINHSUATT;
         private System.Windows.Forms.GroupBox GB_THÔNGTINCANHAN_GV;
         private System.Windows.Forms.Label label10;
@@ -458,5 +495,9 @@
         private System.Windows.Forms.TabPage TP_DANGKYHP;
         private NHANVIEN_DANGKYHOCPHAN nhanvieN_DANGKYHOCPHAN1;
         private NHANVIEN_QUANLYMONHOC nhanvieN_QUANLYMONHOC2;
+        private System.Windows.Forms.TabPage TP_THONGBAO;
+        private NhanVien_ThongBao nhanVien_ThongBao1;
+        private System.Windows.Forms.Button btn_dangxuat;
+        private System.Windows.Forms.Label Xinchao;
     }
 }

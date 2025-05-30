@@ -93,7 +93,7 @@ namespace QLDeAn
                     {
                         roleUser = dr.GetString(0); 
                     }
-
+                    dr.Close();
                     //this.Hide();
 
                     MessageBox.Show("Connect với Oracle thành công");
@@ -124,7 +124,7 @@ namespace QLDeAn
                     }
 
                     NVUI.Show();
-                    dr.Close();
+                    
                 }
 
 

@@ -99,7 +99,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(206, 30);
+            this.label2.Location = new System.Drawing.Point(172, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 16);
             this.label2.TabIndex = 1;
@@ -120,7 +120,7 @@
             this.TB_HOCKI.Multiline = true;
             this.TB_HOCKI.Name = "TB_HOCKI";
             this.TB_HOCKI.ReadOnly = true;
-            this.TB_HOCKI.Size = new System.Drawing.Size(353, 204);
+            this.TB_HOCKI.Size = new System.Drawing.Size(302, 204);
             this.TB_HOCKI.TabIndex = 1;
             // 
             // TB_DIADIEM
@@ -132,7 +132,7 @@
             // 
             // TB_THOIGIAN
             // 
-            this.TB_THOIGIAN.Location = new System.Drawing.Point(209, 49);
+            this.TB_THOIGIAN.Location = new System.Drawing.Point(175, 49);
             this.TB_THOIGIAN.Name = "TB_THOIGIAN";
             this.TB_THOIGIAN.Size = new System.Drawing.Size(150, 22);
             this.TB_THOIGIAN.TabIndex = 1;
@@ -186,9 +186,9 @@
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_HOCKI);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_DIADIEM);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_THOIGIAN);
-            this.GB_MONHOCDUOCCHON.Location = new System.Drawing.Point(602, 3);
+            this.GB_MONHOCDUOCCHON.Location = new System.Drawing.Point(583, 12);
             this.GB_MONHOCDUOCCHON.Name = "GB_MONHOCDUOCCHON";
-            this.GB_MONHOCDUOCCHON.Size = new System.Drawing.Size(391, 468);
+            this.GB_MONHOCDUOCCHON.Size = new System.Drawing.Size(337, 468);
             this.GB_MONHOCDUOCCHON.TabIndex = 8;
             this.GB_MONHOCDUOCCHON.TabStop = false;
             this.GB_MONHOCDUOCCHON.Text = "Thông Báo được chọn";
@@ -216,7 +216,7 @@
             this.Controls.Add(this.groupMONHOC);
             this.Controls.Add(this.GB_MONHOCDUOCCHON);
             this.Name = "NhanVien_ThongBao";
-            this.Size = new System.Drawing.Size(1021, 499);
+            this.Size = new System.Drawing.Size(933, 499);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
