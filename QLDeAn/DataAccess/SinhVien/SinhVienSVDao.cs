@@ -52,7 +52,7 @@ namespace QLDeAn.DataAccess.SinhVien
                             dt = reader["dt"].ToString(),
                             khoa = reader["khoa"].ToString(),
                             TINHTRANG = reader["tinhTrang"].ToString(),
-                            isInDB = true
+                            coso = reader["coso"] != DBNull.Value ? reader["coso"].ToString() : null
                         };
 
                         result.Add(sv);

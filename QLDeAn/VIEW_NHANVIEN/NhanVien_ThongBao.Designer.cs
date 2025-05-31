@@ -57,8 +57,10 @@
             // 
             this.TB_MATHONGBAO.Location = new System.Drawing.Point(22, 49);
             this.TB_MATHONGBAO.Name = "TB_MATHONGBAO";
+            this.TB_MATHONGBAO.ReadOnly = true;
             this.TB_MATHONGBAO.Size = new System.Drawing.Size(140, 22);
             this.TB_MATHONGBAO.TabIndex = 1;
+            this.TB_MATHONGBAO.TextChanged += new System.EventHandler(this.TB_MATHONGBAO_TextChanged);
             // 
             // button2
             // 
@@ -119,7 +121,6 @@
             this.TB_noidung.Location = new System.Drawing.Point(22, 187);
             this.TB_noidung.Multiline = true;
             this.TB_noidung.Name = "TB_noidung";
-            this.TB_noidung.ReadOnly = true;
             this.TB_noidung.Size = new System.Drawing.Size(302, 204);
             this.TB_noidung.TabIndex = 1;
             // 
@@ -134,6 +135,7 @@
             // 
             this.TB_THOIGIAN.Location = new System.Drawing.Point(175, 49);
             this.TB_THOIGIAN.Name = "TB_THOIGIAN";
+            this.TB_THOIGIAN.ReadOnly = true;
             this.TB_THOIGIAN.Size = new System.Drawing.Size(150, 22);
             this.TB_THOIGIAN.TabIndex = 1;
             // 

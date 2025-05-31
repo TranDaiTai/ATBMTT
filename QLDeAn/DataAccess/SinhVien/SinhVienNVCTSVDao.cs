@@ -27,8 +27,8 @@ namespace QLDeAn.DataAccess.SinhVien
 
             string sql = @"
                 INSERT INTO QLDL.SINHVIEN 
-                (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, KHOA) 
-                VALUES (:p_maSV, :p_hoTen, :p_phai, :p_ngSinh, :p_dChi, :p_dt, :p_khoa)";
+                (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, KHOA,COSO) 
+                VALUES (:p_maSV, :p_hoTen, :p_phai, :p_ngSinh, :p_dChi, :p_dt, :p_khoa,:p_coso)";
 
             using (OracleCommand cmd = new OracleCommand(sql, sqlConnection))
             {
@@ -40,6 +40,7 @@ namespace QLDeAn.DataAccess.SinhVien
                 cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi;
                 cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt;
                 cmd.Parameters.Add("p_khoa", OracleDbType.Varchar2).Value = sv.khoa;
+                cmd.Parameters.Add("p_coso", OracleDbType.Varchar2).Value = sv.coso;
 
                 cmd.ExecuteNonQuery();
             }
@@ -100,7 +101,7 @@ namespace QLDeAn.DataAccess.SinhVien
                             dt = reader["DT"].ToString(),
                             khoa = reader["KHOA"].ToString(),
                             TINHTRANG = reader["TINHTRANG"] != DBNull.Value ? reader["TINHTRANG"].ToString() : null,
-                            isInDB = true
+                            coso = reader["COSO"] != DBNull.Value ? reader["COSO"].ToString() : null
                         };
 
                         result.Add(sv);
@@ -123,7 +124,7 @@ namespace QLDeAn.DataAccess.SinhVien
 
             string sql = @"
                 UPDATE QLDL.SINHVIEN 
-                SET HOTEN = :p_hoTen, PHAI = :p_phai, NGSINH = :p_ngSinh, DCHI = :p_dChi, DT = :p_dt, KHOA = :p_khoa 
+                SET HOTEN = :p_hoTen, PHAI = :p_phai, NGSINH = :p_ngSinh, DCHI = :p_dChi, DT = :p_dt, KHOA = :p_khoa, COSO = :p_coso
                 WHERE MASV = :p_maSV";
 
             using (OracleCommand cmd = new OracleCommand(sql, sqlConnection))
@@ -136,6 +137,7 @@ namespace QLDeAn.DataAccess.SinhVien
                 cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt;
                 cmd.Parameters.Add("p_khoa", OracleDbType.Varchar2).Value = sv.khoa;
                 cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
+                cmd.Parameters.Add("p_coso", OracleDbType.Varchar2).Value = sv.coso;
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

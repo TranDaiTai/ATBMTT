@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QLDeAn.DataAccess.NhanVien;
 using QLDeAn.DataAccess.MoMon;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace QLDeAn.VIEW_NHANVIEN
 {
@@ -17,7 +18,7 @@ namespace QLDeAn.VIEW_NHANVIEN
         public NHANVIEN_QUANLYMONHOC()
         {
             InitializeComponent();
-            Load_MoMon();
+            //Load_MoMon();
             SetButtonsByRole();
         }
 
@@ -25,7 +26,7 @@ namespace QLDeAn.VIEW_NHANVIEN
         {
 
         }
-        private void Load_MoMon()
+        public void Load_MoMon()
         {
             IMoMonDao dao = null;
 
@@ -64,6 +65,12 @@ namespace QLDeAn.VIEW_NHANVIEN
                     BTN_CAPNHAT.Visible = true;
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
+
+                    // Hiển thị các trường thông tin
+                    TB_HOCKI.ReadOnly = false;
+                    TB_MAMONHOC.ReadOnly = false;
+                    TB_NAM.ReadOnly = false;
+                    TB_MAGIAOVIEN.ReadOnly = false;
                     break;
 
                 default:

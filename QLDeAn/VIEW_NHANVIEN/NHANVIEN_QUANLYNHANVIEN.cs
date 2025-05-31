@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QLDeAn.DataAccess.NhanVien;
 using QLDeAn.Model;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace QLDeAn.VIEW_NHANVIEN
 {
@@ -17,13 +18,13 @@ namespace QLDeAn.VIEW_NHANVIEN
         public NHANVIEN_QUANLYNHANVIEN()
         {
             InitializeComponent();
-            Load_Nhanvien();
+            //Load_Nhanvien();
             SetButtonsByRole();
         }
         private static INhanVienDao dao = null;
         private static NhanVien selected_nhanvien = null;
 
-        private void Load_Nhanvien()
+        public void Load_Nhanvien()
         {
           
             if (NhanVienUI.roleUser == "NV TCHC")
@@ -56,6 +57,17 @@ namespace QLDeAn.VIEW_NHANVIEN
                     BTN_CAPNHAT.Visible = true;
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
+
+                    // Thiết lập quyền truy cập cho các trường
+                    TB_COSO.ReadOnly = false;
+                    TB_DT.ReadOnly = false;
+                    TB_HOTEN.ReadOnly = false;
+                    TB_LUONG.ReadOnly = false;
+                    TB_MADV.ReadOnly = false;
+                    TB_NGSINH.ReadOnly = false;
+                    TB_PHUCAP.ReadOnly = false  ;
+                    TB_VAITRO.ReadOnly = false  ;
+                    TB_PHAI.ReadOnly = false;
                     break;
 
                 default:

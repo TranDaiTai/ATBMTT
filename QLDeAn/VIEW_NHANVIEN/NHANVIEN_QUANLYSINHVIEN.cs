@@ -11,6 +11,7 @@ using QLDeAn.DataAccess.NhanVien;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using QLDeAn.DataAccess.SinhVien;
 using QLDeAn.Model;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace QLDeAn.VIEW_NHANVIEN
 {
@@ -19,14 +20,14 @@ namespace QLDeAn.VIEW_NHANVIEN
         public NHANVIEN_QUANLYSINHVIEN()
         {
             InitializeComponent();
-            Load_SinhVien();
+            //Load_SinhVien();
             SetButtonsByRole();
         }
         private static ISinhVienDao dao = null;
         private static SinhVien selected_sinhvien = null;
-        private void Load_SinhVien()
+        public void Load_SinhVien()
         {
-
+            
             if (NhanVienUI.roleUser == "GV")
             {
                 dao = new SinhVienGVDao(LoginUI.con);
@@ -46,7 +47,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             List<object> data = dao.Load(null);
             if (data.Count > 0)
             {
-                dataGridView1.DataSource = data.Select(x => (Model.NhanVien)x).ToList();
+                dataGridView1.DataSource = data.Select(x => (Model.SinhVien)x).ToList();
             }
             else
             {
@@ -57,20 +58,32 @@ namespace QLDeAn.VIEW_NHANVIEN
         {
             switch (NhanVienUI.roleUser)
             {
-                case "NV TCHC":
-                    BTN_CAPNHAT.Visible = true;
-                    BTN_THÊM.Visible = true;
-                    BTN_XOA.Visible = true;
-                    break;
+              
                 case "NV PĐT":
                     BTN_CAPNHAT.Visible = true;
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
+
+                    
+                    TB_COSO.ReadOnly = false;
+                    TB_HOTEN.ReadOnly = false;
+                    TB_PHAI.ReadOnly = false;
+                    TB_DIACHI.ReadOnly = false;
+                    TB_KHOA.ReadOnly = false;
+                    TB_NGAYSINH.ReadOnly = false;
+                    TB_SDT.ReadOnly = false;
+
+
                     break;
                 case "NV CTSV":
                     BTN_CAPNHAT.Visible = true;
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
+
+
+                    TB_TINHTRANG.ReadOnly = false;
+
+
                     break;
                 default:
                     // Ẩn hết nếu không xác định được vai trò
@@ -90,7 +103,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             TB_COSO.Text = row.Cells["coso"].Value?.ToString() ?? "";
             TB_HOTEN.Text = row.Cells["hoTen"].Value?.ToString() ?? "";
             TB_PHAI.Text = row.Cells["phai"].Value?.ToString() ?? "";
-            TB_DIACHI.Text = row.Cells["diaChi"].Value?.ToString() ?? "";
+            TB_DIACHI.Text = row.Cells["dChi"].Value?.ToString() ?? "";
             TB_KHOA.Text = row.Cells["khoa"].Value?.ToString() ?? "";
             TB_NGAYSINH.Text = row.Cells["ngSinh"].Value is DateTime date ? date.ToString("dd/MM/yyyy") : "";
             TB_MASINHVIEN.Text = row.Cells["maSV"].Value?.ToString() ?? "";

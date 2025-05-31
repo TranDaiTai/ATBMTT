@@ -95,6 +95,7 @@
             // 
             this.TB_MAHOCPHAN.Location = new System.Drawing.Point(22, 100);
             this.TB_MAHOCPHAN.Name = "TB_MAHOCPHAN";
+            this.TB_MAHOCPHAN.ReadOnly = true;
             this.TB_MAHOCPHAN.Size = new System.Drawing.Size(263, 22);
             this.TB_MAHOCPHAN.TabIndex = 1;
             // 
@@ -102,6 +103,7 @@
             // 
             this.TB_MAGIAOVIEN.Location = new System.Drawing.Point(22, 153);
             this.TB_MAGIAOVIEN.Name = "TB_MAGIAOVIEN";
+            this.TB_MAGIAOVIEN.ReadOnly = true;
             this.TB_MAGIAOVIEN.Size = new System.Drawing.Size(263, 22);
             this.TB_MAGIAOVIEN.TabIndex = 1;
             // 
@@ -197,6 +199,7 @@
             // 
             this.TB_MAMONHOC.Location = new System.Drawing.Point(22, 49);
             this.TB_MAMONHOC.Name = "TB_MAMONHOC";
+            this.TB_MAMONHOC.ReadOnly = true;
             this.TB_MAMONHOC.Size = new System.Drawing.Size(263, 22);
             this.TB_MAMONHOC.TabIndex = 1;
             this.TB_MAMONHOC.TextChanged += new System.EventHandler(this.TB_MANHANVIEN_TextChanged);

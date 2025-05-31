@@ -49,7 +49,8 @@ namespace QLDeAn.DataAccess.SinhVien
                             dChi = reader["dChi"].ToString(),
                             dt = reader["dt"].ToString(),
                             khoa = reader["khoa"].ToString(),
-                            TINHTRANG = reader["tinhTrang"].ToString()
+                            TINHTRANG = reader["TINHTRANG"].ToString(),
+                            coso = reader["coso"].ToString()
                         };
 
                         result.Add(sv);

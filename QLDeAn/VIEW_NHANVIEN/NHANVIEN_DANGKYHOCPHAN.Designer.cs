@@ -165,6 +165,7 @@
             // 
             this.TB_DIEMTK.Location = new System.Drawing.Point(162, 267);
             this.TB_DIEMTK.Name = "TB_DIEMTK";
+            this.TB_DIEMTK.ReadOnly = true;
             this.TB_DIEMTK.Size = new System.Drawing.Size(127, 22);
             this.TB_DIEMTK.TabIndex = 1;
             // 
@@ -172,6 +173,7 @@
             // 
             this.TB_DIEMCK.Location = new System.Drawing.Point(22, 267);
             this.TB_DIEMCK.Name = "TB_DIEMCK";
+            this.TB_DIEMCK.ReadOnly = true;
             this.TB_DIEMCK.Size = new System.Drawing.Size(134, 22);
             this.TB_DIEMCK.TabIndex = 1;
             // 
@@ -179,6 +181,7 @@
             // 
             this.TB_DiemQT.Location = new System.Drawing.Point(162, 209);
             this.TB_DiemQT.Name = "TB_DiemQT";
+            this.TB_DiemQT.ReadOnly = true;
             this.TB_DiemQT.Size = new System.Drawing.Size(127, 22);
             this.TB_DiemQT.TabIndex = 1;
             // 
@@ -186,6 +189,7 @@
             // 
             this.TB_Diemth.Location = new System.Drawing.Point(22, 209);
             this.TB_Diemth.Name = "TB_Diemth";
+            this.TB_Diemth.ReadOnly = true;
             this.TB_Diemth.Size = new System.Drawing.Size(134, 22);
             this.TB_Diemth.TabIndex = 1;
             // 
@@ -193,6 +197,7 @@
             // 
             this.TB_tenmonhoc.Location = new System.Drawing.Point(144, 153);
             this.TB_tenmonhoc.Name = "TB_tenmonhoc";
+            this.TB_tenmonhoc.ReadOnly = true;
             this.TB_tenmonhoc.Size = new System.Drawing.Size(141, 22);
             this.TB_tenmonhoc.TabIndex = 1;
             // 
@@ -200,6 +205,7 @@
             // 
             this.TB_Mamonhoc.Location = new System.Drawing.Point(22, 153);
             this.TB_Mamonhoc.Name = "TB_Mamonhoc";
+            this.TB_Mamonhoc.ReadOnly = true;
             this.TB_Mamonhoc.Size = new System.Drawing.Size(92, 22);
             this.TB_Mamonhoc.TabIndex = 1;
             // 
@@ -207,6 +213,7 @@
             // 
             this.TB_HOTEN.Location = new System.Drawing.Point(22, 100);
             this.TB_HOTEN.Name = "TB_HOTEN";
+            this.TB_HOTEN.ReadOnly = true;
             this.TB_HOTEN.Size = new System.Drawing.Size(263, 22);
             this.TB_HOTEN.TabIndex = 1;
             // 
@@ -214,6 +221,7 @@
             // 
             this.TB_MASINHVIEN.Location = new System.Drawing.Point(22, 49);
             this.TB_MASINHVIEN.Name = "TB_MASINHVIEN";
+            this.TB_MASINHVIEN.ReadOnly = true;
             this.TB_MASINHVIEN.Size = new System.Drawing.Size(263, 22);
             this.TB_MASINHVIEN.TabIndex = 1;
             // 

@@ -18,7 +18,8 @@ namespace QLDeAn.Model
         public string dt { get; set; }
         public string khoa { get; set; }
         public string TINHTRANG { get; set; }
-        public bool? isInDB { get; set; }
+        public string coso { get; set; }
+
 
         public SinhVien()
         {
@@ -30,6 +31,8 @@ namespace QLDeAn.Model
             dt = "Điện thoại";
             khoa = null;
             TINHTRANG = null ;
+            coso = null;
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }

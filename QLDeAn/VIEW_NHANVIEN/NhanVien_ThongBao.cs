@@ -18,7 +18,8 @@ namespace QLDeAn.VIEW_NHANVIEN
         public NhanVien_ThongBao()
         {
             InitializeComponent();
-            Load_Thongbao();
+            
+          
         }
 
         private void groupMONHOC_Enter(object sender, EventArgs e)
@@ -27,36 +28,7 @@ namespace QLDeAn.VIEW_NHANVIEN
         }
         private static IThongBaoDao dao = null;
         private static ThongBao selected_ThongBao = null;
-        private void Load_Thongbao()
-        {
-            dao = new ThongBaoXAdminDao(LoginUI.con);
-            //if (NhanVienUI.roleUser == "GV")
-            //{
-            //    dao = new DangKyGVDao(LoginUI.con);
-            //}
-            //else if (NhanVienUI.roleUser == "NV PĐT")
-            //{
-            //    dao = new DangKyNVPDTDao(LoginUI.con);
-            //}
-            //else if (NhanVienUI.roleUser == "NV PKT")
-            //{
-            //    dao = new DangKyNVPKTDao(LoginUI.con);
-            //}
-            //else
-            //{
-            //    return;
-            //}
-            List<object> data = dao.Load(null);
-            if (data.Count > 0)
-            {
-                dataGridView1.DataSource = data.Select(x => (Model.ThongBao)x).ToList();
-            }
-            else
-            {
-            }
-
-        }
-     
+      
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Bỏ qua nếu click header
@@ -65,7 +37,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             selected_ThongBao = (ThongBao)row.DataBoundItem;
 
             TB_DIADIEM.Text = row.Cells["diadiem"].Value?.ToString() ?? "";
-            TB_MATHONGBAO.Text = row.Cells["mathongbao"].Value?.ToString() ?? "";
+            TB_MATHONGBAO.Text = row.Cells["ID_ThongBao"].Value?.ToString() ?? "";
             TB_THOIGIAN.Text = row.Cells["thoigian"].Value?.ToString() ?? "";
             TB_noidung.Text = row.Cells["noidung"].Value?.ToString() ?? "";
 
@@ -126,6 +98,44 @@ namespace QLDeAn.VIEW_NHANVIEN
             else
             {
             }
+
+        }
+
+        public void Load_Thongbao()
+        {
+            dao = new ThongBaoXAdminDao(LoginUI.con);
+
+            //if (NhanVienUI.roleUser == "GV")
+            //{
+            //    dao = new DangKyGVDao(LoginUI.con);
+            //}
+            //else if (NhanVienUI.roleUser == "NV PĐT")
+            //{
+            //    dao = new DangKyNVPDTDao(LoginUI.con);
+            //}
+            //else if (NhanVienUI.roleUser == "NV PKT")
+            //{
+            //    dao = new DangKyNVPKTDao(LoginUI.con);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+
+            List<object> data = dao.Load(null);
+
+
+            if (data.Count > 0)
+            {
+                dataGridView1.DataSource = data.Select(x => (Model.ThongBao)x).ToList();
+            }
+            else
+            {
+            }
+        }
+
+        private void TB_MATHONGBAO_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

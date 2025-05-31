@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using QLDeAn.DataAccess.SinhVien;
 using QLDeAn.Model;
 using QLDeAn.DataAccess.DangKy;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace QLDeAn.VIEW_NHANVIEN
 {
@@ -18,12 +19,12 @@ namespace QLDeAn.VIEW_NHANVIEN
         public NHANVIEN_DANGKYHOCPHAN()
         {
             InitializeComponent();
-            Load_DangKyhocPhan();
+            //Load_DangKyhocPhan();
             SetButtonsByRole();
         }
         private static IDangKyDao dao = null;
         private static DangKy selected_DangKy = null;
-        private void Load_DangKyhocPhan()
+        public void Load_DangKyhocPhan()
         {
 
             if (NhanVienUI.roleUser == "GV")
@@ -60,11 +61,22 @@ namespace QLDeAn.VIEW_NHANVIEN
                     BTN_CAPNHAT.Visible = true;
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
+
+
+                    TB_MASINHVIEN.ReadOnly = false;
+                    TB_Mamonhoc.ReadOnly = false;
+
                     break;
                 case "NV PKT":
                     BTN_CAPNHAT.Visible = true;
-                    BTN_THÊM.Visible = true;
+                    BTN_THÊM.Visible = false;
                     BTN_XOA.Visible = false;
+
+
+                    TB_DiemQT.ReadOnly = false;
+                    TB_DIEMCK.ReadOnly = false;
+                    TB_Diemth.ReadOnly = false;
+                    TB_DIEMTK.ReadOnly = false;
                     break;
                 default:
                     // Ẩn hết nếu không xác định được vai trò

@@ -14,7 +14,7 @@ using QLDeAn.DataAccess;
 using QLDeAn.DataAccess.NhanVien;
 namespace QLDeAn.VIEW_NHANVIEN
 {
-    public partial class NhanVienUI: Form
+    public partial class NhanVienUI : Form
     {
         public NhanVienUI()
         {
@@ -40,6 +40,7 @@ namespace QLDeAn.VIEW_NHANVIEN
                 s_nv = (NhanVien)data[0]; // Lưu nhân viên hiện tại vào biến tĩnh
                 Xinchao.Text = "XIN CHÀO " + s_nv.hoTen.ToUpper() + "!";
                 TB_COSO.Text = s_nv.coso;
+                TB_VAITRO.Text = s_nv.vaiTro;
                 TB_DT.Text = s_nv.dt;
                 TB_HOTEN.Text = s_nv.hoTen;
                 TB_MADV.Text = s_nv.maDV;
@@ -127,7 +128,7 @@ namespace QLDeAn.VIEW_NHANVIEN
 
         private void NhanVienUI_FormClosing(object sender, FormClosingEventArgs e)
         {
-         
+
 
 
         }
@@ -183,6 +184,39 @@ namespace QLDeAn.VIEW_NHANVIEN
         private void nhanvieN_DANGKYHOCPHAN1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void TP_THONGBAO_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == TP_QUANLYMONHOC)
+            {
+                nhanvieN_QUANLYMONHOC1.Load_MoMon();
+                //SetButtonsByRole();
+            }
+            else if (tabControl1.SelectedTab == TP_QUANLYSINHVIEN)
+            {
+                nhanvieN_QUANLYSINHVIEN1.Load_SinhVien();
+                //SetButtonsByRole();
+            }
+            else if (tabControl1.SelectedTab == TP_QUANLYNHANVIEN)
+            {
+                nhanvieN_QUANLYNHANVIEN1.Load_Nhanvien();
+                //SetButtonsByRole();
+            }
+            else if (tabControl1.SelectedTab == TP_DANGKYHP)
+            {
+                nhanvieN_DANGKYHOCPHAN1.Load_DangKyhocPhan();
+                //SetButtonsByRole();
+            }
+            else if (tabControl1.SelectedTab == TP_THONGBAO)
+            {
+                nhanVien_ThongBao2.Load_Thongbao();
+                //SetButtonsByRole();
+            }
         }
     }
 }

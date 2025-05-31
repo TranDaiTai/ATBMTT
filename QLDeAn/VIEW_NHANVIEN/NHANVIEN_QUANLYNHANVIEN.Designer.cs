@@ -194,6 +194,7 @@
             // 
             this.TB_COSO.Location = new System.Drawing.Point(162, 327);
             this.TB_COSO.Name = "TB_COSO";
+            this.TB_COSO.ReadOnly = true;
             this.TB_COSO.Size = new System.Drawing.Size(127, 22);
             this.TB_COSO.TabIndex = 1;
             // 
@@ -201,6 +202,7 @@
             // 
             this.TB_MADV.Location = new System.Drawing.Point(22, 327);
             this.TB_MADV.Name = "TB_MADV";
+            this.TB_MADV.ReadOnly = true;
             this.TB_MADV.Size = new System.Drawing.Size(134, 22);
             this.TB_MADV.TabIndex = 1;
             // 
@@ -208,6 +210,7 @@
             // 
             this.TB_VAITRO.Location = new System.Drawing.Point(162, 267);
             this.TB_VAITRO.Name = "TB_VAITRO";
+            this.TB_VAITRO.ReadOnly = true;
             this.TB_VAITRO.Size = new System.Drawing.Size(127, 22);
             this.TB_VAITRO.TabIndex = 1;
             // 
@@ -215,6 +218,7 @@
             // 
             this.TB_DT.Location = new System.Drawing.Point(22, 267);
             this.TB_DT.Name = "TB_DT";
+            this.TB_DT.ReadOnly = true;
             this.TB_DT.Size = new System.Drawing.Size(134, 22);
             this.TB_DT.TabIndex = 1;
             // 
@@ -222,6 +226,7 @@
             // 
             this.TB_PHUCAP.Location = new System.Drawing.Point(162, 209);
             this.TB_PHUCAP.Name = "TB_PHUCAP";
+            this.TB_PHUCAP.ReadOnly = true;
             this.TB_PHUCAP.Size = new System.Drawing.Size(127, 22);
             this.TB_PHUCAP.TabIndex = 1;
             // 
@@ -229,6 +234,7 @@
             // 
             this.TB_LUONG.Location = new System.Drawing.Point(22, 209);
             this.TB_LUONG.Name = "TB_LUONG";
+            this.TB_LUONG.ReadOnly = true;
             this.TB_LUONG.Size = new System.Drawing.Size(134, 22);
             this.TB_LUONG.TabIndex = 1;
             this.TB_LUONG.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -237,6 +243,7 @@
             // 
             this.TB_NGSINH.Location = new System.Drawing.Point(144, 153);
             this.TB_NGSINH.Name = "TB_NGSINH";
+            this.TB_NGSINH.ReadOnly = true;
             this.TB_NGSINH.Size = new System.Drawing.Size(141, 22);
             this.TB_NGSINH.TabIndex = 1;
             // 
@@ -244,6 +251,7 @@
             // 
             this.TB_PHAI.Location = new System.Drawing.Point(22, 153);
             this.TB_PHAI.Name = "TB_PHAI";
+            this.TB_PHAI.ReadOnly = true;
             this.TB_PHAI.Size = new System.Drawing.Size(92, 22);
             this.TB_PHAI.TabIndex = 1;
             // 
@@ -251,6 +259,7 @@
             // 
             this.TB_HOTEN.Location = new System.Drawing.Point(22, 100);
             this.TB_HOTEN.Name = "TB_HOTEN";
+            this.TB_HOTEN.ReadOnly = true;
             this.TB_HOTEN.Size = new System.Drawing.Size(263, 22);
             this.TB_HOTEN.TabIndex = 1;
             // 

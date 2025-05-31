@@ -36,7 +36,7 @@ namespace QLDeAn.DataAccess.SinhVien
 
             List<Model.SinhVien> result = new List<Model.SinhVien>();
 
-            using (var cmd = new OracleCommand("SELECT * FROM QLSL.SINHVIEN", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.SINHVIEN", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text; // ✅ Sửa lại ở đây
 
@@ -54,7 +54,7 @@ namespace QLDeAn.DataAccess.SinhVien
                             dt = reader["dt"].ToString(),
                             khoa = reader["khoa"].ToString(),
                             TINHTRANG = reader["tinhTrang"].ToString(),
-                            isInDB = true
+                            coso = reader["coso"] != DBNull.Value ? reader["coso"].ToString() : null
                         };
 
                         result.Add(sv);
