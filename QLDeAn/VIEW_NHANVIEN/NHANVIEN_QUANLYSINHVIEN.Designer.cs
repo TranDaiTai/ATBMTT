@@ -33,6 +33,9 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupMONHOC = new System.Windows.Forms.GroupBox();
             this.GB_THÔNGTINCANHAN_GV = new System.Windows.Forms.GroupBox();
+            this.CBB_DONVI = new System.Windows.Forms.ComboBox();
+            this.CBB_PHAI = new System.Windows.Forms.ComboBox();
+            this.CBB_COSO = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BTN_CAPNHAT = new System.Windows.Forms.Button();
@@ -51,9 +54,6 @@
             this.TB_NGAYSINH = new System.Windows.Forms.TextBox();
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_MASINHVIEN = new System.Windows.Forms.TextBox();
-            this.CBB_PHAI = new System.Windows.Forms.ComboBox();
-            this.CBB_DONVI = new System.Windows.Forms.ComboBox();
-            this.CBB_COSO = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupMONHOC.SuspendLayout();
@@ -127,6 +127,47 @@
             this.GB_THÔNGTINCANHAN_GV.TabIndex = 10;
             this.GB_THÔNGTINCANHAN_GV.TabStop = false;
             this.GB_THÔNGTINCANHAN_GV.Text = "SINH VIÊN ĐƯỢC CHỌN";
+            // 
+            // CBB_DONVI
+            // 
+            this.CBB_DONVI.Enabled = false;
+            this.CBB_DONVI.FormattingEnabled = true;
+            this.CBB_DONVI.Items.AddRange(new object[] {
+            "CNTT",
+            "HOA",
+            "TOAN",
+            "PDT",
+            "PTV",
+            "VLY",
+            "PQTTB"});
+            this.CBB_DONVI.Location = new System.Drawing.Point(160, 209);
+            this.CBB_DONVI.Name = "CBB_DONVI";
+            this.CBB_DONVI.Size = new System.Drawing.Size(121, 24);
+            this.CBB_DONVI.TabIndex = 12;
+            // 
+            // CBB_PHAI
+            // 
+            this.CBB_PHAI.Enabled = false;
+            this.CBB_PHAI.FormattingEnabled = true;
+            this.CBB_PHAI.Items.AddRange(new object[] {
+            "Nam",
+            "Nữ"});
+            this.CBB_PHAI.Location = new System.Drawing.Point(22, 153);
+            this.CBB_PHAI.Name = "CBB_PHAI";
+            this.CBB_PHAI.Size = new System.Drawing.Size(121, 24);
+            this.CBB_PHAI.TabIndex = 14;
+            // 
+            // CBB_COSO
+            // 
+            this.CBB_COSO.Enabled = false;
+            this.CBB_COSO.FormattingEnabled = true;
+            this.CBB_COSO.Items.AddRange(new object[] {
+            "Cơ sở 1",
+            "Cơ sở 2"});
+            this.CBB_COSO.Location = new System.Drawing.Point(24, 322);
+            this.CBB_COSO.Name = "CBB_COSO";
+            this.CBB_COSO.Size = new System.Drawing.Size(121, 24);
+            this.CBB_COSO.TabIndex = 13;
             // 
             // label10
             // 
@@ -286,47 +327,6 @@
             this.TB_MASINHVIEN.ReadOnly = true;
             this.TB_MASINHVIEN.Size = new System.Drawing.Size(263, 22);
             this.TB_MASINHVIEN.TabIndex = 1;
-            // 
-            // CBB_PHAI
-            // 
-            this.CBB_PHAI.Enabled = false;
-            this.CBB_PHAI.FormattingEnabled = true;
-            this.CBB_PHAI.Items.AddRange(new object[] {
-            "Nam",
-            "Nữ"});
-            this.CBB_PHAI.Location = new System.Drawing.Point(22, 153);
-            this.CBB_PHAI.Name = "CBB_PHAI";
-            this.CBB_PHAI.Size = new System.Drawing.Size(121, 24);
-            this.CBB_PHAI.TabIndex = 14;
-            // 
-            // CBB_DONVI
-            // 
-            this.CBB_DONVI.Enabled = false;
-            this.CBB_DONVI.FormattingEnabled = true;
-            this.CBB_DONVI.Items.AddRange(new object[] {
-            "CNTT",
-            "HOA",
-            "TOAN",
-            "PDT",
-            "PTV",
-            "VLY",
-            "PQTTB"});
-            this.CBB_DONVI.Location = new System.Drawing.Point(160, 209);
-            this.CBB_DONVI.Name = "CBB_DONVI";
-            this.CBB_DONVI.Size = new System.Drawing.Size(121, 24);
-            this.CBB_DONVI.TabIndex = 12;
-            // 
-            // CBB_COSO
-            // 
-            this.CBB_COSO.Enabled = false;
-            this.CBB_COSO.FormattingEnabled = true;
-            this.CBB_COSO.Items.AddRange(new object[] {
-            "Cơ sở 1",
-            "Cơ sở 2"});
-            this.CBB_COSO.Location = new System.Drawing.Point(24, 322);
-            this.CBB_COSO.Name = "CBB_COSO";
-            this.CBB_COSO.Size = new System.Drawing.Size(121, 24);
-            this.CBB_COSO.TabIndex = 13;
             // 
             // NHANVIEN_QUANLYSINHVIEN
             // 

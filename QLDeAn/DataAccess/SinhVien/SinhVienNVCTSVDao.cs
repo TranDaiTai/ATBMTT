@@ -155,21 +155,21 @@ namespace QLDeAn.DataAccess.SinhVien
 
                 Model.SinhVien sv = (Model.SinhVien)obj;
                 
-                using (var cmd = new OracleCommand("UPDATE QLDL.SINHVIEN  SET HOTEN = :p_hoTen, PHAI = :p_phai, NGSINH = :p_ngSinh, DCHI = :p_dChi, DT = :p_dt, KHOA = :p_khoa, COSO = :p_coso WHERE MASV = :p_maSV", sqlConnection))
+                using (var cmd = new OracleCommand("UPDATE QLDL.SINHVIEN  SET HOTEN = :p_hoTen, PHAI = :p_phai, NGSINH = :p_ngSinh, DCHI = :p_dChi, DT = :p_dt, KHOA = :p_khoa WHERE MASV = :p_maSV", sqlConnection))
                 {
                     cmd.CommandType = CommandType.Text; // ❗Vì đây là SQL thường
 
+
                     cmd.Parameters.Add("p_hoTen", OracleDbType.Varchar2).Value = sv.hoTen ?? (object)DBNull.Value;
                     cmd.Parameters.Add("p_phai", OracleDbType.Varchar2).Value = sv.phai ?? (object)DBNull.Value;
-                    cmd.Parameters.Add("p_ngSinh", OracleDbType.Date).Value =
-                    sv.ngSinh.HasValue ? (object)sv.ngSinh.Value : DBNull.Value;
+                    cmd.Parameters.Add("p_ngSinh", OracleDbType.Date).Value =sv.ngSinh ??(object)DBNull.Value;
 
 
                     cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi ?? (object)DBNull.Value;
                     cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt ?? (object)DBNull.Value;
                     cmd.Parameters.Add("p_khoa", OracleDbType.Varchar2).Value = sv.khoa ?? (object)DBNull.Value;
                     cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV ?? (object)DBNull.Value;
-                    cmd.Parameters.Add("p_coso", OracleDbType.Varchar2).Value = sv.coso ?? (object)DBNull.Value;
+                    //cmd.Parameters.Add("p_coso", OracleDbType.Varchar2).Value = sv.coso ?? (object)DBNull.Value;
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;

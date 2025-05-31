@@ -75,7 +75,6 @@ namespace QLDeAn.VIEW_NHANVIEN
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
 
-                    CBB_COSO.Enabled = true;
                     TB_HOTEN.ReadOnly = false;
                     CBB_DONVI.Enabled = true;
                     CBB_PHAI.Enabled = true;
