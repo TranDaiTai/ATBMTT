@@ -74,6 +74,20 @@ INSERT INTO MOMON VALUES ('MM005', 'HP005', 'NV08', 1, 2024);
 INSERT INTO MOMON VALUES ('MM006', 'HP006', 'NV02', 3, 2024);
 INSERT INTO MOMON VALUES ('MM007', 'HP007', 'NV07', 2, 2024);
 
+
+
+INSERT INTO MOMON VALUES ('MM008', 'HP001', 'NV03', 2, 2025);
+INSERT INTO MOMON VALUES ('MM009', 'HP002', 'NV04', 2, 2025);
+INSERT INTO MOMON VALUES ('MM010', 'HP003', 'NV01', 2, 2025);
+INSERT INTO MOMON VALUES ('MM011', 'HP004', 'NV05', 2, 2025);
+INSERT INTO MOMON VALUES ('MM012', 'HP005', 'NV06', 2, 2025);
+INSERT INTO MOMON VALUES ('MM013', 'HP006', 'NV02', 2, 2025);
+INSERT INTO MOMON VALUES ('MM014', 'HP007', 'NV08', 2, 2025);
+INSERT INTO MOMON VALUES ('MM015', 'HP001', 'NV07', 2, 2025);
+INSERT INTO MOMON VALUES ('MM016', 'HP002', 'NV03', 2, 2025);
+INSERT INTO MOMON VALUES ('MM017', 'HP003', 'NV06', 2, 2025);
+
+
 --BẢNG DANGKY
 INSERT INTO DANGKY VALUES ('SV001', 'MM001', 8.5, 9.0, 8.0, 8.5);
 INSERT INTO DANGKY VALUES ('SV001', 'MM004', 7.5, 8.0, 7.0, 7.5);
@@ -82,3 +96,52 @@ INSERT INTO DANGKY VALUES ('SV004', 'MM002', 9.0, 9.5, 9.0, 9.2);
 INSERT INTO DANGKY VALUES ('SV005', 'MM006', 7.0, 8.0, 7.5, 7.5);
 INSERT INTO DANGKY VALUES ('SV006', 'MM005', 6.5, 7.0, 6.0, 6.5);
 INSERT INTO DANGKY VALUES ('SV007', 'MM007', 8.0, 7.5, 7.0, 7.5);
+
+
+
+-- Cập nhật dữ liệu mẫu cho cột COSO
+UPDATE QLDL.NHANVIEN SET COSO = 'Cơ sở 1' WHERE MADV IN ('CNTT', 'TOAN', 'PDT', 'PTV');
+UPDATE QLDL.NHANVIEN SET COSO = 'Cơ sở 2' WHERE MADV IN ('HOA', 'VLY', 'PQTTB');
+UPDATE QLDL.SINHVIEN SET COSO = 'Cơ sở 1' WHERE KHOA IN ('CNTT', 'TOAN');
+UPDATE QLDL.SINHVIEN SET COSO = 'Cơ sở 2' WHERE KHOA IN ('HOA', 'VLY'); 
+
+
+-- Thêm thông báo với nhãn t1: Dành cho tất cả trưởng đơn vị
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo họp trưởng đơn vị toàn trường.', CHAR_TO_LABEL('THONGBAO_POLICY', 'TRUONGDV'));
+
+-- Thêm thông báo với nhãn t2: Dành cho tất cả nhân viên
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo nghỉ lễ dành cho toàn thể nhân viên.', CHAR_TO_LABEL('THONGBAO_POLICY', 'NHANVIEN'));
+
+-- Thêm thông báo với nhãn t3: Dành cho tất cả sinh viên
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo lịch thi học kỳ cho sinh viên.', CHAR_TO_LABEL('THONGBAO_POLICY', 'SINHVIEN'));
+
+-- Thêm thông báo với nhãn t4: Dành cho sinh viên khoa Hóa cơ sở 1
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo seminar khoa Hóa cơ sở 1.', CHAR_TO_LABEL('THONGBAO_POLICY', 'SINHVIEN:HOA:COSO1'));
+
+-- Thêm thông báo với nhãn t5: Dành cho sinh viên khoa Hóa cơ sở 2
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo thực hành thí nghiệm khoa Hóa cơ sở 2.', CHAR_TO_LABEL('THONGBAO_POLICY', 'SINHVIEN:HOA:COSO2'));
+
+-- Thêm thông báo với nhãn t6: Dành cho sinh viên khoa Hóa cả 2 cơ sở
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo hội thảo khoa Hóa cả hai cơ sở.', CHAR_TO_LABEL('THONGBAO_POLICY', 'SINHVIEN:HOA:COSO1,COSO2'));
+
+-- Thêm thông báo với nhãn t7: Dành cho tất cả sinh viên cả 2 cơ sở
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo ngày hội sinh viên toàn trường.', CHAR_TO_LABEL('THONGBAO_POLICY', 'SINHVIEN::COSO1,COSO2'));
+
+-- Thêm thông báo với nhãn t8: Dành cho trưởng khoa Hóa cơ sở 1
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo họp trưởng khoa Hóa cơ sở 1.', CHAR_TO_LABEL('THONGBAO_POLICY', 'TRUONGDV:HOA:COSO1'));
+
+-- Thêm thông báo với nhãn t9: Dành cho trưởng khoa Hóa cả 2 cơ sở
+INSERT INTO THONGBAO (ID_THONGBAO, NOIDUNG, LABEL)
+VALUES (thongbao_seq.NEXTVAL, 'Thông báo kế hoạch phát triển khoa Hóa cả hai cơ sở.', CHAR_TO_LABEL('THONGBAO_POLICY', 'TRUONGDV:HOA:COSO1,COSO2'));
+
+
+
+

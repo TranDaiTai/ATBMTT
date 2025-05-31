@@ -1,20 +1,5 @@
 CONNECT QLDL/123456@localhost:1521/QLDULIEUNOIBO;
 
---1. Tạo các vai trò tương ứng (roles)
-CREATE ROLE ROLE_GV;
-CREATE ROLE ROLE_NV_PDT;
-CREATE ROLE ROLE_NV_PKT;
-CREATE ROLE ROLE_NV_CTSV;
-CREATE ROLE ROLE_SINHVIEN;
--- Vai trò nhân viên cơ bản
-CREATE ROLE ROLE_NVCB;
-
--- Vai trò trưởng đơn vị
-CREATE ROLE ROLE_TRGDV;
-
--- Vai trò nhân viên tổ chức hành chính
-CREATE ROLE ROLE_TCHC;
-
 --2. Tạo view và policy phù hợp với từng vai trò
 --2.1. NVCB – Xem và sửa ĐT của chính mình
 -- View cho NVCB chỉ xem thông tin chính mình
@@ -48,7 +33,7 @@ GRANT ROLE_NVCB TO ROLE_TCHC;
 --2.3. TRGDV – Xem nhân viên đơn vị mình, ẩn lương & phụ cấp
 -- View ẩn LUONG và PHUCAP cho TRGDV
 CREATE OR REPLACE VIEW VIEW_NHANVIEN_TRGDV AS
-SELECT MANV, HOTEN, PHAI, NGSINH, DT, VAITRO, MADV
+SELECT MANV, HOTEN, PHAI, NGSINH, DT, VAITRO, MADV, COSO
 FROM NHANVIEN
 WHERE MADV = (
   SELECT MADV FROM DONVI WHERE TRGDV = SYS_CONTEXT('USERENV', 'SESSION_USER')
