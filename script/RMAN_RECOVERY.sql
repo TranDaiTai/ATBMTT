@@ -1,3 +1,5 @@
+--Kiểm tra chế độ LOG_MODE
+SELECT LOG_MODE FROM V$DATABASE;
 -- Luu ý: Phải Bật Achivelog 
 --sqlplus / as sysdba mở CMD và nhập lệnh trên và tiếp tục các bước 
 ---- 1. Tắt database
@@ -33,7 +35,13 @@ SELECT * FROM DATAPUMP_TEST_USER.RECOVERY_TEST;
 --Phục hồi bằng RMAN (bao gồm PITR) tất cả thực hiện trên CMND đối vói RMAN
 -- Chạy trong RMAN: rman target QLDL/123456@localhost:1521/QLDULIEUNOIBO
 --RMAN> RUN {
---    SET UNTIL SCN 12345678; -- Thay bằng SCN thực tế từ bước 4
+--    SET UNTIL SCN 12345678; --
+--    RESTORE TABLESPACE RECOVERY_TEST;
+--    RECOVER TABLESPACE RECOVERY_TEST;
+--    ALTER TABLESPACE RECOVERY_TEST ONLINE;
+--}
+--RMAN> RUN {
+--    SET UNTIL SEQUENCE 100 THREAD 1; -- 
 --    RESTORE TABLESPACE RECOVERY_TEST;
 --    RECOVER TABLESPACE RECOVERY_TEST;
 --    ALTER TABLESPACE RECOVERY_TEST ONLINE;
