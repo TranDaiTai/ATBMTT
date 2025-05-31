@@ -32,11 +32,13 @@ namespace QLDeAn.DataAccess.NhanVien
             {
                 sqlConnection.Open();
             }
+
             List<Model.NhanVien> result = new List<Model.NhanVien>();
-            using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_NHANVIEN_ForNVCB", sqlConnection))
+
+            // Sử dụng câu SQL thường thay vì stored procedure
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.VIEW_NHANVIEN_NVCB", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.Text; // <- Sửa tại đây
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -45,54 +47,66 @@ namespace QLDeAn.DataAccess.NhanVien
                         var nv = new Model.NhanVien
                         {
                             maNV = reader["MANV"].ToString(),
-                            hoTen = reader["hoTen"].ToString(),
-                            phai = reader["phai"].ToString(),
-                            ngSinh = Convert.ToDateTime(reader["ngSinh"]),
-                            luong = reader["luong"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["luong"]),
-                            phuCap = reader["phuCap"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["phuCap"]),
-                            dt = reader["dt"].ToString(),
-                            vaiTro = reader["vaiTro"].ToString(),
-                            maDV = reader["maDV"].ToString()
-                        }
-                        ;
+                            hoTen = reader["HOTEN"].ToString(),
+                            phai = reader["PHAI"].ToString(),
+                            ngSinh = Convert.ToDateTime(reader["NGSINH"]),
+                            luong = reader["LUONG"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["LUONG"]),
+                            phuCap = reader["PHUCAP"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["PHUCAP"]),
+                            dt = reader["DT"].ToString(),
+                            vaiTro = reader["VAITRO"].ToString(),
+                            maDV = reader["MADV"].ToString()
+                        };
+
                         nv.isInDB = true;
                         result.Add(nv);
                     }
                 }
             }
 
+            sqlConnection.Close();
             return result.Cast<object>().ToList();
         }
+
 
         public bool Update(object obj)
         {
             try
             {
                 Model.NhanVien nv = (Model.NhanVien)obj;
+
                 if (sqlConnection.State != ConnectionState.Open)
                 {
                     sqlConnection.Open();
                 }
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Update_NHANVIEN_ForNVCB", sqlConnection))
+
+                // Câu lệnh UPDATE dùng biến bind chứ không phải hardcoded như NEWDT
+                using (var cmd = new OracleCommand(@"
+                    UPDATE QLDL.VIEW_NHANVIEN_NVCB 
+                    SET DT = :newDt 
+                    WHERE MANV = SYS_CONTEXT('X_UNIVERITY_CONTEXT', 'USER_NAME')", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.Text; // ✅ Rất quan trọng: Vì đây là SQL thường, không phải stored procedure
+
                     cmd.Parameters.Add("newDt", OracleDbType.Varchar2).Value = nv.dt;
 
-                    var rowParam = cmd.Parameters.Add("ROW_AFFECTED", OracleDbType.Int32);
-                    rowParam.Direction = ParameterDirection.Output;
+                    int rowsAffected = cmd.ExecuteNonQuery(); // Không cần dùng output param
 
-                    cmd.ExecuteNonQuery();
-                    int rowsAffected = ((OracleDecimal)rowParam.Value).ToInt32();
-
-                    sqlConnection.Close();
                     return rowsAffected > 0;
                 }
             }
             catch (System.Exception e)
             {
-                sqlConnection.Close();
+                Console.WriteLine("Error: " + e.Message);
                 return false;
             }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
         }
+
     }
 }

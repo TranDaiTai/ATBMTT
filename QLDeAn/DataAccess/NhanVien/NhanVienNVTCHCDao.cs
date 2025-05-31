@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 
@@ -12,22 +10,26 @@ namespace QLDeAn.DataAccess.NhanVien
     class NhanVienNVTCHCDao : INhanVienDao
     {
         private OracleConnection sqlConnection;
+
         public NhanVienNVTCHCDao(OracleConnection sqlConnection)
         {
             this.sqlConnection = sqlConnection;
         }
+
         public bool Add(object obj)
         {
-            if (sqlConnection.State != ConnectionState.Open)
-            {
-                sqlConnection.Open();
-            }
             try
             {
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_INSERT_NHANVIEN_TABLE_FOR_NVTCHC", sqlConnection))
+                if (sqlConnection.State != ConnectionState.Open)
+                    sqlConnection.Open();
+
+                using (var cmd = new OracleCommand(@"INSERT INTO QLDL.NHANVIEN 
+                    (MANV, HOTEN, PHAI, NGSINH, LUONG, PHUCAP, DT, VAITRO, MADV)
+                    VALUES (:MaNLD, :HoTen, :PHAI, :NgaySinh, :Luong, :PhuCap, :SDT, :VaiTro, :MaDV)", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.Text;
                     var nv = (Model.NhanVien)obj;
+
                     cmd.Parameters.Add("MaNLD", OracleDbType.Varchar2).Value = nv.maNV;
                     cmd.Parameters.Add("HoTen", OracleDbType.Varchar2).Value = nv.hoTen;
                     cmd.Parameters.Add("PHAI", OracleDbType.Varchar2).Value = nv.phai;
@@ -40,8 +42,10 @@ namespace QLDeAn.DataAccess.NhanVien
 
                     cmd.ExecuteNonQuery();
                 }
+
+                return true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
@@ -50,28 +54,27 @@ namespace QLDeAn.DataAccess.NhanVien
             {
                 sqlConnection.Close();
             }
-            return true;
         }
 
         public bool Delete(object obj)
         {
-            if (sqlConnection.State != ConnectionState.Open)
-            {
-                sqlConnection.Open();
-            }
             try
             {
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_DELETE_NHANVIEN_TABLE_FOR_NVTCHC", sqlConnection))
+                if (sqlConnection.State != ConnectionState.Open)
+                    sqlConnection.Open();
+
+                using (var cmd = new OracleCommand("DELETE FROM QLDL.NHANVIEN WHERE MANV = :MaNLD", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.Text;
                     var nv = (Model.NhanVien)obj;
                     cmd.Parameters.Add("MaNLD", OracleDbType.Varchar2).Value = nv.maNV;
-                    cmd.Parameters.Add("VaiTro", OracleDbType.Varchar2).Value = nv.vaiTro;
 
                     cmd.ExecuteNonQuery();
                 }
+
+                return true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
@@ -80,22 +83,19 @@ namespace QLDeAn.DataAccess.NhanVien
             {
                 sqlConnection.Close();
             }
-            return true;
         }
 
         public List<object> Load(object obj)
         {
-            if(sqlConnection.State != ConnectionState.Open )
-            {
-                sqlConnection.Open();
-            }
-            List<Model.NhanVien> result = new List<Model.NhanVien>();
+            var result = new List<Model.NhanVien>();
             try
             {
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_SELECT_NHANVIEN_TABLE_FOR_NVTCHC", sqlConnection))
+                if (sqlConnection.State != ConnectionState.Open)
+                    sqlConnection.Open();
+
+                using (var cmd = new OracleCommand("SELECT * FROM QLDL.NHANVIEN", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.Text;
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -116,10 +116,10 @@ namespace QLDeAn.DataAccess.NhanVien
                             };
                             result.Add(nv);
                         }
-                    }            
+                    }
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
@@ -127,39 +127,48 @@ namespace QLDeAn.DataAccess.NhanVien
             {
                 sqlConnection.Close();
             }
+
             return result.Cast<object>().ToList();
         }
 
         public bool Update(object obj)
         {
-            if(sqlConnection.State != ConnectionState.Open)
-            {
-                sqlConnection.Open();
-            }
             try
             {
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_UPDATE_NHANVIEN_TABLE_FOR_NVTCHC", sqlConnection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    var nv = (Model.NhanVien)obj;
-                    cmd.Parameters.Add("MaNLD", OracleDbType.Varchar2).Value = nv.maNV;
-                    cmd.Parameters.Add("p_hoten", OracleDbType.Varchar2).Value = nv.hoTen;
-                    cmd.Parameters.Add("p_PHAI", OracleDbType.Varchar2).Value = nv.phai;
-                    cmd.Parameters.Add("NgaySinh", OracleDbType.Date).Value = nv.ngSinh;
-                    cmd.Parameters.Add("p_luong", OracleDbType.Int32).Value = nv.luong;
-                    cmd.Parameters.Add("p_phuCap", OracleDbType.Int32).Value = nv.phuCap;
-                    cmd.Parameters.Add("SDT", OracleDbType.Varchar2).Value = nv.dt;
-                    cmd.Parameters.Add("p_VaiTro", OracleDbType.Varchar2).Value = nv.vaiTro;
-                    cmd.Parameters.Add("p_MaDV", OracleDbType.Varchar2).Value = nv.maDV;
-                    cmd.Parameters.Add("p_row_affected", OracleDbType.Int32).Direction = ParameterDirection.Output;
-                    cmd.ExecuteNonQuery();
+                if (sqlConnection.State != ConnectionState.Open)
+                    sqlConnection.Open();
 
-                    int rowAffected = ((OracleDecimal)cmd.Parameters["p_row_affected"].Value).ToInt32();
+                using (var cmd = new OracleCommand(@"
+                    UPDATE QLDL.NHANVIEN 
+                    SET HOTEN = :HoTen, 
+                        PHAI = :Phai, 
+                        NGSINH = :NgaySinh, 
+                        LUONG = :Luong, 
+                        PHUCAP = :PhuCap, 
+                        DT = :SDT, 
+                        VAITRO = :VaiTro, 
+                        MADV = :MaDV 
+                    WHERE MANV = :MaNLD", sqlConnection))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    var nv = (Model.NhanVien)obj;
+
+                    cmd.Parameters.Add("HoTen", OracleDbType.Varchar2).Value = nv.hoTen;
+                    cmd.Parameters.Add("Phai", OracleDbType.Varchar2).Value = nv.phai;
+                    cmd.Parameters.Add("NgaySinh", OracleDbType.Date).Value = nv.ngSinh;
+                    cmd.Parameters.Add("Luong", OracleDbType.Int32).Value = nv.luong;
+                    cmd.Parameters.Add("PhuCap", OracleDbType.Int32).Value = nv.phuCap;
+                    cmd.Parameters.Add("SDT", OracleDbType.Varchar2).Value = nv.dt;
+                    cmd.Parameters.Add("VaiTro", OracleDbType.Varchar2).Value = nv.vaiTro;
+                    cmd.Parameters.Add("MaDV", OracleDbType.Varchar2).Value = nv.maDV;
+                    cmd.Parameters.Add("MaNLD", OracleDbType.Varchar2).Value = nv.maNV;
+
+                    int rowAffected = cmd.ExecuteNonQuery();
 
                     return rowAffected > 0;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;

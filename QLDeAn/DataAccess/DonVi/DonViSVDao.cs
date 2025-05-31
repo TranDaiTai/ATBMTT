@@ -10,26 +10,28 @@ namespace QLDeAn.DataAccess.DonVi
     {
         public bool Add(object obj)
         {
-            //throw new NoPrivilegeException();
-            return false;
+            throw new NotImplementedException();
+            //return false;
         }
 
         public bool Delete(object obj)
         {
-            //throw new NoPrivilegeException();
-            return false;
+            throw new NotImplementedException();
+
+            //return false;
         }
 
         public List<object> Load(object obj)
         {
-            //throw new NoPrivilegeException();
-            return null;
+            throw new NotImplementedException();
+
+            //return null;
         }
 
         public bool Update(object obj)
         {
-            //throw new NoPrivilegeException();
-            return false;
+            throw new NotImplementedException();
+
         }
     }
 }

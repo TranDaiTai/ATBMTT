@@ -26,18 +26,21 @@ namespace QLDeAn.DataAccess.MoMon
                     sqlConnection.Open();
                 }
                 Model.MoMon mm = (Model.MoMon)obj;
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_insert_view_PDT_MOMON", sqlConnection))
+                using (var cmd = new OracleCommand("INSERT INTO QLDL.VIEW_MOMON_PDT (MaMM, MaHP, MaGV, HK, NAM) VALUES (:MaMM, :MaHP, :MaGV, :HK, :NAM)", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new OracleParameter("MaMM", mm.MAMM));
-                    cmd.Parameters.Add(new OracleParameter("MaHP", mm.MAHP));
-                    cmd.Parameters.Add(new OracleParameter("MaGV", mm.MAGV));
-                    cmd.Parameters.Add(new OracleParameter("HK", mm.HK));
-                    cmd.Parameters.Add(new OracleParameter("NAM", mm.NAM));
+                    cmd.CommandType = CommandType.Text;  // Dùng Text thay vì StoredProcedure
+
+                    cmd.Parameters.Add(new OracleParameter("MaMM", OracleDbType.Varchar2)).Value = mm.MAMM;
+                    cmd.Parameters.Add(new OracleParameter("MaHP", OracleDbType.Varchar2)).Value = mm.MAHP;
+                    cmd.Parameters.Add(new OracleParameter("MaGV", OracleDbType.Varchar2)).Value = mm.MAGV;
+                    cmd.Parameters.Add(new OracleParameter("HK", OracleDbType.Int32)).Value = mm.HK;
+                    cmd.Parameters.Add(new OracleParameter("NAM", OracleDbType.Int32)).Value = mm.NAM;
+
                     cmd.ExecuteNonQuery();
                     sqlConnection.Close();
                     return true;
                 }
+
             }
             catch (System.Exception e)
             {
@@ -54,15 +57,20 @@ namespace QLDeAn.DataAccess.MoMon
                 {
                     sqlConnection.Open();
                 }
+
                 Model.MoMon mm = (Model.MoMon)obj;
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_delete_view_PDT_MOMON", sqlConnection))
+
+                using (var cmd = new OracleCommand("DELETE FROM QLDL.VIEW_MOMON_PDT WHERE MAMM = :Ma", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new OracleParameter("Ma", mm.MAMM));
-                    cmd.ExecuteNonQuery();
+                    cmd.CommandType = CommandType.Text; // sửa từ StoredProcedure sang Text
+                    cmd.Parameters.Add("Ma", OracleDbType.Varchar2).Value = mm.MAMM;
+
+                    int rowsAffected = cmd.ExecuteNonQuery(); // lấy số dòng bị ảnh hưởng
+
                     sqlConnection.Close();
-                    return true;
+                    return rowsAffected > 0; // chỉ trả true nếu có dòng bị xóa
                 }
+
             }
             catch (System.Exception e)
             {
@@ -78,7 +86,7 @@ namespace QLDeAn.DataAccess.MoMon
                 sqlConnection.Open();
             }
             List<Model.MoMon> result = new List<Model.MoMon>();
-            using (var cmd = new OracleCommand("SELECT * FROM X_ADMIN.view_PDT_MOMON", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.VIEW_MOMON_PDT", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text;
 
@@ -112,31 +120,37 @@ namespace QLDeAn.DataAccess.MoMon
                 {
                     sqlConnection.Open();
                 }
+
                 Model.MoMon mm = (Model.MoMon)obj;
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_update_view_PDT_MOMON", sqlConnection))
+
+                using (var cmd = new OracleCommand(
+                    "UPDATE QLDL.VIEW_MOMON_PDT SET MaHP = :MaHP_, MaGV = :MaGV_ " +
+                    "WHERE MaMM = :MaMM_ AND HK = :HK_ AND NAM = :NAM_", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new OracleParameter("MaMM_", mm.MAMM));
-                    cmd.Parameters.Add(new OracleParameter("MaHP_", mm.MAHP));
-                    cmd.Parameters.Add(new OracleParameter("MaGV_", mm.MAGV));
-                    cmd.Parameters.Add(new OracleParameter("HK_", mm.HK));
-                    cmd.Parameters.Add(new OracleParameter("NAM_", mm.NAM));
+                    cmd.CommandType = CommandType.Text;
 
-                    var rowAffectedParam = new OracleParameter("ROW_AFFECTED", OracleDbType.Int32);
-                    rowAffectedParam.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(rowAffectedParam);
+                    cmd.Parameters.Add("MaHP_", OracleDbType.Varchar2).Value = mm.MAHP;
+                    cmd.Parameters.Add("MaGV_", OracleDbType.Varchar2).Value = mm.MAGV;
+                    cmd.Parameters.Add("MaMM_", OracleDbType.Varchar2).Value = mm.MAMM;
+                    cmd.Parameters.Add("HK_", OracleDbType.Int32).Value = mm.HK;
+                    cmd.Parameters.Add("NAM_", OracleDbType.Int32).Value = mm.NAM;
 
-                    cmd.ExecuteNonQuery();
-                    int rowsAffected = ((OracleDecimal)rowAffectedParam.Value).ToInt32();
-                    sqlConnection.Close();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
                     return rowsAffected > 0;
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                sqlConnection.Close();
+                Console.WriteLine("Error: " + e.Message);
                 return false;
             }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                    sqlConnection.Close();
+            }
         }
+
     }
 }

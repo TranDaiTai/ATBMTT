@@ -25,15 +25,17 @@ namespace QLDeAn.DataAccess.DangKy
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Insert_DANGKY_Table_ForSV", sqlConnection))
+            using (OracleCommand cmd = new OracleCommand("INSERT INTO QLDL.V_DANGKY (MASV, MAMM) VALUES (:p_maSV, :p_maMM)", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;  //  dùng lệnh SQL trực tiếp
                 cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = dk.maSV;
                 cmd.Parameters.Add("p_maMM", OracleDbType.Varchar2).Value = dk.maMM;
+
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 return true;
             }
+
         }
 
         public bool Delete(object obj)
@@ -45,19 +47,20 @@ namespace QLDeAn.DataAccess.DangKy
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Delete_DANGKY_Table_ForSV", sqlConnection))
+            using (OracleCommand cmd = new OracleCommand("DELETE FROM QLDL.V_DANGKY WHERE MASV = :p_maSV AND MAMM = :p_maMM", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;  // Sửa thành Text
+
                 cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = dk.maSV;
                 cmd.Parameters.Add("p_maMM", OracleDbType.Varchar2).Value = dk.maMM;
-                cmd.Parameters.Add("p_row_affected", OracleDbType.Int32).Direction = ParameterDirection.Output;
-                cmd.ExecuteNonQuery();
-                int rowAffected = ((OracleDecimal)cmd.Parameters["p_row_affected"].Value).ToInt32();
+
+                int rowAffected = cmd.ExecuteNonQuery();
+
                 sqlConnection.Close();
 
                 return rowAffected > 0;
-
             }
+
         }
 
         public List<object> Load(object obj)
@@ -66,34 +69,46 @@ namespace QLDeAn.DataAccess.DangKy
             {
                 sqlConnection.Open();
             }
+
             List<Model.DangKy> result = new List<Model.DangKy>();
-            using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_DANGKY_Table_ForSV", sqlConnection))
+
+            try
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-
-                using (var reader = cmd.ExecuteReader())
+                using (var cmd = new OracleCommand("SELECT * FROM QLDL.V_DANGKY", sqlConnection))
                 {
-                    while (reader.Read())
-                    {
-                        var dk = new Model.DangKy
-                        {
-                            maSV = reader["maSV"].ToString(),
-                            maMM = reader["maMM"].ToString(),
-                            diemTH = reader["diemTH"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemTH"]) : null,
-                            diemCT = reader["diemCT"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCT"]) : null,
-                            diemCK = reader["diemCK"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCK"]) : null,
-                            diemTK = reader["diemTK"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemTK"]) : null
-                        };
+                    cmd.CommandType = CommandType.Text; // ✅ sửa lại từ StoredProcedure
 
-                        result.Add(dk);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var dk = new Model.DangKy
+                            {
+                                maSV = reader["maSV"].ToString(),
+                                maMM = reader["maMM"].ToString(),
+                                diemTH = reader["diemTH"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemTH"]) : null,
+                                diemCT = reader["diemCT"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCT"]) : null,
+                                diemCK = reader["diemCK"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCK"]) : null,
+                                diemTK = reader["diemTK"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemTK"]) : null
+                            };
+
+                            result.Add(dk);
+                        }
                     }
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                sqlConnection.Close();
             }
 
             return result.Cast<object>().ToList();
         }
+
 
         public bool Update(object obj)
         {
@@ -104,16 +119,31 @@ namespace QLDeAn.DataAccess.DangKy
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Update_DANGKY_Table_ForSV", sqlConnection))
+            try
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = dk.maSV;
-                cmd.Parameters.Add("p_maMM", OracleDbType.Varchar2).Value = dk.maMM;
-                cmd.ExecuteNonQuery();
+                using (OracleCommand cmd = new OracleCommand(
+                    "UPDATE QLDL.V_DANGKY SET MAMM = :p_maMM WHERE MASV = :p_maSV", sqlConnection))
+                {
+                    cmd.CommandType = CommandType.Text; // ❗Vì đây là câu SQL thường
+
+                    cmd.Parameters.Add("p_maMM", OracleDbType.Varchar2).Value = dk.maMM;
+                    cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = dk.maSV;
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi cập nhật: " + ex.Message);
+                return false;
+            }
+            finally
+            {
                 sqlConnection.Close();
-                return true;
             }
         }
+
 
     }
 }

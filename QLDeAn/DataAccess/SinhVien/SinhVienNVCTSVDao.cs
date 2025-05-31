@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 
@@ -18,18 +15,24 @@ namespace QLDeAn.DataAccess.SinhVien
         {
             this.sqlConnection = sqlConnection;
         }
+
         public bool Add(object obj)
         {
             var sv = obj as Model.SinhVien;
 
-            if(sqlConnection.State != ConnectionState.Open)
+            if (sqlConnection.State != ConnectionState.Open)
             {
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Insert_SINHVIEN_Table_ForNVCTSV", sqlConnection))
+            string sql = @"
+                INSERT INTO QLDL.SINHVIEN 
+                (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, KHOA) 
+                VALUES (:p_maSV, :p_hoTen, :p_phai, :p_ngSinh, :p_dChi, :p_dt, :p_khoa)";
+
+            using (OracleCommand cmd = new OracleCommand(sql, sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text; // Thực thi câu SQL thuần
                 cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
                 cmd.Parameters.Add("p_hoTen", OracleDbType.Varchar2).Value = sv.hoTen;
                 cmd.Parameters.Add("p_phai", OracleDbType.Varchar2).Value = sv.phai;
@@ -37,10 +40,12 @@ namespace QLDeAn.DataAccess.SinhVien
                 cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi;
                 cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt;
                 cmd.Parameters.Add("p_khoa", OracleDbType.Varchar2).Value = sv.khoa;
+
                 cmd.ExecuteNonQuery();
-                return true;
             }
-            
+
+            sqlConnection.Close();
+            return true;
         }
 
         public bool Delete(object obj)
@@ -52,19 +57,17 @@ namespace QLDeAn.DataAccess.SinhVien
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Delete_SINHVIEN_Table_ForNVCTSV", sqlConnection))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("rowAffected", OracleDbType.Int32).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
-                cmd.ExecuteNonQuery();
+            string sql = "DELETE FROM QLDL.SINHVIEN WHERE MASV = :p_maSV";
 
-                var outputParam = cmd.Parameters["rowAffected"].Value;
-                int rowAffected = outputParam != null && outputParam != DBNull.Value
-                    ? ((OracleDecimal)outputParam).ToInt32() : 0;
+            using (OracleCommand cmd = new OracleCommand(sql, sqlConnection))
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
+
+                int rowsAffected = cmd.ExecuteNonQuery();
 
                 sqlConnection.Close();
-                return true;
+                return rowsAffected > 0;
             }
         }
 
@@ -74,11 +77,14 @@ namespace QLDeAn.DataAccess.SinhVien
             {
                 sqlConnection.Open();
             }
+
             List<Model.SinhVien> result = new List<Model.SinhVien>();
-            using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_SINHVIEN_Table_ForNVCTSV", sqlConnection))
+
+            string sql = "SELECT * FROM QLDL.SINHVIEN";
+
+            using (var cmd = new OracleCommand(sql, sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.Text;
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -86,14 +92,14 @@ namespace QLDeAn.DataAccess.SinhVien
                     {
                         var sv = new Model.SinhVien
                         {
-                            maSV = reader["maSV"].ToString(),
-                            hoTen = reader["hoTen"].ToString(),
-                            phai = reader["phai"].ToString(),
-                            ngSinh = Convert.ToDateTime(reader["ngSinh"]),
-                            dChi = reader["dChi"].ToString(),
-                            dt = reader["dt"].ToString(),
-                            khoa = reader["khoa"].ToString(),
-                            TINHTRANG = reader["tinhTrang"].ToString(),
+                            maSV = reader["MASV"].ToString(),
+                            hoTen = reader["HOTEN"].ToString(),
+                            phai = reader["PHAI"].ToString(),
+                            ngSinh = reader["NGSINH"] != DBNull.Value ? Convert.ToDateTime(reader["NGSINH"]) : (DateTime?)null,
+                            dChi = reader["DCHI"].ToString(),
+                            dt = reader["DT"].ToString(),
+                            khoa = reader["KHOA"].ToString(),
+                            TINHTRANG = reader["TINHTRANG"] != DBNull.Value ? reader["TINHTRANG"].ToString() : null,
                             isInDB = true
                         };
 
@@ -102,6 +108,7 @@ namespace QLDeAn.DataAccess.SinhVien
                 }
             }
 
+            sqlConnection.Close();
             return result.Cast<object>().ToList();
         }
 
@@ -114,19 +121,26 @@ namespace QLDeAn.DataAccess.SinhVien
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Update_SINHVIEN_Table_ForNVCTSV", sqlConnection))
+            string sql = @"
+                UPDATE QLDL.SINHVIEN 
+                SET HOTEN = :p_hoTen, PHAI = :p_phai, NGSINH = :p_ngSinh, DCHI = :p_dChi, DT = :p_dt, KHOA = :p_khoa 
+                WHERE MASV = :p_maSV";
+
+            using (OracleCommand cmd = new OracleCommand(sql, sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
+                cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Add("p_hoTen", OracleDbType.Varchar2).Value = sv.hoTen;
                 cmd.Parameters.Add("p_phai", OracleDbType.Varchar2).Value = sv.phai;
                 cmd.Parameters.Add("p_ngSinh", OracleDbType.Date).Value = sv.ngSinh;
                 cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi;
                 cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt;
                 cmd.Parameters.Add("p_khoa", OracleDbType.Varchar2).Value = sv.khoa;
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
                 sqlConnection.Close();
-                return true;
+                return rowsAffected > 0;
             }
         }
     }

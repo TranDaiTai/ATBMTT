@@ -33,7 +33,7 @@ namespace QLDeAn.DataAccess.SinhVien
                 sqlConnection.Open();
             }
             List<Model.SinhVien> result = new List<Model.SinhVien>();
-            using (var cmd = new OracleCommand("SELECT * FROM X_ADMIN.SINHVIEN", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.V_SINHVIEN", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text;
                 using (var reader = cmd.ExecuteReader())

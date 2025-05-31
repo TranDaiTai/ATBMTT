@@ -25,13 +25,14 @@ namespace QLDeAn.DataAccess.DangKy
                     sqlConnection.Open();
                 }
                 Model.DangKy dk = (Model.DangKy)obj;
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_insert_DANGKY_NVPDT", sqlConnection))
+                using (var cmd = new OracleCommand("INSERT INTO QLDL.DANGKY(MASV, MAMM) VALUES (:MaSV_, :MaMM_)", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.Text; // Sử dụng SQL thường
                     cmd.Parameters.Add(new OracleParameter("MaSV_", dk.maSV));
                     cmd.Parameters.Add(new OracleParameter("MaMM_", dk.maMM));
                     cmd.ExecuteNonQuery();
                 }
+
                 sqlConnection.Close();
                 return true;
             }
@@ -49,24 +50,26 @@ namespace QLDeAn.DataAccess.DangKy
                 {
                     sqlConnection.Open();
                 }
+
                 Model.DangKy dk = (Model.DangKy)obj;
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_delete_DANGKY_NVPDT", sqlConnection))
+
+                string sql = "DELETE FROM QLDL.DANGKY WHERE MAMM = :MaMM_ AND MASV = :MaSV_";
+
+                using (var cmd = new OracleCommand(sql, sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.Text;
+
                     cmd.Parameters.Add(new OracleParameter("MaSV_", dk.maSV));
                     cmd.Parameters.Add(new OracleParameter("MaMM_", dk.maMM));
 
-                    var rowAffectedParam = new OracleParameter("ROW_AFFECTED", OracleDbType.Int32);
-                    rowAffectedParam.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(rowAffectedParam);
+                    int rowsAffected = cmd.ExecuteNonQuery();
 
-                    cmd.ExecuteNonQuery();
-                    int rowsAffected = ((OracleDecimal)rowAffectedParam.Value).ToInt32();
                     return rowsAffected > 0;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
+                // Có thể log ex nếu cần
                 return false;
             }
             finally
@@ -85,7 +88,7 @@ namespace QLDeAn.DataAccess.DangKy
                 sqlConnection.Open();
             }
             List<Model.DangKy> result = new List<Model.DangKy>();
-            using (var cmd = new OracleCommand("SELECT * FROM X_ADMIN.DANGKY", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.DANGKY", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text;
 

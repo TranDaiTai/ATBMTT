@@ -34,10 +34,9 @@ namespace QLDeAn.DataAccess.MoMon
                 sqlConnection.Open();
             }
             List<Model.MoMon> result = new List<Model.MoMon>();
-            using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_MOMON_Table_ForTRGDV", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.VIEW_MOMON_TRGDV", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.Text; // Phải để Text khi chạy câu lệnh SQL thuần
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -60,8 +59,8 @@ namespace QLDeAn.DataAccess.MoMon
                         result.Add(mm);
                     }
                 }
-
             }
+
 
             return result.Cast<object>().ToList();
         }

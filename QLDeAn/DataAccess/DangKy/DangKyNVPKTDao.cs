@@ -27,18 +27,17 @@ namespace QLDeAn.DataAccess.DangKy
 
         public List<object> Load(object obj)
         {
-            if(sqlConnection.State == ConnectionState.Closed)
+            if (sqlConnection.State == ConnectionState.Closed)
             {
                 sqlConnection.Open();
             }
             List<Model.DangKy> result = new List<Model.DangKy>();
             try
             {
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_SELECT_DANGKY_TABLE_FOR_NVPKT", sqlConnection))
+                using (var cmd = new OracleCommand("SELECT * FROM QLDL.DANGKY", sqlConnection))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-    
+                    cmd.CommandType = CommandType.Text;
+
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -47,16 +46,17 @@ namespace QLDeAn.DataAccess.DangKy
                             {
                                 maMM = reader["MAMM"].ToString(),
                                 maSV = reader["MASV"].ToString(),
-                                diemTH = Convert.ToDouble(reader["DIEMTH"]),
-                                diemCT = Convert.ToDouble(reader["DIEMCT"]),
-                                diemCK = Convert.ToDouble(reader["DIEMCK"]),
-                                diemTK = Convert.ToDouble(reader["DIEMTK"]),
+                                diemTH = reader["DIEMTH"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMTH"]) : null,
+                                diemCT = reader["DIEMCT"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMCT"]) : null,
+                                diemCK = reader["DIEMCK"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMCK"]) : null,
+                                diemTK = reader["DIEMTK"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMTK"]) : null
                             };
 
                             result.Add(dk);
                         }
                     }
                 }
+
             }
             catch (System.Exception ex)
             {
@@ -75,32 +75,44 @@ namespace QLDeAn.DataAccess.DangKy
             {
                 sqlConnection.Open();
             }
+
             try
             {
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_UPDATE_DANGKY_TABLE_FOR_NVPKT", sqlConnection))
+                var dangKy = (Model.DangKy)obj;
+
+                string sql = @"UPDATE QLDL.DANGKY 
+                       SET DIEMTH = :p_DIEMTH, 
+                           DIEMCT = :p_DIEMCT, 
+                           DIEMCK = :p_DIEMCK, 
+                           DIEMTK = :p_DIEMTK 
+                       WHERE MAMM = :p_MAMM AND MASV = :p_MASV";
+
+                using (var cmd = new OracleCommand(sql, sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    var dangKy = (Model.DangKy)obj;
-                    cmd.Parameters.Add("p_MAMM", OracleDbType.Varchar2).Value = dangKy.maMM;
-                    cmd.Parameters.Add("p_MASV", OracleDbType.Varchar2).Value = dangKy.maSV;
+                    cmd.CommandType = CommandType.Text; // Sửa lại thành Text
+
                     cmd.Parameters.Add("p_DIEMTH", OracleDbType.Double).Value = dangKy.diemTH;
                     cmd.Parameters.Add("p_DIEMCT", OracleDbType.Double).Value = dangKy.diemCT;
                     cmd.Parameters.Add("p_DIEMCK", OracleDbType.Double).Value = dangKy.diemCK;
                     cmd.Parameters.Add("p_DIEMTK", OracleDbType.Double).Value = dangKy.diemTK;
+                    cmd.Parameters.Add("p_MAMM", OracleDbType.Varchar2).Value = dangKy.maMM;
+                    cmd.Parameters.Add("p_MASV", OracleDbType.Varchar2).Value = dangKy.maSV;
 
-                    cmd.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
             finally
             {
-                sqlConnection.Close();
+                if (sqlConnection.State == ConnectionState.Open)
+                    sqlConnection.Close();
             }
-            return true;
         }
     }
+
 }

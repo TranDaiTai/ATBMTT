@@ -32,7 +32,7 @@ namespace QLDeAn.DataAccess.DangKy
                 sqlConnection.Open();
             }
             List<Model.DangKy> result = new List<Model.DangKy>();
-            using (var cmd = new OracleCommand("SELECT * FROM X_ADMIN.DANGKY", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.V_DANGKY", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text;
 
