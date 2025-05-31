@@ -310,6 +310,12 @@
     <Compile Include="VIEW_NHANVIEN\NhanVien_ThongBao.Designer.cs">
       <DependentUpon>NhanVien_ThongBao.cs</DependentUpon>
     </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_DANGKYMON.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VIEW_SINHVIEN\SINHVIENUI_DANGKYMON.Designer.cs">
+      <DependentUpon>SINHVIENUI_DANGKYMON.cs</DependentUpon>
+    </Compile>
     <Compile Include="VIEW_SINHVIEN\SINHVIENUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -415,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NhanVien_ThongBao.resx">
       <DependentUpon>NhanVien_ThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI_DANGKYMON.resx">
+      <DependentUpon>SINHVIENUI_DANGKYMON.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VIEW_SINHVIEN\SINHVIENUI.resx">
       <DependentUpon>SINHVIENUI.cs</DependentUpon>

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using QLDeAn.Model;
 using QLDeAn.VIEW_NHANVIEN;
+using QLDeAn.VIEW_SINHVIEN;
 
 
 namespace QLDeAn
@@ -146,9 +147,29 @@ namespace QLDeAn
                     NVUI.Show();
                     
                 }
+                else if (role.Text == "SINH VIÊN")
+                {
+                    string query = @"SELECT * FROM qldl.V_SINHVIEN ";
 
 
-                this.Hide();
+                    OracleCommand command_role = new OracleCommand(query, con);
+                    command_role.Parameters.Add(new OracleParameter("manv", username.Text));
+                    OracleDataReader dr = command_role.ExecuteReader();
+
+                    if (!dr.Read())
+                    {
+                        MessageBox.Show("Không tìm thấy vai trò cho người dùng này trong phân hệ sinh viên.");
+                        return;
+                    }
+
+                    MessageBox.Show("Connect với Oracle thành công");
+                    SINHVIENUI SVUI = new SINHVIENUI();
+                    SVUI.Text = "SINH VIÊN";
+                    SVUI.Show();
+                }
+
+
+                    this.Hide();
             }
             catch (OracleException ex)
             {

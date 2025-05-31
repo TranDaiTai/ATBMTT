@@ -107,6 +107,7 @@
             this.BTN_CAPNHAT.TabIndex = 0;
             this.BTN_CAPNHAT.Text = "CẬP NHẬT";
             this.BTN_CAPNHAT.UseVisualStyleBackColor = true;
+            this.BTN_CAPNHAT.Click += new System.EventHandler(this.BTN_CAPNHAT_Click);
             // 
             // label8
             // 
@@ -185,6 +186,7 @@
             // 
             this.TB_COSO.Location = new System.Drawing.Point(24, 322);
             this.TB_COSO.Name = "TB_COSO";
+            this.TB_COSO.ReadOnly = true;
             this.TB_COSO.Size = new System.Drawing.Size(127, 22);
             this.TB_COSO.TabIndex = 1;
             // 
@@ -192,6 +194,7 @@
             // 
             this.TB_TINHTRANG.Location = new System.Drawing.Point(162, 267);
             this.TB_TINHTRANG.Name = "TB_TINHTRANG";
+            this.TB_TINHTRANG.ReadOnly = true;
             this.TB_TINHTRANG.Size = new System.Drawing.Size(127, 22);
             this.TB_TINHTRANG.TabIndex = 1;
             // 
@@ -206,6 +209,7 @@
             // 
             this.TB_KHOA.Location = new System.Drawing.Point(162, 209);
             this.TB_KHOA.Name = "TB_KHOA";
+            this.TB_KHOA.ReadOnly = true;
             this.TB_KHOA.Size = new System.Drawing.Size(127, 22);
             this.TB_KHOA.TabIndex = 1;
             // 
@@ -220,6 +224,7 @@
             // 
             this.TB_NGAYSINH.Location = new System.Drawing.Point(144, 153);
             this.TB_NGAYSINH.Name = "TB_NGAYSINH";
+            this.TB_NGAYSINH.ReadOnly = true;
             this.TB_NGAYSINH.Size = new System.Drawing.Size(141, 22);
             this.TB_NGAYSINH.TabIndex = 1;
             // 
@@ -227,6 +232,7 @@
             // 
             this.TB_PHAI.Location = new System.Drawing.Point(22, 153);
             this.TB_PHAI.Name = "TB_PHAI";
+            this.TB_PHAI.ReadOnly = true;
             this.TB_PHAI.Size = new System.Drawing.Size(92, 22);
             this.TB_PHAI.TabIndex = 1;
             // 
@@ -234,6 +240,7 @@
             // 
             this.TB_HOTEN.Location = new System.Drawing.Point(22, 100);
             this.TB_HOTEN.Name = "TB_HOTEN";
+            this.TB_HOTEN.ReadOnly = true;
             this.TB_HOTEN.Size = new System.Drawing.Size(263, 22);
             this.TB_HOTEN.TabIndex = 1;
             // 
@@ -241,6 +248,7 @@
             // 
             this.TB_MASINHVIEN.Location = new System.Drawing.Point(22, 49);
             this.TB_MASINHVIEN.Name = "TB_MASINHVIEN";
+            this.TB_MASINHVIEN.ReadOnly = true;
             this.TB_MASINHVIEN.Size = new System.Drawing.Size(263, 22);
             this.TB_MASINHVIEN.TabIndex = 1;
             // 

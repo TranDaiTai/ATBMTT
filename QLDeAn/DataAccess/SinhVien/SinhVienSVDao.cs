@@ -34,7 +34,7 @@ namespace QLDeAn.DataAccess.SinhVien
             }
             List<Model.SinhVien> result = new List<Model.SinhVien>();
 
-            using (var cmd = new OracleCommand("SELECT * FROM V_SINHVIEN", sqlConnection))
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.V_SINHVIEN", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text;  // Sửa lại đây
 
@@ -77,13 +77,12 @@ namespace QLDeAn.DataAccess.SinhVien
             }
 
             using (OracleCommand cmd = new OracleCommand(
-                "UPDATE QLDL.SINHVIEN SET DCHI = :p_dChi, DT = :p_dt WHERE MASV = :p_maSV", sqlConnection))
+                "UPDATE QLDL.V_SINHVIEN SET DCHI = :p_dChi, DT = :p_dt ", sqlConnection))
             {
                 cmd.CommandType = CommandType.Text;  // Thực thi câu lệnh SQL bình thường
 
                 cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi ?? (object)DBNull.Value;
                 cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt ?? (object)DBNull.Value;
-                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 

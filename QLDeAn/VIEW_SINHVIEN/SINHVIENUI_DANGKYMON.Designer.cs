@@ -1,6 +1,6 @@
 ﻿namespace QLDeAn.VIEW_SINHVIEN
 {
-    partial class SINHVIENUI_MOMON
+    partial class SINHVIENUI_DANGKYMON
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.BTN_DANGKY = new System.Windows.Forms.Button();
             this.GB_MONHOCDUOCCHON = new System.Windows.Forms.GroupBox();
             this.TB_MAMONHOC = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -44,9 +45,20 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupMONHOC = new System.Windows.Forms.GroupBox();
             this.GB_MONHOCDUOCCHON.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupMONHOC.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // BTN_DANGKY
+            // 
+            this.BTN_DANGKY.Location = new System.Drawing.Point(16, 22);
+            this.BTN_DANGKY.Name = "BTN_DANGKY";
+            this.BTN_DANGKY.Size = new System.Drawing.Size(75, 23);
+            this.BTN_DANGKY.TabIndex = 2;
+            this.BTN_DANGKY.Text = "ĐĂNG KÝ";
+            this.BTN_DANGKY.UseVisualStyleBackColor = true;
+            this.BTN_DANGKY.Click += new System.EventHandler(this.BTN_DANGKY_Click);
             // 
             // GB_MONHOCDUOCCHON
             // 
@@ -64,7 +76,7 @@
             this.GB_MONHOCDUOCCHON.Location = new System.Drawing.Point(610, 3);
             this.GB_MONHOCDUOCCHON.Name = "GB_MONHOCDUOCCHON";
             this.GB_MONHOCDUOCCHON.Size = new System.Drawing.Size(312, 468);
-            this.GB_MONHOCDUOCCHON.TabIndex = 8;
+            this.GB_MONHOCDUOCCHON.TabIndex = 11;
             this.GB_MONHOCDUOCCHON.TabStop = false;
             this.GB_MONHOCDUOCCHON.Text = "MON HOC ĐƯỢC CHỌN";
             // 
@@ -78,6 +90,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.BTN_DANGKY);
             this.panel2.Location = new System.Drawing.Point(6, 366);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 48);
@@ -165,7 +178,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 423);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(575, 48);
-            this.panel1.TabIndex = 9;
+            this.panel1.TabIndex = 12;
             // 
             // dataGridView1
             // 
@@ -176,7 +189,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(568, 387);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick_1);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick_2);
             // 
             // groupMONHOC
             // 
@@ -184,21 +197,22 @@
             this.groupMONHOC.Location = new System.Drawing.Point(3, 3);
             this.groupMONHOC.Name = "groupMONHOC";
             this.groupMONHOC.Size = new System.Drawing.Size(575, 414);
-            this.groupMONHOC.TabIndex = 7;
+            this.groupMONHOC.TabIndex = 10;
             this.groupMONHOC.TabStop = false;
             this.groupMONHOC.Text = "DANH SÁCH MÔN HỌC";
             // 
-            // SINHVIENUI_MOMON
+            // SINHVIENUI_DANGKYMON
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GB_MONHOCDUOCCHON);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupMONHOC);
-            this.Name = "SINHVIENUI_MOMON";
-            this.Size = new System.Drawing.Size(937, 484);
+            this.Name = "SINHVIENUI_DANGKYMON";
+            this.Size = new System.Drawing.Size(931, 462);
             this.GB_MONHOCDUOCCHON.ResumeLayout(false);
             this.GB_MONHOCDUOCCHON.PerformLayout();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupMONHOC.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -207,6 +221,7 @@
 
         #endregion
 
+        private System.Windows.Forms.Button BTN_DANGKY;
         private System.Windows.Forms.GroupBox GB_MONHOCDUOCCHON;
         private System.Windows.Forms.TextBox TB_MAMONHOC;
         private System.Windows.Forms.Panel panel2;

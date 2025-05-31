@@ -37,7 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.TB_HOCKI = new System.Windows.Forms.TextBox();
+            this.TB_NOIDUNG = new System.Windows.Forms.TextBox();
             this.TB_DIADIEM = new System.Windows.Forms.TextBox();
             this.TB_THOIGIAN = new System.Windows.Forms.TextBox();
             this.GB_MONHOCDUOCCHON = new System.Windows.Forms.GroupBox();
@@ -78,6 +78,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(568, 387);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick_1);
             // 
             // label4
             // 
@@ -115,14 +116,14 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã thông báo";
             // 
-            // TB_HOCKI
+            // TB_NOIDUNG
             // 
-            this.TB_HOCKI.Location = new System.Drawing.Point(22, 187);
-            this.TB_HOCKI.Multiline = true;
-            this.TB_HOCKI.Name = "TB_HOCKI";
-            this.TB_HOCKI.ReadOnly = true;
-            this.TB_HOCKI.Size = new System.Drawing.Size(302, 204);
-            this.TB_HOCKI.TabIndex = 1;
+            this.TB_NOIDUNG.Location = new System.Drawing.Point(22, 187);
+            this.TB_NOIDUNG.Multiline = true;
+            this.TB_NOIDUNG.Name = "TB_NOIDUNG";
+            this.TB_NOIDUNG.ReadOnly = true;
+            this.TB_NOIDUNG.Size = new System.Drawing.Size(302, 204);
+            this.TB_NOIDUNG.TabIndex = 1;
             // 
             // TB_DIADIEM
             // 
@@ -145,7 +146,7 @@
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label3);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label2);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label1);
-            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_HOCKI);
+            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_NOIDUNG);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_DIADIEM);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_THOIGIAN);
             this.GB_MONHOCDUOCCHON.Location = new System.Drawing.Point(583, 12);
@@ -181,7 +182,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TB_HOCKI;
+        private System.Windows.Forms.TextBox TB_NOIDUNG;
         private System.Windows.Forms.TextBox TB_DIADIEM;
         private System.Windows.Forms.TextBox TB_THOIGIAN;
         private System.Windows.Forms.GroupBox GB_MONHOCDUOCCHON;

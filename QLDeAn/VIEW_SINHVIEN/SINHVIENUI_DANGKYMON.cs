@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QLDeAn.DataAccess.DangKy;
-using QLDeAn.Model;
 using QLDeAn.DataAccess.MoMon;
+using QLDeAn.Model;
+using QLDeAn.DataAccess.DangKy;
 
 namespace QLDeAn.VIEW_SINHVIEN
 {
-    public partial class SINHVIENUI_MOMON: UserControl
+    public partial class SINHVIENUI_DANGKYMON : UserControl
     {
-        public SINHVIENUI_MOMON()
+        public SINHVIENUI_DANGKYMON()
         {
             InitializeComponent();
         }
@@ -75,7 +75,34 @@ namespace QLDeAn.VIEW_SINHVIEN
             Refesh_Dangkyhocphan();
         }
 
-        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+
+
+        private void BTN_DANGKY_Click(object sender, EventArgs e)
+        {
+            var dao_dangky = new DangKySVDao(LoginUI.con);
+           
+            if (selected_monhoc == null)
+            {
+                MessageBox.Show("Vui lòng chọn môn học để đăng ký.");
+                return;
+            }
+            var dangky = new DangKy
+            {
+                maSV = LoginUI.userUser, // Sử dụng userUser từ LoginUI
+                maMM = TB_MAMONHOC.Text.Trim() // Lấy mã môn học từ TextBox
+            };
+            if (dao_dangky.Add(dangky))
+            {
+                MessageBox.Show("Đăng ký môn học thành công!");
+                Refesh_Dangkyhocphan();
+            }
+            else
+            {
+                MessageBox.Show("Đăng ký môn học thất bại. Vui lòng thử lại.");
+            }
+        }
+
+        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Bỏ qua nếu click header
 
