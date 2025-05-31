@@ -54,10 +54,12 @@ namespace QLDeAn.DataAccess.NhanVien
                             phuCap = reader["PHUCAP"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["PHUCAP"]),
                             dt = reader["DT"].ToString(),
                             vaiTro = reader["VAITRO"].ToString(),
-                            maDV = reader["MADV"].ToString()
+                            maDV = reader["MADV"].ToString(),
+                            coso = reader["COSO"].ToString()
+
+
                         };
 
-                        nv.isInDB = true;
                         result.Add(nv);
                     }
                 }

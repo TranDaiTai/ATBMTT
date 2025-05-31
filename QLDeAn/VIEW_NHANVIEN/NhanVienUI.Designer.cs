@@ -394,7 +394,7 @@
             // Xinchao
             // 
             this.Xinchao.AutoSize = true;
-            this.Xinchao.Location = new System.Drawing.Point(724, 12);
+            this.Xinchao.Location = new System.Drawing.Point(663, 5);
             this.Xinchao.Name = "Xinchao";
             this.Xinchao.Size = new System.Drawing.Size(66, 16);
             this.Xinchao.TabIndex = 2;

@@ -47,7 +47,7 @@ namespace QLDeAn.DataAccess.DangKy
                                 maMM = reader["MAMM"].ToString(),
                                 maSV = reader["MASV"].ToString(),
                                 diemTH = reader["DIEMTH"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMTH"]) : null,
-                                diemCT = reader["DIEMCT"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMCT"]) : null,
+                                diemQT = reader["DIEMQT"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMQT"]) : null,
                                 diemCK = reader["DIEMCK"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMCK"]) : null,
                                 diemTK = reader["DIEMTK"] != DBNull.Value ? (double?)Convert.ToDouble(reader["DIEMTK"]) : null
                             };
@@ -92,7 +92,7 @@ namespace QLDeAn.DataAccess.DangKy
                     cmd.CommandType = CommandType.Text; // Sửa lại thành Text
 
                     cmd.Parameters.Add("p_DIEMTH", OracleDbType.Double).Value = dangKy.diemTH;
-                    cmd.Parameters.Add("p_DIEMCT", OracleDbType.Double).Value = dangKy.diemCT;
+                    cmd.Parameters.Add("p_DIEMCT", OracleDbType.Double).Value = dangKy.diemQT;
                     cmd.Parameters.Add("p_DIEMCK", OracleDbType.Double).Value = dangKy.diemCK;
                     cmd.Parameters.Add("p_DIEMTK", OracleDbType.Double).Value = dangKy.diemTK;
                     cmd.Parameters.Add("p_MAMM", OracleDbType.Varchar2).Value = dangKy.maMM;

@@ -73,6 +73,17 @@ namespace QLDeAn
 
                 if (role.Text == "SYSDBA" || role.Text == "ADMIN")
                 {
+                    string query = @"SELECT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE = :username";
+                    OracleCommand cmd = new OracleCommand(query, con);
+                    cmd.Parameters.Add("username", OracleDbType.Varchar2).Value = "ADMIN";
+                    var reader = cmd.ExecuteReader();
+
+                    if (!reader.Read())
+                    {
+                        MessageBox.Show("Không tìm thấy vai trò cho người dùng này trong phân hệ giáo viên.");
+                        return;
+                    }
+
                     MessageBox.Show("Connect với Oracle thành công");
                     DBAUI dba = new DBAUI();
                     dba.Show();
@@ -94,7 +105,12 @@ namespace QLDeAn
                         roleUser = dr.GetString(0); 
                         NhanVienUI.roleUser = roleUser; // Lưu vai trò vào biến tĩnh để sử dụng trong NhanVienUI
                     }
-                    dr.Close();
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy vai trò cho người dùng này trong phân hệ giáo viên.");
+                        return;
+                    }
+                        dr.Close();
                     //this.Hide();
 
                     MessageBox.Show("Connect với Oracle thành công");

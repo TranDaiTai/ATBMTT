@@ -15,7 +15,6 @@ namespace QLDeAn.Model
         public string MAGV { get; set; }
         public int? HK { get; set; }
         public int? NAM { get; set; }
-        public bool? isInDB { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public MoMon()

@@ -69,6 +69,7 @@
             this.BTN_THÊM.TabIndex = 0;
             this.BTN_THÊM.Text = "THÊM";
             this.BTN_THÊM.UseVisualStyleBackColor = true;
+            this.BTN_THÊM.Click += new System.EventHandler(this.BTN_THÊM_Click);
             // 
             // panel1
             // 
@@ -87,6 +88,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(568, 387);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // groupMONHOC
             // 
@@ -152,6 +154,7 @@
             this.BTN_CAPNHAT.TabIndex = 0;
             this.BTN_CAPNHAT.Text = "CẬP NHẬT";
             this.BTN_CAPNHAT.UseVisualStyleBackColor = true;
+            this.BTN_CAPNHAT.Click += new System.EventHandler(this.BTN_CAPNHAT_Click);
             // 
             // BTN_XOA
             // 
@@ -161,6 +164,7 @@
             this.BTN_XOA.TabIndex = 0;
             this.BTN_XOA.Text = "XOÁ";
             this.BTN_XOA.UseVisualStyleBackColor = true;
+            this.BTN_XOA.Click += new System.EventHandler(this.btn_xoa_Click);
             // 
             // label8
             // 
@@ -295,6 +299,7 @@
             // 
             this.TB_MASINHVIEN.Location = new System.Drawing.Point(22, 49);
             this.TB_MASINHVIEN.Name = "TB_MASINHVIEN";
+            this.TB_MASINHVIEN.ReadOnly = true;
             this.TB_MASINHVIEN.Size = new System.Drawing.Size(263, 22);
             this.TB_MASINHVIEN.TabIndex = 1;
             // 

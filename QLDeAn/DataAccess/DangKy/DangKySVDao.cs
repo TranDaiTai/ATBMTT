@@ -87,7 +87,7 @@ namespace QLDeAn.DataAccess.DangKy
                                 maSV = reader["maSV"].ToString(),
                                 maMM = reader["maMM"].ToString(),
                                 diemTH = reader["diemTH"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemTH"]) : null,
-                                diemCT = reader["diemCT"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCT"]) : null,
+                                diemQT = reader["diemCT"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCT"]) : null,
                                 diemCK = reader["diemCK"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemCK"]) : null,
                                 diemTK = reader["diemTK"] != DBNull.Value ? (short?)Convert.ToInt16(reader["diemTK"]) : null
                             };

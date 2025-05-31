@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
-
+using QLDeAn.Model;
+using QLDeAn.DataAccess;
+using QLDeAn.DataAccess.NhanVien;
 namespace QLDeAn.VIEW_NHANVIEN
 {
     public partial class NhanVienUI: Form
@@ -23,14 +25,36 @@ namespace QLDeAn.VIEW_NHANVIEN
         public static String roleUser;
         public static OracleConnection conNow;
         private bool isLogout = false;
+        private static NhanVien s_nv; // Biến tĩnh để lưu thông tin nhân viên hiện tại
 
         private void NHANVIENUI_LOAD()
         {
             conNow = LoginUI.con;
 
+            // Gọi DAO
+            var dao = new NhanVienNVCBDao(conNow);
+            List<object> data = dao.Load(null);
 
-            Xinchao.Text = "XIN CHÀO " + LoginUI.userUser.ToUpper() + "!";
+            if (data.Count > 0)
+            {
+                s_nv = (NhanVien)data[0]; // Lưu nhân viên hiện tại vào biến tĩnh
+                Xinchao.Text = "XIN CHÀO " + s_nv.hoTen.ToUpper() + "!";
+                TB_COSO.Text = s_nv.coso;
+                TB_DT.Text = s_nv.dt;
+                TB_HOTEN.Text = s_nv.hoTen;
+                TB_MADV.Text = s_nv.maDV;
+                TB_LUONG.Text = s_nv.luong.HasValue ? s_nv.luong.Value.ToString() : "Chưa cập nhật";
+                TB_MANHANVIEN.Text = s_nv.maNV;
+                TB_NGAYSINH.Text = s_nv.ngSinh.HasValue ? s_nv.ngSinh.Value.ToString("dd/MM/yyyy") : "Chưa cập nhật";
+                TB_PHAI.Text = s_nv.phai;
+                TB_PHUCAP.Text = s_nv.phuCap.HasValue ? s_nv.phuCap.Value.ToString() : "Chưa cập nhật";
+            }
+            else
+            {
+                Xinchao.Text = "KHÔNG THỂ LẤY THÔNG TIN NHÂN VIÊN!";
+            }
         }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -60,7 +84,6 @@ namespace QLDeAn.VIEW_NHANVIEN
             }
 
             tabControl1.TabPages.Add(TP_THONGTINNHANVIEN);
-            tabControl1.TabPages.Add(TP_THONGBAO);
             string role = LoginUI.roleUser;
             Console.WriteLine(role);
             // Tùy role mà add lại các tab được phép
@@ -98,6 +121,8 @@ namespace QLDeAn.VIEW_NHANVIEN
             {
                 tabControl1.TabPages.Add(TP_QUANLYSINHVIEN);
             }
+            tabControl1.TabPages.Add(TP_THONGBAO);
+
         }
 
         private void NhanVienUI_FormClosing(object sender, FormClosingEventArgs e)
@@ -147,6 +172,17 @@ namespace QLDeAn.VIEW_NHANVIEN
             LoginUI.con.Close();
             OracleConnection.ClearPool(conNow);
             Application.Exit(); // Đóng toàn bộ ứng dụng nếu không đăng xuất
+        }
+
+        private void BTN_CHINHSUATT_Click(object sender, EventArgs e)
+        {
+            NhanVienUI_ChinhsuaTT chinhsuaUI = new NhanVienUI_ChinhsuaTT();
+            chinhsuaUI.ShowDialog();
+        }
+
+        private void nhanvieN_DANGKYHOCPHAN1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

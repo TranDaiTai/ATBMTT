@@ -60,6 +60,7 @@
             this.BTN_CẬP_NHẬT.TabIndex = 3;
             this.BTN_CẬP_NHẬT.Text = "CẬP NHẬT";
             this.BTN_CẬP_NHẬT.UseVisualStyleBackColor = true;
+            this.BTN_CẬP_NHẬT.Click += new System.EventHandler(this.BTN_CẬP_NHẬT_Click);
             // 
             // BTN_HUỶ
             // 
@@ -69,6 +70,7 @@
             this.BTN_HUỶ.TabIndex = 4;
             this.BTN_HUỶ.Text = "HUỶ";
             this.BTN_HUỶ.UseVisualStyleBackColor = true;
+            this.BTN_HUỶ.Click += new System.EventHandler(this.BTN_HUỶ_Click);
             // 
             // NhanVienUI_ChinhsuaTT
             // 

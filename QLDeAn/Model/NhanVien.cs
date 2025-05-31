@@ -20,7 +20,7 @@ namespace QLDeAn.Model
         public string dt { get; set; }
         public string vaiTro { get; set; }
         public string maDV { get; set; }
-        public bool? isInDB { get; set; }
+        public string coso { get; set; }
 
         public NhanVien()
         {
@@ -33,6 +33,8 @@ namespace QLDeAn.Model
             dt = "";
             vaiTro = "";
             maDV = "";
+            coso = "";
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }

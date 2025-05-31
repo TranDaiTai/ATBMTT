@@ -32,8 +32,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BTN_THÊM = new System.Windows.Forms.Button();
-            this.TB_HOTEN = new System.Windows.Forms.TextBox();
-            this.TB_PHAI = new System.Windows.Forms.TextBox();
+            this.TB_MAHOCPHAN = new System.Windows.Forms.TextBox();
+            this.TB_MAGIAOVIEN = new System.Windows.Forms.TextBox();
             this.TB_HOCKI = new System.Windows.Forms.TextBox();
             this.TB_NAM = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,9 +42,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.TB_MANHANVIEN = new System.Windows.Forms.TextBox();
+            this.BTN_CAPNHAT = new System.Windows.Forms.Button();
+            this.BTN_XOA = new System.Windows.Forms.Button();
+            this.TB_MAMONHOC = new System.Windows.Forms.TextBox();
             this.GB_MONHOCDUOCCHON = new System.Windows.Forms.GroupBox();
             this.groupMONHOC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -72,6 +72,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(568, 387);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // panel1
             // 
@@ -90,19 +91,19 @@
             this.BTN_THÊM.Text = "THÊM";
             this.BTN_THÊM.UseVisualStyleBackColor = true;
             // 
-            // TB_HOTEN
+            // TB_MAHOCPHAN
             // 
-            this.TB_HOTEN.Location = new System.Drawing.Point(22, 100);
-            this.TB_HOTEN.Name = "TB_HOTEN";
-            this.TB_HOTEN.Size = new System.Drawing.Size(263, 22);
-            this.TB_HOTEN.TabIndex = 1;
+            this.TB_MAHOCPHAN.Location = new System.Drawing.Point(22, 100);
+            this.TB_MAHOCPHAN.Name = "TB_MAHOCPHAN";
+            this.TB_MAHOCPHAN.Size = new System.Drawing.Size(263, 22);
+            this.TB_MAHOCPHAN.TabIndex = 1;
             // 
-            // TB_PHAI
+            // TB_MAGIAOVIEN
             // 
-            this.TB_PHAI.Location = new System.Drawing.Point(22, 153);
-            this.TB_PHAI.Name = "TB_PHAI";
-            this.TB_PHAI.Size = new System.Drawing.Size(263, 22);
-            this.TB_PHAI.TabIndex = 1;
+            this.TB_MAGIAOVIEN.Location = new System.Drawing.Point(22, 153);
+            this.TB_MAGIAOVIEN.Name = "TB_MAGIAOVIEN";
+            this.TB_MAGIAOVIEN.Size = new System.Drawing.Size(263, 22);
+            this.TB_MAGIAOVIEN.TabIndex = 1;
             // 
             // TB_HOCKI
             // 
@@ -167,41 +168,42 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.BTN_CAPNHAT);
+            this.panel2.Controls.Add(this.BTN_XOA);
             this.panel2.Location = new System.Drawing.Point(6, 366);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 48);
             this.panel2.TabIndex = 1;
             // 
-            // button2
+            // BTN_CAPNHAT
             // 
-            this.button2.Location = new System.Drawing.Point(162, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "CẬP NHẬT";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BTN_CAPNHAT.Location = new System.Drawing.Point(162, 12);
+            this.BTN_CAPNHAT.Name = "BTN_CAPNHAT";
+            this.BTN_CAPNHAT.Size = new System.Drawing.Size(123, 23);
+            this.BTN_CAPNHAT.TabIndex = 0;
+            this.BTN_CAPNHAT.Text = "CẬP NHẬT";
+            this.BTN_CAPNHAT.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // BTN_XOA
             // 
-            this.button1.Location = new System.Drawing.Point(18, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "XOÁ";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BTN_XOA.Location = new System.Drawing.Point(18, 12);
+            this.BTN_XOA.Name = "BTN_XOA";
+            this.BTN_XOA.Size = new System.Drawing.Size(138, 23);
+            this.BTN_XOA.TabIndex = 0;
+            this.BTN_XOA.Text = "XOÁ";
+            this.BTN_XOA.UseVisualStyleBackColor = true;
             // 
-            // TB_MANHANVIEN
+            // TB_MAMONHOC
             // 
-            this.TB_MANHANVIEN.Location = new System.Drawing.Point(22, 49);
-            this.TB_MANHANVIEN.Name = "TB_MANHANVIEN";
-            this.TB_MANHANVIEN.Size = new System.Drawing.Size(263, 22);
-            this.TB_MANHANVIEN.TabIndex = 1;
+            this.TB_MAMONHOC.Location = new System.Drawing.Point(22, 49);
+            this.TB_MAMONHOC.Name = "TB_MAMONHOC";
+            this.TB_MAMONHOC.Size = new System.Drawing.Size(263, 22);
+            this.TB_MAMONHOC.TabIndex = 1;
+            this.TB_MAMONHOC.TextChanged += new System.EventHandler(this.TB_MANHANVIEN_TextChanged);
             // 
             // GB_MONHOCDUOCCHON
             // 
-            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_MANHANVIEN);
+            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_MAMONHOC);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.panel2);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label6);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label5);
@@ -210,8 +212,8 @@
             this.GB_MONHOCDUOCCHON.Controls.Add(this.label1);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_NAM);
             this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_HOCKI);
-            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_PHAI);
-            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_HOTEN);
+            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_MAGIAOVIEN);
+            this.GB_MONHOCDUOCCHON.Controls.Add(this.TB_MAHOCPHAN);
             this.GB_MONHOCDUOCCHON.Location = new System.Drawing.Point(621, 17);
             this.GB_MONHOCDUOCCHON.Name = "GB_MONHOCDUOCCHON";
             this.GB_MONHOCDUOCCHON.Size = new System.Drawing.Size(312, 468);
@@ -245,8 +247,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BTN_THÊM;
-        private System.Windows.Forms.TextBox TB_HOTEN;
-        private System.Windows.Forms.TextBox TB_PHAI;
+        private System.Windows.Forms.TextBox TB_MAHOCPHAN;
+        private System.Windows.Forms.TextBox TB_MAGIAOVIEN;
         private System.Windows.Forms.TextBox TB_HOCKI;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -254,9 +256,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox TB_MANHANVIEN;
+        private System.Windows.Forms.Button BTN_CAPNHAT;
+        private System.Windows.Forms.Button BTN_XOA;
+        private System.Windows.Forms.TextBox TB_MAMONHOC;
         private System.Windows.Forms.GroupBox GB_MONHOCDUOCCHON;
         private System.Windows.Forms.TextBox TB_NAM;
     }

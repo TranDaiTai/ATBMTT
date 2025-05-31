@@ -103,7 +103,6 @@ namespace QLDeAn.DataAccess.MoMon
                             NAM = reader["nam"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["nam"]),
                         }
                         ;
-                        mm.isInDB = true;
                         result.Add(mm);
                     }
                 }

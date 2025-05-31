@@ -39,12 +39,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.TB_TINHTRANG = new System.Windows.Forms.TextBox();
-            this.TB_SDT = new System.Windows.Forms.TextBox();
-            this.TB_KHOA = new System.Windows.Forms.TextBox();
-            this.TB_DIACHI = new System.Windows.Forms.TextBox();
-            this.TB_NGAYSINH = new System.Windows.Forms.TextBox();
-            this.TB_PHAI = new System.Windows.Forms.TextBox();
+            this.TB_DIEMTK = new System.Windows.Forms.TextBox();
+            this.TB_DIEMCK = new System.Windows.Forms.TextBox();
+            this.TB_DiemQT = new System.Windows.Forms.TextBox();
+            this.TB_Diemth = new System.Windows.Forms.TextBox();
+            this.TB_tenmonhoc = new System.Windows.Forms.TextBox();
+            this.TB_Mamonhoc = new System.Windows.Forms.TextBox();
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_MASINHVIEN = new System.Windows.Forms.TextBox();
             this.groupMONHOC = new System.Windows.Forms.GroupBox();
@@ -76,6 +76,7 @@
             this.BTN_CAPNHAT.TabIndex = 0;
             this.BTN_CAPNHAT.Text = "CẬP NHẬT";
             this.BTN_CAPNHAT.UseVisualStyleBackColor = true;
+            this.BTN_CAPNHAT.Click += new System.EventHandler(this.BTN_CAPNHAT_Click);
             // 
             // BTN_XOA
             // 
@@ -85,6 +86,7 @@
             this.BTN_XOA.TabIndex = 0;
             this.BTN_XOA.Text = "XOÁ";
             this.BTN_XOA.UseVisualStyleBackColor = true;
+            this.BTN_XOA.Click += new System.EventHandler(this.btn_xoa_Click);
             // 
             // label8
             // 
@@ -159,47 +161,47 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "MÃ SINH VIÊN";
             // 
-            // TB_TINHTRANG
+            // TB_DIEMTK
             // 
-            this.TB_TINHTRANG.Location = new System.Drawing.Point(162, 267);
-            this.TB_TINHTRANG.Name = "TB_TINHTRANG";
-            this.TB_TINHTRANG.Size = new System.Drawing.Size(127, 22);
-            this.TB_TINHTRANG.TabIndex = 1;
+            this.TB_DIEMTK.Location = new System.Drawing.Point(162, 267);
+            this.TB_DIEMTK.Name = "TB_DIEMTK";
+            this.TB_DIEMTK.Size = new System.Drawing.Size(127, 22);
+            this.TB_DIEMTK.TabIndex = 1;
             // 
-            // TB_SDT
+            // TB_DIEMCK
             // 
-            this.TB_SDT.Location = new System.Drawing.Point(22, 267);
-            this.TB_SDT.Name = "TB_SDT";
-            this.TB_SDT.Size = new System.Drawing.Size(134, 22);
-            this.TB_SDT.TabIndex = 1;
+            this.TB_DIEMCK.Location = new System.Drawing.Point(22, 267);
+            this.TB_DIEMCK.Name = "TB_DIEMCK";
+            this.TB_DIEMCK.Size = new System.Drawing.Size(134, 22);
+            this.TB_DIEMCK.TabIndex = 1;
             // 
-            // TB_KHOA
+            // TB_DiemQT
             // 
-            this.TB_KHOA.Location = new System.Drawing.Point(162, 209);
-            this.TB_KHOA.Name = "TB_KHOA";
-            this.TB_KHOA.Size = new System.Drawing.Size(127, 22);
-            this.TB_KHOA.TabIndex = 1;
+            this.TB_DiemQT.Location = new System.Drawing.Point(162, 209);
+            this.TB_DiemQT.Name = "TB_DiemQT";
+            this.TB_DiemQT.Size = new System.Drawing.Size(127, 22);
+            this.TB_DiemQT.TabIndex = 1;
             // 
-            // TB_DIACHI
+            // TB_Diemth
             // 
-            this.TB_DIACHI.Location = new System.Drawing.Point(22, 209);
-            this.TB_DIACHI.Name = "TB_DIACHI";
-            this.TB_DIACHI.Size = new System.Drawing.Size(134, 22);
-            this.TB_DIACHI.TabIndex = 1;
+            this.TB_Diemth.Location = new System.Drawing.Point(22, 209);
+            this.TB_Diemth.Name = "TB_Diemth";
+            this.TB_Diemth.Size = new System.Drawing.Size(134, 22);
+            this.TB_Diemth.TabIndex = 1;
             // 
-            // TB_NGAYSINH
+            // TB_tenmonhoc
             // 
-            this.TB_NGAYSINH.Location = new System.Drawing.Point(144, 153);
-            this.TB_NGAYSINH.Name = "TB_NGAYSINH";
-            this.TB_NGAYSINH.Size = new System.Drawing.Size(141, 22);
-            this.TB_NGAYSINH.TabIndex = 1;
+            this.TB_tenmonhoc.Location = new System.Drawing.Point(144, 153);
+            this.TB_tenmonhoc.Name = "TB_tenmonhoc";
+            this.TB_tenmonhoc.Size = new System.Drawing.Size(141, 22);
+            this.TB_tenmonhoc.TabIndex = 1;
             // 
-            // TB_PHAI
+            // TB_Mamonhoc
             // 
-            this.TB_PHAI.Location = new System.Drawing.Point(22, 153);
-            this.TB_PHAI.Name = "TB_PHAI";
-            this.TB_PHAI.Size = new System.Drawing.Size(92, 22);
-            this.TB_PHAI.TabIndex = 1;
+            this.TB_Mamonhoc.Location = new System.Drawing.Point(22, 153);
+            this.TB_Mamonhoc.Name = "TB_Mamonhoc";
+            this.TB_Mamonhoc.Size = new System.Drawing.Size(92, 22);
+            this.TB_Mamonhoc.TabIndex = 1;
             // 
             // TB_HOTEN
             // 
@@ -234,6 +236,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(568, 387);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // panel1
             // 
@@ -251,6 +254,7 @@
             this.BTN_THÊM.TabIndex = 0;
             this.BTN_THÊM.Text = "THÊM";
             this.BTN_THÊM.UseVisualStyleBackColor = true;
+            this.BTN_THÊM.Click += new System.EventHandler(this.BTN_THÊM_Click);
             // 
             // GB_THÔNGTINCANHAN_GV
             // 
@@ -263,12 +267,12 @@
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label3);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label2);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label1);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_TINHTRANG);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_SDT);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_KHOA);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DIACHI);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_NGAYSINH);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_PHAI);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DIEMTK);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DIEMCK);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DiemQT);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_Diemth);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_tenmonhoc);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_Mamonhoc);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_HOTEN);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_MASINHVIEN);
             this.GB_THÔNGTINCANHAN_GV.Location = new System.Drawing.Point(603, 3);
@@ -309,12 +313,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TB_TINHTRANG;
-        private System.Windows.Forms.TextBox TB_SDT;
-        private System.Windows.Forms.TextBox TB_KHOA;
-        private System.Windows.Forms.TextBox TB_DIACHI;
-        private System.Windows.Forms.TextBox TB_NGAYSINH;
-        private System.Windows.Forms.TextBox TB_PHAI;
+        private System.Windows.Forms.TextBox TB_DIEMTK;
+        private System.Windows.Forms.TextBox TB_DIEMCK;
+        private System.Windows.Forms.TextBox TB_DiemQT;
+        private System.Windows.Forms.TextBox TB_Diemth;
+        private System.Windows.Forms.TextBox TB_tenmonhoc;
+        private System.Windows.Forms.TextBox TB_Mamonhoc;
         private System.Windows.Forms.TextBox TB_HOTEN;
         private System.Windows.Forms.TextBox TB_MASINHVIEN;
         private System.Windows.Forms.GroupBox groupMONHOC;

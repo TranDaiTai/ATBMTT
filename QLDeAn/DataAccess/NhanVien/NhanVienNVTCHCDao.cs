@@ -112,7 +112,8 @@ namespace QLDeAn.DataAccess.NhanVien
                                 dt = reader["dt"].ToString(),
                                 vaiTro = reader["vaiTro"].ToString(),
                                 maDV = reader["maDV"].ToString(),
-                                isInDB = true
+                                coso = reader["coso"].ToString()
+
                             };
                             result.Add(nv);
                         }

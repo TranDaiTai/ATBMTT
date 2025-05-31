@@ -13,7 +13,7 @@ namespace QLDeAn.Model
         public string maSV { get; set; }
         public string maMM { get; set; }
         public double? diemTH { get; set; }
-        public double? diemCT { get; set; }
+        public double? diemQT { get; set; }
         public double? diemCK { get; set; }
         public double? diemTK { get; set; }
 
