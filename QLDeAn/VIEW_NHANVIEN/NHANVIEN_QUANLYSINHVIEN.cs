@@ -61,17 +61,12 @@ namespace QLDeAn.VIEW_NHANVIEN
               
                 case "NV PĐT":
                     BTN_CAPNHAT.Visible = true;
-                    BTN_THÊM.Visible = true;
-                    BTN_XOA.Visible = true;
+                    BTN_THÊM.Visible = false;
+                    BTN_XOA.Visible = false;
 
-                    
-                    TB_COSO.ReadOnly = false;
-                    TB_HOTEN.ReadOnly = false;
-                    TB_PHAI.ReadOnly = false;
-                    TB_DIACHI.ReadOnly = false;
-                    TB_KHOA.ReadOnly = false;
-                    TB_NGAYSINH.ReadOnly = false;
-                    TB_SDT.ReadOnly = false;
+                    TB_TINHTRANG.ReadOnly = false;
+
+
 
 
                     break;
@@ -80,8 +75,16 @@ namespace QLDeAn.VIEW_NHANVIEN
                     BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
 
+                    CBB_COSO.Enabled = true;
+                    TB_HOTEN.ReadOnly = false;
+                    CBB_DONVI.Enabled = true;
+                    CBB_PHAI.Enabled = true;
+                    TB_DIACHI.ReadOnly = false;
+                    CBB_DONVI.Enabled = true;
+                    TB_NGAYSINH.ReadOnly = false;
+                    TB_SDT.ReadOnly = false;
 
-                    TB_TINHTRANG.ReadOnly = false;
+
 
 
                     break;
@@ -100,11 +103,11 @@ namespace QLDeAn.VIEW_NHANVIEN
             var row = dataGridView1.Rows[e.RowIndex];
             selected_sinhvien = (SinhVien)row.DataBoundItem;
 
-            TB_COSO.Text = row.Cells["coso"].Value?.ToString() ?? "";
+            CBB_COSO.Text = row.Cells["coso"].Value?.ToString() ?? "";
             TB_HOTEN.Text = row.Cells["hoTen"].Value?.ToString() ?? "";
-            TB_PHAI.Text = row.Cells["phai"].Value?.ToString() ?? "";
+            CBB_PHAI.Text = row.Cells["phai"].Value?.ToString() ?? "";
             TB_DIACHI.Text = row.Cells["dChi"].Value?.ToString() ?? "";
-            TB_KHOA.Text = row.Cells["khoa"].Value?.ToString() ?? "";
+            CBB_DONVI.Text = row.Cells["khoa"].Value?.ToString() ?? "";
             TB_NGAYSINH.Text = row.Cells["ngSinh"].Value is DateTime date ? date.ToString("dd/MM/yyyy") : "";
             TB_MASINHVIEN.Text = row.Cells["maSV"].Value?.ToString() ?? "";
             TB_TINHTRANG.Text = row.Cells["tinhTrang"].Value?.ToString() ?? "";
@@ -137,7 +140,20 @@ namespace QLDeAn.VIEW_NHANVIEN
                 MessageBox.Show("Vui lòng chọn nhân viên để cập nhật.");
                 return;
             }
-            if (dao.Update(selected_sinhvien))
+            SinhVien sv = new SinhVien
+            {
+                maSV = TB_MASINHVIEN.Text,
+                hoTen = TB_HOTEN.Text,
+                phai = CBB_PHAI.SelectedItem.ToString(),
+                dChi = TB_DIACHI.Text,
+                dt = TB_SDT.Text,
+                khoa = CBB_DONVI.SelectedItem.ToString(),
+                coso = CBB_COSO.SelectedItem.ToString(),
+                ngSinh = DateTime.TryParse(TB_NGAYSINH.Text, out DateTime ngSinh) ? ngSinh : (DateTime?)null,
+                TINHTRANG = TB_TINHTRANG.Text
+            };
+          
+            if (dao.Update(sv))
             {
                 MessageBox.Show("Cập nhật thành công.");
             }

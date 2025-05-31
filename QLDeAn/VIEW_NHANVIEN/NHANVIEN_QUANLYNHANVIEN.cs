@@ -136,14 +136,9 @@ namespace QLDeAn.VIEW_NHANVIEN
                 MessageBox.Show("Vui lòng chọn nhân viên để cập nhật.");
                 return;
             }
-            if (dao.Update(selected_nhanvien))
-            {
-                MessageBox.Show("Cập nhật thành công.");
-            }
-            else
-            {
-                MessageBox.Show("Cập nhật thất bại. Vui lòng kiểm tra lại thông tin.");
-            }
+            NHANVIENUI_CAPNHATNHANVIEN nvui_capnhatnv = new NHANVIENUI_CAPNHATNHANVIEN();
+            nvui_capnhatnv.Tag = selected_nhanvien; // Truyền nhân viên đã chọn vào form cập nhật
+            nvui_capnhatnv.Show(); // Hiển thị form cập nhật
             selected_nhanvien = null; 
             Refesh_Nhanvien();
 
@@ -151,7 +146,8 @@ namespace QLDeAn.VIEW_NHANVIEN
 
         private void BTN_THÊM_Click(object sender, EventArgs e)
         {
-
+            NHANVIENUI_THEMNHANVIEN themNhanVienForm = new NHANVIENUI_THEMNHANVIEN();
+            themNhanVienForm.Show();
         }
         private void Refesh_Nhanvien()
         {

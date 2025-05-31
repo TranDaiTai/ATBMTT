@@ -72,10 +72,7 @@ namespace QLDeAn.VIEW_NHANVIEN
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+      
         private void SetTabsByRole()
         {
             // Đầu tiên hiện tất cả tab (nếu cần)
@@ -175,16 +172,6 @@ namespace QLDeAn.VIEW_NHANVIEN
             Application.Exit(); // Đóng toàn bộ ứng dụng nếu không đăng xuất
         }
 
-        private void BTN_CHINHSUATT_Click(object sender, EventArgs e)
-        {
-            NhanVienUI_ChinhsuaTT chinhsuaUI = new NhanVienUI_ChinhsuaTT();
-            chinhsuaUI.ShowDialog();
-        }
-
-        private void nhanvieN_DANGKYHOCPHAN1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void TP_THONGBAO_Click(object sender, EventArgs e)
         {
@@ -217,6 +204,12 @@ namespace QLDeAn.VIEW_NHANVIEN
                 nhanVien_ThongBao2.Load_Thongbao();
                 //SetButtonsByRole();
             }
+        }
+
+        private void BTN_CHINHSUATT_Click_1(object sender, EventArgs e)
+        {
+            NhanVienUI_ChinhsuaTT chinhsuaUI = new NhanVienUI_ChinhsuaTT();
+            chinhsuaUI.ShowDialog();
         }
     }
 }

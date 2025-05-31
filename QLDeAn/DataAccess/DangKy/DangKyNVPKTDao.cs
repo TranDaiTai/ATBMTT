@@ -82,7 +82,7 @@ namespace QLDeAn.DataAccess.DangKy
 
                 string sql = @"UPDATE QLDL.DANGKY 
                        SET DIEMTH = :p_DIEMTH, 
-                           DIEMCT = :p_DIEMCT, 
+                           DIEMQT = :p_DIEMQT, 
                            DIEMCK = :p_DIEMCK, 
                            DIEMTK = :p_DIEMTK 
                        WHERE MAMM = :p_MAMM AND MASV = :p_MASV";
@@ -92,7 +92,7 @@ namespace QLDeAn.DataAccess.DangKy
                     cmd.CommandType = CommandType.Text; // Sửa lại thành Text
 
                     cmd.Parameters.Add("p_DIEMTH", OracleDbType.Double).Value = dangKy.diemTH;
-                    cmd.Parameters.Add("p_DIEMCT", OracleDbType.Double).Value = dangKy.diemQT;
+                    cmd.Parameters.Add("p_DIEMQT", OracleDbType.Double).Value = dangKy.diemQT;
                     cmd.Parameters.Add("p_DIEMCK", OracleDbType.Double).Value = dangKy.diemCK;
                     cmd.Parameters.Add("p_DIEMTK", OracleDbType.Double).Value = dangKy.diemTK;
                     cmd.Parameters.Add("p_MAMM", OracleDbType.Varchar2).Value = dangKy.maMM;

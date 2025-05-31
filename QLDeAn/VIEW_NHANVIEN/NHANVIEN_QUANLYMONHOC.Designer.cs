@@ -185,6 +185,7 @@
             this.BTN_CAPNHAT.TabIndex = 0;
             this.BTN_CAPNHAT.Text = "CẬP NHẬT";
             this.BTN_CAPNHAT.UseVisualStyleBackColor = true;
+            this.BTN_CAPNHAT.Click += new System.EventHandler(this.BTN_CAPNHAT_Click);
             // 
             // BTN_XOA
             // 

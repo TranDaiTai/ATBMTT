@@ -274,11 +274,29 @@
     <Compile Include="VIEW_NHANVIEN\NhanVienUI.Designer.cs">
       <DependentUpon>NhanVienUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_CAPNHATNHANVIEN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_CAPNHATNHANVIEN.Designer.cs">
+      <DependentUpon>NHANVIENUI_CAPNHATNHANVIEN.cs</DependentUpon>
+    </Compile>
     <Compile Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.Designer.cs">
       <DependentUpon>NhanVienUI_ChinhsuaTT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMDANGKY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMDANGKY.Designer.cs">
+      <DependentUpon>NHANVIENUI_THEMDANGKY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMNHANVIEN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMNHANVIEN.Designer.cs">
+      <DependentUpon>NHANVIENUI_THEMNHANVIEN.cs</DependentUpon>
     </Compile>
     <Compile Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.cs">
       <SubType>UserControl</SubType>
@@ -404,8 +422,17 @@
     <EmbeddedResource Include="VIEW_NHANVIEN\NhanVienUI.resx">
       <DependentUpon>NhanVienUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_CAPNHATNHANVIEN.resx">
+      <DependentUpon>NHANVIENUI_CAPNHATNHANVIEN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NhanVienUI_ChinhsuaTT.resx">
       <DependentUpon>NhanVienUI_ChinhsuaTT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_THEMDANGKY.resx">
+      <DependentUpon>NHANVIENUI_THEMDANGKY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_THEMNHANVIEN.resx">
+      <DependentUpon>NHANVIENUI_THEMNHANVIEN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.resx">
       <DependentUpon>NHANVIEN_DANGKYHOCPHAN.cs</DependentUpon>

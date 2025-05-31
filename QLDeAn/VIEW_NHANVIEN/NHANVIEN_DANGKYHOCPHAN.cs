@@ -128,7 +128,17 @@ namespace QLDeAn.VIEW_NHANVIEN
                 MessageBox.Show("Vui lòng chọn nhân viên để cập nhật.");
                 return;
             }
-            if (dao.Update(selected_DangKy))
+            DangKy nv = new DangKy()
+            {
+                maSV = TB_MASINHVIEN.Text,
+                maMM = TB_Mamonhoc.Text,
+                diemTH = string.IsNullOrEmpty(TB_Diemth.Text) ? (double?)null : Convert.ToDouble(TB_Diemth.Text),
+                diemQT = string.IsNullOrEmpty(TB_DiemQT.Text) ? (double?)null : Convert.ToDouble(TB_DiemQT.Text),
+                diemCK = string.IsNullOrEmpty(TB_DIEMCK.Text) ? (double?)null : Convert.ToDouble(TB_DIEMCK.Text),
+                diemTK = string.IsNullOrEmpty(TB_DIEMTK.Text) ? (double?)null : Convert.ToDouble(TB_DIEMTK.Text)
+            };
+            
+            if (dao.Update(nv))
             {
                 MessageBox.Show("Cập nhật thành công.");
             }

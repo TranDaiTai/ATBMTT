@@ -45,15 +45,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.TB_COSO = new System.Windows.Forms.TextBox();
             this.TB_TINHTRANG = new System.Windows.Forms.TextBox();
             this.TB_SDT = new System.Windows.Forms.TextBox();
-            this.TB_KHOA = new System.Windows.Forms.TextBox();
             this.TB_DIACHI = new System.Windows.Forms.TextBox();
             this.TB_NGAYSINH = new System.Windows.Forms.TextBox();
-            this.TB_PHAI = new System.Windows.Forms.TextBox();
             this.TB_HOTEN = new System.Windows.Forms.TextBox();
             this.TB_MASINHVIEN = new System.Windows.Forms.TextBox();
+            this.CBB_PHAI = new System.Windows.Forms.ComboBox();
+            this.CBB_DONVI = new System.Windows.Forms.ComboBox();
+            this.CBB_COSO = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupMONHOC.SuspendLayout();
@@ -102,6 +102,9 @@
             // 
             // GB_THÔNGTINCANHAN_GV
             // 
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.CBB_DONVI);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.CBB_PHAI);
+            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.CBB_COSO);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label10);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.panel2);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label8);
@@ -112,13 +115,10 @@
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label3);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label2);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.label1);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_COSO);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_TINHTRANG);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_SDT);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_KHOA);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_DIACHI);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_NGAYSINH);
-            this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_PHAI);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_HOTEN);
             this.GB_THÔNGTINCANHAN_GV.Controls.Add(this.TB_MASINHVIEN);
             this.GB_THÔNGTINCANHAN_GV.Location = new System.Drawing.Point(594, 3);
@@ -187,7 +187,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(141, 134);
+            this.label4.Location = new System.Drawing.Point(159, 134);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 16);
             this.label4.TabIndex = 1;
@@ -239,14 +239,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "MÃ SINH VIÊN";
             // 
-            // TB_COSO
-            // 
-            this.TB_COSO.Location = new System.Drawing.Point(24, 322);
-            this.TB_COSO.Name = "TB_COSO";
-            this.TB_COSO.ReadOnly = true;
-            this.TB_COSO.Size = new System.Drawing.Size(127, 22);
-            this.TB_COSO.TabIndex = 1;
-            // 
             // TB_TINHTRANG
             // 
             this.TB_TINHTRANG.Location = new System.Drawing.Point(162, 267);
@@ -263,14 +255,6 @@
             this.TB_SDT.Size = new System.Drawing.Size(134, 22);
             this.TB_SDT.TabIndex = 1;
             // 
-            // TB_KHOA
-            // 
-            this.TB_KHOA.Location = new System.Drawing.Point(162, 209);
-            this.TB_KHOA.Name = "TB_KHOA";
-            this.TB_KHOA.ReadOnly = true;
-            this.TB_KHOA.Size = new System.Drawing.Size(127, 22);
-            this.TB_KHOA.TabIndex = 1;
-            // 
             // TB_DIACHI
             // 
             this.TB_DIACHI.Location = new System.Drawing.Point(22, 209);
@@ -281,19 +265,11 @@
             // 
             // TB_NGAYSINH
             // 
-            this.TB_NGAYSINH.Location = new System.Drawing.Point(144, 153);
+            this.TB_NGAYSINH.Location = new System.Drawing.Point(160, 155);
             this.TB_NGAYSINH.Name = "TB_NGAYSINH";
             this.TB_NGAYSINH.ReadOnly = true;
-            this.TB_NGAYSINH.Size = new System.Drawing.Size(141, 22);
+            this.TB_NGAYSINH.Size = new System.Drawing.Size(125, 22);
             this.TB_NGAYSINH.TabIndex = 1;
-            // 
-            // TB_PHAI
-            // 
-            this.TB_PHAI.Location = new System.Drawing.Point(22, 153);
-            this.TB_PHAI.Name = "TB_PHAI";
-            this.TB_PHAI.ReadOnly = true;
-            this.TB_PHAI.Size = new System.Drawing.Size(92, 22);
-            this.TB_PHAI.TabIndex = 1;
             // 
             // TB_HOTEN
             // 
@@ -310,6 +286,47 @@
             this.TB_MASINHVIEN.ReadOnly = true;
             this.TB_MASINHVIEN.Size = new System.Drawing.Size(263, 22);
             this.TB_MASINHVIEN.TabIndex = 1;
+            // 
+            // CBB_PHAI
+            // 
+            this.CBB_PHAI.Enabled = false;
+            this.CBB_PHAI.FormattingEnabled = true;
+            this.CBB_PHAI.Items.AddRange(new object[] {
+            "Nam",
+            "Nữ"});
+            this.CBB_PHAI.Location = new System.Drawing.Point(22, 153);
+            this.CBB_PHAI.Name = "CBB_PHAI";
+            this.CBB_PHAI.Size = new System.Drawing.Size(121, 24);
+            this.CBB_PHAI.TabIndex = 14;
+            // 
+            // CBB_DONVI
+            // 
+            this.CBB_DONVI.Enabled = false;
+            this.CBB_DONVI.FormattingEnabled = true;
+            this.CBB_DONVI.Items.AddRange(new object[] {
+            "CNTT",
+            "HOA",
+            "TOAN",
+            "PDT",
+            "PTV",
+            "VLY",
+            "PQTTB"});
+            this.CBB_DONVI.Location = new System.Drawing.Point(160, 209);
+            this.CBB_DONVI.Name = "CBB_DONVI";
+            this.CBB_DONVI.Size = new System.Drawing.Size(121, 24);
+            this.CBB_DONVI.TabIndex = 12;
+            // 
+            // CBB_COSO
+            // 
+            this.CBB_COSO.Enabled = false;
+            this.CBB_COSO.FormattingEnabled = true;
+            this.CBB_COSO.Items.AddRange(new object[] {
+            "CƠ SỞ 1",
+            "CƠ SỞ 2"});
+            this.CBB_COSO.Location = new System.Drawing.Point(24, 322);
+            this.CBB_COSO.Name = "CBB_COSO";
+            this.CBB_COSO.Size = new System.Drawing.Size(121, 24);
+            this.CBB_COSO.TabIndex = 13;
             // 
             // NHANVIEN_QUANLYSINHVIEN
             // 
@@ -348,14 +365,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TB_COSO;
         private System.Windows.Forms.TextBox TB_TINHTRANG;
         private System.Windows.Forms.TextBox TB_SDT;
-        private System.Windows.Forms.TextBox TB_KHOA;
         private System.Windows.Forms.TextBox TB_DIACHI;
         private System.Windows.Forms.TextBox TB_NGAYSINH;
-        private System.Windows.Forms.TextBox TB_PHAI;
         private System.Windows.Forms.TextBox TB_HOTEN;
         private System.Windows.Forms.TextBox TB_MASINHVIEN;
+        private System.Windows.Forms.ComboBox CBB_DONVI;
+        private System.Windows.Forms.ComboBox CBB_PHAI;
+        private System.Windows.Forms.ComboBox CBB_COSO;
     }
 }

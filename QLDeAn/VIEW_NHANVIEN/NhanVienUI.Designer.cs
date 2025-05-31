@@ -113,6 +113,7 @@
             this.BTN_CHINHSUATT.TabIndex = 1;
             this.BTN_CHINHSUATT.Text = "Chỉnh sửa Thông tin";
             this.BTN_CHINHSUATT.UseVisualStyleBackColor = true;
+            this.BTN_CHINHSUATT.Click += new System.EventHandler(this.BTN_CHINHSUATT_Click_1);
             // 
             // GB_THÔNGTINCANHAN_GV
             // 

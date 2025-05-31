@@ -23,14 +23,19 @@ namespace QLDeAn.DataAccess.NhanVien
                 if (sqlConnection.State != ConnectionState.Open)
                     sqlConnection.Open();
 
-                using (var cmd = new OracleCommand(@"INSERT INTO QLDL.NHANVIEN 
+                using (var cmd = new OracleCommand(@"
+                    INSERT INTO QLDL.NHANVIEN 
                     (MANV, HOTEN, PHAI, NGSINH, LUONG, PHUCAP, DT, VAITRO, MADV)
-                    VALUES (:MaNLD, :HoTen, :PHAI, :NgaySinh, :Luong, :PhuCap, :SDT, :VaiTro, :MaDV)", sqlConnection))
+                    VALUES (
+                        'NV' ||QLDL.nhanvien_seq.NEXTVAL, 
+                        :HoTen, :PHAI, :NgaySinh, :Luong, :PhuCap, :SDT, :VaiTro, :MaDV
+                    )", sqlConnection)) 
                 {
                     cmd.CommandType = CommandType.Text;
                     var nv = (Model.NhanVien)obj;
 
-                    cmd.Parameters.Add("MaNLD", OracleDbType.Varchar2).Value = nv.maNV;
+                    // Không cần set MANV nữa
+
                     cmd.Parameters.Add("HoTen", OracleDbType.Varchar2).Value = nv.hoTen;
                     cmd.Parameters.Add("PHAI", OracleDbType.Varchar2).Value = nv.phai;
                     cmd.Parameters.Add("NgaySinh", OracleDbType.Date).Value = nv.ngSinh;
@@ -42,6 +47,7 @@ namespace QLDeAn.DataAccess.NhanVien
 
                     cmd.ExecuteNonQuery();
                 }
+
 
                 return true;
             }
