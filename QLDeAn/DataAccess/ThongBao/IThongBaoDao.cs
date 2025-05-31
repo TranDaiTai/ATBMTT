@@ -9,10 +9,11 @@ namespace QLDeAn.DataAccess.ThongBao
 {
     public interface IThongBaoDao: IBaseDao
     {
-        //public List<LabelComponent> GetAllLevels();
-        //public List<LabelComponent> GetAllDepartments();
-        //public List<LabelComponent> GetAllGroups();
-        //public bool SendNotification(string content, string label);
+        List<LabelComponent> GetAllLevels();
+        List<LabelComponent> GetAllDepartments();
+        List<LabelComponent> GetAllGroups();
+        bool SendNotification(string content, string label);
+
 
     }
 }

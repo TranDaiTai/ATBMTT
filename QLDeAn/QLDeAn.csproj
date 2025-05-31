@@ -168,6 +168,7 @@
     <Compile Include="DataAccess\SinhVien\SinhVienTRGDVDao.cs" />
     <Compile Include="DataAccess\ThongBao\IThongBaoDao.cs" />
     <Compile Include="DataAccess\ThongBao\ThongBaoXAdminDao.cs" />
+    <Compile Include="Model\LabelComponent.cs" />
     <Compile Include="VIEW_DBA\View_UserandRoleUI\CreateRole_F.cs">
       <SubType>Form</SubType>
     </Compile>

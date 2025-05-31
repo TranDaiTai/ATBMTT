@@ -25,34 +25,35 @@ namespace QLDeAn.DataAccess.ThongBao
         }
         public bool SendNotification(string content, string label)
         {
-            if (sqlConnection.State == ConnectionState.Closed)
-            {
-                sqlConnection.Open();
-            }
-            try
-            {
-                using (OracleCommand cmd = new OracleCommand("SendNotification", sqlConnection))
-                {
+            //if (sqlConnection.State == ConnectionState.Closed)
+            //{
+            //    sqlConnection.Open();
+            //}
+            //try
+            //{
+            //    using (OracleCommand cmd = new OracleCommand("SendNotification", sqlConnection))
+            //    {
 
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("p_noidung", OracleDbType.Varchar2).Value = content;
-                    cmd.Parameters.Add("p_label", OracleDbType.Varchar2).Value = label;
-                    cmd.ExecuteNonQuery();
-                }
-                return true;
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine($"Error: {e.Message}");
-                return false;
-            }
-            finally
-            {
-                if (sqlConnection.State == ConnectionState.Open)
-                {
-                    sqlConnection.Close();
-                }
-            }
+            //        cmd.CommandType = CommandType.StoredProcedure;
+            //        cmd.Parameters.Add("p_noidung", OracleDbType.Varchar2).Value = content;
+            //        cmd.Parameters.Add("p_label", OracleDbType.Varchar2).Value = label;
+            //        cmd.ExecuteNonQuery();
+            //    }
+            //    return true;
+            //}
+            //catch (System.Exception e)
+            //{
+            //    Console.WriteLine($"Error: {e.Message}");
+            //    return false;
+            //}
+            //finally
+            //{
+            //    if (sqlConnection.State == ConnectionState.Open)
+            //    {
+            //        sqlConnection.Close();
+            //    }
+            //}
+            return false;
         }
         public bool Delete(object obj)
         {
@@ -61,161 +62,165 @@ namespace QLDeAn.DataAccess.ThongBao
 
         public List<object> Load(object obj)
         {
-            //if (sqlConnection.State != ConnectionState.Open)
-            //{
-            //    sqlConnection.Open();
-            //}
-            //List<Model.ThongBao> result = new List<Model.ThongBao>();
-            //using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_THONGBAO_Table", sqlConnection))
-            //{
-            //    cmd.CommandType = CommandType.StoredProcedure;
-            //    cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            if (sqlConnection.State != ConnectionState.Open)
+            {
+                sqlConnection.Open();
+            }
 
-            //    using (var reader = cmd.ExecuteReader())
-            //    {
-            //        while (reader.Read())
-            //        {
-            //            var tb = new Model.ThongBao
-            //            {
-            //                MATB = Convert.ToInt32(reader["MATB"]),
-            //                NOIDUNG = reader["NOIDUNG"].ToString(),
-            //                NGAYTB = DateOnly.FromDateTime(Convert.ToDateTime(reader["NGAYTB"])),
-            //            };
+            List<Model.ThongBao> result = new List<Model.ThongBao>();
 
-            //            result.Add(tb);
-            //        }
-            //    }
-            //}
-            //sqlConnection.Close();
-            //return result.Cast<object>().ToList();
-            return null;
+            using (var cmd = new OracleCommand("SELECT * FROM QLDL.THONGBAO", sqlConnection))
+            {
+                cmd.CommandType = CommandType.Text; // Sửa lại thành Text vì là câu lệnh SELECT
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tb = new Model.ThongBao
+                        {
+                            ID_ThongBao = Convert.ToInt32(reader["ID_ThongBao"]),
+                            NoiDung = reader["NOIDUNG"].ToString(),
+                            ThoiGian = Convert.ToDateTime(reader["THOIGIAN"]).Date, // Lấy phần ngày
+                            DiaDiem = reader["DIADIEM"].ToString()
+                        };
+
+                        result.Add(tb);
+                    }
+                }
+            }
+
+            sqlConnection.Close();
+            return result.Cast<object>().ToList();
         }
+
 
         public bool Update(object obj)
         {
             throw new NotImplementedException();
         }
 
-        // Lấy các level
-        //public List<LabelComponent> GetAllLevels()
-        //{
-        //    List<LabelComponent> levelList = new List<LabelComponent>();
-        //    if (sqlConnection.State != ConnectionState.Open)
-        //    {
-        //        sqlConnection.Open();
-        //    }
-        //    try
-        //    {
-        //        using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_GetLevels", sqlConnection))
-        //        {
-        //            cmd.CommandType = CommandType.StoredProcedure;
-        //            cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+        public List<LabelComponent> GetAllLevels()
+        {
+            //List<LabelComponent> levelList = new List<LabelComponent>();
+            //if (sqlConnection.State != ConnectionState.Open)
+            //{
+            //    sqlConnection.Open();
+            //}
+            //try
+            //{
+            //    using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_GetLevels", sqlConnection))
+            //    {
+            //        cmd.CommandType = CommandType.StoredProcedure;
+            //        cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
-        //            using (var reader = cmd.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    var label = new LabelComponent
-        //                    {
-        //                        LONG_NAME = reader["LONG_NAME"].ToString() ,
-        //                        SHORT_NAME = reader["SHORT_NAME"].ToString(),
-        //                        TYPE = "Level"
-        //                    };
-        //                    levelList.Add(label);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        Console.WriteLine($"Error: {e.Message}");
-        //    }
-        //    finally
-        //    {
-        //        sqlConnection.Close();
-        //    }
-        //    return levelList;
-        //}
-        // Lấy các department
-        //public List<LabelComponent> GetAllDepartments()
-        //{
-        //    List<LabelComponent> departmentList = new List<LabelComponent>();
+            //        using (var reader = cmd.ExecuteReader())
+            //        {
+            //            while (reader.Read())
+            //            {
+            //                var label = new LabelComponent
+            //                {
+            //                    LONG_NAME = reader["LONG_NAME"].ToString(),
+            //                    SHORT_NAME = reader["SHORT_NAME"].ToString(),
+            //                    TYPE = "Level"
+            //                };
+            //                levelList.Add(label);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (System.Exception e)
+            //{
+            //    Console.WriteLine($"Error: {e.Message}");
+            //}
+            //finally
+            //{
+            //    sqlConnection.Close();
+            //}
+            //return levelList;
+            return null;
+        }
+        public List<LabelComponent> GetAllDepartments()
+        {
+            //List<LabelComponent> departmentList = new List<LabelComponent>();
 
-        //    if (sqlConnection.State != ConnectionState.Open)
-        //    {
-        //        sqlConnection.Open();
-        //    }
-        //    try
-        //    {
-        //        using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_GetDepartments", sqlConnection))
-        //        {
-        //            cmd.CommandType = CommandType.StoredProcedure;
-        //            cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            //if (sqlConnection.State != ConnectionState.Open)
+            //{
+            //    sqlConnection.Open();
+            //}
+            //try
+            //{
+            //    using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_GetDepartments", sqlConnection))
+            //    {
+            //        cmd.CommandType = CommandType.StoredProcedure;
+            //        cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
-        //            using (var reader = cmd.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    var department = new LabelComponent
-        //                    {
-        //                        LONG_NAME = reader["LONG_NAME"].ToString(),
-        //                        SHORT_NAME = reader["SHORT_NAME"].ToString(),
-        //                        TYPE = "Department"
-        //                    };
-        //                    departmentList.Add(department);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        Console.WriteLine($"Error: {e.Message}");
-        //    }
-        //    finally
-        //    {
-        //        sqlConnection.Close();
-        //    }
-        //    return departmentList;
-        //}
-        // lấy các group
-        //public List<LabelComponent> GetAllGroups()
-        //{
-        //    List<LabelComponent> groupList = new List<LabelComponent>();    
-        //    if (sqlConnection.State != ConnectionState.Open)
-        //    {
-        //        sqlConnection.Open();
-        //    }
-        //    try
-        //    {
-        //        using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_GetGroups", sqlConnection))
-        //        {
-        //            cmd.CommandType = CommandType.StoredProcedure;
-        //            cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+            //        using (var reader = cmd.ExecuteReader())
+            //        {
+            //            while (reader.Read())
+            //            {
+            //                var department = new LabelComponent
+            //                {
+            //                    LONG_NAME = reader["LONG_NAME"].ToString(),
+            //                    SHORT_NAME = reader["SHORT_NAME"].ToString(),
+            //                    TYPE = "Department"
+            //                };
+            //                departmentList.Add(department);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (System.Exception e)
+            //{
+            //    Console.WriteLine($"Error: {e.Message}");
+            //}
+            //finally
+            //{
+            //    sqlConnection.Close();
+            //}
+            //return departmentList;
+            return null; 
+        }
+        public List<LabelComponent> GetAllGroups()
+        {
+            //    List<LabelComponent> groupList = new List<LabelComponent>();
+            //    if (sqlConnection.State != ConnectionState.Open)
+            //    {
+            //        sqlConnection.Open();
+            //    }
+            //    try
+            //    {
+            //        using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_GetGroups", sqlConnection))
+            //        {
+            //            cmd.CommandType = CommandType.StoredProcedure;
+            //            cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
-        //            using (var reader = cmd.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    var group = new LabelComponent
-        //                    {
-        //                        LONG_NAME = reader["LONG_NAME"].ToString(),
-        //                        SHORT_NAME = reader["SHORT_NAME"].ToString(),
-        //                        TYPE = "Group"
-        //                    };
-        //                    groupList.Add(group);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        Console.WriteLine($"Error: {e.Message}");
-        //    }
-        //    finally
-        //    {
-        //        sqlConnection.Close();
-        //    }
-        //    return groupList;
-        //}
+            //            using (var reader = cmd.ExecuteReader())
+            //            {
+            //                while (reader.Read())
+            //                {
+            //                    var group = new LabelComponent
+            //                    {
+            //                        LONG_NAME = reader["LONG_NAME"].ToString(),
+            //                        SHORT_NAME = reader["SHORT_NAME"].ToString(),
+            //                        TYPE = "Group"
+            //                    };
+            //                    groupList.Add(group);
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (System.Exception e)
+            //    {
+            //        Console.WriteLine($"Error: {e.Message}");
+            //    }
+            //    finally
+            //    {
+            //        sqlConnection.Close();
+            //    }
+            //    return groupList;
+            return null;
+
+        }
     }
 }

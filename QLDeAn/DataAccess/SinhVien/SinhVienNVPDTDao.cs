@@ -33,11 +33,12 @@ namespace QLDeAn.DataAccess.SinhVien
             {
                 sqlConnection.Open();
             }
+
             List<Model.SinhVien> result = new List<Model.SinhVien>();
-            using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_SINHVIEN_Table_ForSV", sqlConnection))
+
+            using (var cmd = new OracleCommand("SELECT * FROM QLSL.SINHVIEN", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.Text; // ✅ Sửa lại ở đây
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -52,9 +53,10 @@ namespace QLDeAn.DataAccess.SinhVien
                             dChi = reader["dChi"].ToString(),
                             dt = reader["dt"].ToString(),
                             khoa = reader["khoa"].ToString(),
-                            TINHTRANG = reader["tinhTrang"].ToString()
+                            TINHTRANG = reader["tinhTrang"].ToString(),
+                            isInDB = true
                         };
-                        sv.isInDB = true;
+
                         result.Add(sv);
                     }
                 }
@@ -62,6 +64,7 @@ namespace QLDeAn.DataAccess.SinhVien
 
             return result.Cast<object>().ToList();
         }
+
 
         public bool Update(object obj)
         {
@@ -71,24 +74,23 @@ namespace QLDeAn.DataAccess.SinhVien
                 {
                     sqlConnection.Open();
                 }
+
                 Model.SinhVien sinhVien = (Model.SinhVien)obj;
-                using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_update_TT_SV", sqlConnection))
+
+                using (var cmd = new OracleCommand("UPDATE QLDL.SINHVIEN SET TINHTRANG = :TINHTRANG_ WHERE MASV = :MaSV_", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("MaSV_", OracleDbType.Varchar2).Value = sinhVien.maSV;
+                    cmd.CommandType = CommandType.Text; // ❗Vì đây là SQL thường
+
                     cmd.Parameters.Add("TINHTRANG_", OracleDbType.Varchar2).Value = sinhVien.TINHTRANG;
+                    cmd.Parameters.Add("MaSV_", OracleDbType.Varchar2).Value = sinhVien.maSV;
 
-                    var rowAffectedParam = new OracleParameter("ROW_AFFECTED", OracleDbType.Int32);
-                    rowAffectedParam.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(rowAffectedParam);
-
-                    cmd.ExecuteNonQuery();
-                    int rowsAffected = ((OracleDecimal)rowAffectedParam.Value).ToInt32();
+                    int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
+                // Có thể log lỗi: ex.Message
                 return false;
             }
             finally
@@ -99,5 +101,6 @@ namespace QLDeAn.DataAccess.SinhVien
                 }
             }
         }
+
     }
 }

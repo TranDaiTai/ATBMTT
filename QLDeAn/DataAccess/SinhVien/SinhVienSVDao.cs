@@ -33,11 +33,11 @@ namespace QLDeAn.DataAccess.SinhVien
                 sqlConnection.Open();
             }
             List<Model.SinhVien> result = new List<Model.SinhVien>();
-            using (var cmd = new OracleCommand("X_ADMIN.X_ADMIN_Select_SINHVIEN_Table_ForSV", sqlConnection))
+
+            using (var cmd = new OracleCommand("SELECT * FROM V_SINHVIEN", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
-                
+                cmd.CommandType = CommandType.Text;  // Sửa lại đây
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -63,24 +63,35 @@ namespace QLDeAn.DataAccess.SinhVien
             return result.Cast<object>().ToList();
         }
 
+
         public bool Update(object obj)
         {
             var sv = obj as Model.SinhVien;
+
+            if (sv == null)
+                return false;
 
             if (sqlConnection.State != ConnectionState.Open)
             {
                 sqlConnection.Open();
             }
 
-            using (OracleCommand cmd = new OracleCommand("X_ADMIN.X_ADMIN_Update_SINHVIEN_Table_ForSV", sqlConnection))
+            using (OracleCommand cmd = new OracleCommand(
+                "UPDATE QLDL.SINHVIEN SET DCHI = :p_dChi, DT = :p_dt WHERE MASV = :p_maSV", sqlConnection))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi;
-                cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt;
-                cmd.ExecuteNonQuery();
+                cmd.CommandType = CommandType.Text;  // Thực thi câu lệnh SQL bình thường
+
+                cmd.Parameters.Add("p_dChi", OracleDbType.Varchar2).Value = sv.dChi ?? (object)DBNull.Value;
+                cmd.Parameters.Add("p_dt", OracleDbType.Varchar2).Value = sv.dt ?? (object)DBNull.Value;
+                cmd.Parameters.Add("p_maSV", OracleDbType.Varchar2).Value = sv.maSV;
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
                 sqlConnection.Close();
-                return true;
+
+                return rowsAffected > 0;
             }
         }
+
     }
 }
