@@ -32,17 +32,17 @@
             this.Xinchao = new System.Windows.Forms.Label();
             this.btn_dangxuat = new System.Windows.Forms.Button();
             this.TP_THONGBAO = new System.Windows.Forms.TabPage();
-            this.sinhvienuI_THONGBAO2 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_THONGBAO();
             this.TP_LICHSUHOCPHAN = new System.Windows.Forms.TabPage();
-            this.sinhvienuI_LICHSUDANGKY1 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_LICHSUDANGKY();
             this.TP_Thongtinsv = new System.Windows.Forms.TabPage();
-            this.sinhvienuI_THONGTINSINHVIEN1 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_THONGTINSINHVIEN();
             this.TP_MOMON = new System.Windows.Forms.TabPage();
-            this.sinhvienuI_MOMON2 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_MOMON();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TP_DANGKYMON = new System.Windows.Forms.TabPage();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.sinhvienuI_MOMON2 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_MOMON();
+            this.sinhvienuI_THONGTINSINHVIEN1 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_THONGTINSINHVIEN();
+            this.sinhvienuI_LICHSUDANGKY1 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_LICHSUDANGKY();
+            this.sinhvienuI_THONGBAO2 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_THONGBAO();
             this.sinhvienuI_DANGKYMON1 = new QLDeAn.VIEW_SINHVIEN.SINHVIENUI_DANGKYMON();
             this.TP_THONGBAO.SuspendLayout();
             this.TP_LICHSUHOCPHAN.SuspendLayout();
@@ -57,7 +57,7 @@
             // Xinchao
             // 
             this.Xinchao.AutoSize = true;
-            this.Xinchao.Location = new System.Drawing.Point(604, 15);
+            this.Xinchao.Location = new System.Drawing.Point(634, 2);
             this.Xinchao.Name = "Xinchao";
             this.Xinchao.Size = new System.Drawing.Size(66, 16);
             this.Xinchao.TabIndex = 4;
@@ -66,7 +66,7 @@
             // 
             // btn_dangxuat
             // 
-            this.btn_dangxuat.Location = new System.Drawing.Point(824, 8);
+            this.btn_dangxuat.Location = new System.Drawing.Point(838, -1);
             this.btn_dangxuat.Name = "btn_dangxuat";
             this.btn_dangxuat.Size = new System.Drawing.Size(100, 23);
             this.btn_dangxuat.TabIndex = 3;
@@ -85,13 +85,6 @@
             this.TP_THONGBAO.Text = "THÔNG BÁO";
             this.TP_THONGBAO.UseVisualStyleBackColor = true;
             // 
-            // sinhvienuI_THONGBAO2
-            // 
-            this.sinhvienuI_THONGBAO2.Location = new System.Drawing.Point(0, 3);
-            this.sinhvienuI_THONGBAO2.Name = "sinhvienuI_THONGBAO2";
-            this.sinhvienuI_THONGBAO2.Size = new System.Drawing.Size(956, 470);
-            this.sinhvienuI_THONGBAO2.TabIndex = 0;
-            // 
             // TP_LICHSUHOCPHAN
             // 
             this.TP_LICHSUHOCPHAN.Controls.Add(this.sinhvienuI_LICHSUDANGKY1);
@@ -102,13 +95,6 @@
             this.TP_LICHSUHOCPHAN.TabIndex = 3;
             this.TP_LICHSUHOCPHAN.Text = "LỊCH SỬ HỌC PHẦN";
             this.TP_LICHSUHOCPHAN.UseVisualStyleBackColor = true;
-            // 
-            // sinhvienuI_LICHSUDANGKY1
-            // 
-            this.sinhvienuI_LICHSUDANGKY1.Location = new System.Drawing.Point(3, 6);
-            this.sinhvienuI_LICHSUDANGKY1.Name = "sinhvienuI_LICHSUDANGKY1";
-            this.sinhvienuI_LICHSUDANGKY1.Size = new System.Drawing.Size(899, 479);
-            this.sinhvienuI_LICHSUDANGKY1.TabIndex = 0;
             // 
             // TP_Thongtinsv
             // 
@@ -122,13 +108,6 @@
             this.TP_Thongtinsv.UseVisualStyleBackColor = true;
             this.TP_Thongtinsv.Click += new System.EventHandler(this.TP_Thongtinsv_Click);
             // 
-            // sinhvienuI_THONGTINSINHVIEN1
-            // 
-            this.sinhvienuI_THONGTINSINHVIEN1.Location = new System.Drawing.Point(0, 0);
-            this.sinhvienuI_THONGTINSINHVIEN1.Name = "sinhvienuI_THONGTINSINHVIEN1";
-            this.sinhvienuI_THONGTINSINHVIEN1.Size = new System.Drawing.Size(900, 488);
-            this.sinhvienuI_THONGTINSINHVIEN1.TabIndex = 0;
-            // 
             // TP_MOMON
             // 
             this.TP_MOMON.Controls.Add(this.sinhvienuI_MOMON2);
@@ -141,14 +120,6 @@
             this.TP_MOMON.UseVisualStyleBackColor = true;
             this.TP_MOMON.Click += new System.EventHandler(this.TP_MOMON_Click);
             // 
-            // sinhvienuI_MOMON2
-            // 
-            this.sinhvienuI_MOMON2.Location = new System.Drawing.Point(-4, 0);
-            this.sinhvienuI_MOMON2.Name = "sinhvienuI_MOMON2";
-            this.sinhvienuI_MOMON2.Size = new System.Drawing.Size(937, 484);
-            this.sinhvienuI_MOMON2.TabIndex = 0;
-            this.sinhvienuI_MOMON2.Click += new System.EventHandler(this.sinhvienuI_MOMON2_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TP_MOMON);
@@ -156,7 +127,7 @@
             this.tabControl1.Controls.Add(this.TP_LICHSUHOCPHAN);
             this.tabControl1.Controls.Add(this.TP_THONGBAO);
             this.tabControl1.Controls.Add(this.TP_DANGKYMON);
-            this.tabControl1.Location = new System.Drawing.Point(12, 8);
+            this.tabControl1.Location = new System.Drawing.Point(2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(926, 505);
@@ -173,6 +144,35 @@
             this.TP_DANGKYMON.TabIndex = 5;
             this.TP_DANGKYMON.Text = "ĐĂNG KÝ MÔN";
             this.TP_DANGKYMON.UseVisualStyleBackColor = true;
+            // 
+            // sinhvienuI_MOMON2
+            // 
+            this.sinhvienuI_MOMON2.Location = new System.Drawing.Point(-4, 0);
+            this.sinhvienuI_MOMON2.Name = "sinhvienuI_MOMON2";
+            this.sinhvienuI_MOMON2.Size = new System.Drawing.Size(937, 484);
+            this.sinhvienuI_MOMON2.TabIndex = 0;
+            this.sinhvienuI_MOMON2.Click += new System.EventHandler(this.sinhvienuI_MOMON2_Click);
+            // 
+            // sinhvienuI_THONGTINSINHVIEN1
+            // 
+            this.sinhvienuI_THONGTINSINHVIEN1.Location = new System.Drawing.Point(0, 0);
+            this.sinhvienuI_THONGTINSINHVIEN1.Name = "sinhvienuI_THONGTINSINHVIEN1";
+            this.sinhvienuI_THONGTINSINHVIEN1.Size = new System.Drawing.Size(900, 488);
+            this.sinhvienuI_THONGTINSINHVIEN1.TabIndex = 0;
+            // 
+            // sinhvienuI_LICHSUDANGKY1
+            // 
+            this.sinhvienuI_LICHSUDANGKY1.Location = new System.Drawing.Point(3, 6);
+            this.sinhvienuI_LICHSUDANGKY1.Name = "sinhvienuI_LICHSUDANGKY1";
+            this.sinhvienuI_LICHSUDANGKY1.Size = new System.Drawing.Size(899, 479);
+            this.sinhvienuI_LICHSUDANGKY1.TabIndex = 0;
+            // 
+            // sinhvienuI_THONGBAO2
+            // 
+            this.sinhvienuI_THONGBAO2.Location = new System.Drawing.Point(0, 3);
+            this.sinhvienuI_THONGBAO2.Name = "sinhvienuI_THONGBAO2";
+            this.sinhvienuI_THONGBAO2.Size = new System.Drawing.Size(956, 470);
+            this.sinhvienuI_THONGBAO2.TabIndex = 0;
             // 
             // sinhvienuI_DANGKYMON1
             // 

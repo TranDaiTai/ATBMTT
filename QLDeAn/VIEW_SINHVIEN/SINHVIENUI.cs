@@ -112,7 +112,8 @@ namespace QLDeAn.VIEW_SINHVIEN
         private void SINHVIENUI_Load(object sender, EventArgs e)
         {
             sinhvienuI_MOMON2.Load_DangKyhocPhan();
-
+            sinhvienuI_THONGTINSINHVIEN1.Load_SinhVien();
+            
             //var dao = new SinhVienSVDao(LoginUI.con);
 
             //List<object> data = dao.Load(null);
@@ -120,7 +121,7 @@ namespace QLDeAn.VIEW_SINHVIEN
             //if (data.Count > 0)
             //{
             //    s_sv = (SinhVien)data[0]; // Lưu nhân viên hiện tại vào biến tĩnh
-            //    Xinchao.Text = "XIN CHÀO " + s_sv.hoTen.ToUpper() + "!";
+            Xinchao.Text = "XIN CHÀO " + sinhvienuI_THONGTINSINHVIEN1.current_sinhvien.hoTen.ToUpper() + "!";
             //}
             //else
             //{

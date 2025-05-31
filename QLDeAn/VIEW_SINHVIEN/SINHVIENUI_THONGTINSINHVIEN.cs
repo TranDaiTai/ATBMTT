@@ -23,7 +23,7 @@ namespace QLDeAn.VIEW_SINHVIEN
 
 
         private static ISinhVienDao dao = null;
-        private static SinhVien current_sinhvien = null;
+        public  SinhVien current_sinhvien = null;
 
         public void Load_SinhVien()
         {
