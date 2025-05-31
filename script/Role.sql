@@ -13,3 +13,7 @@ CREATE ROLE ROLE_TRGDV;
 
 -- Vai trò nhân viên tổ chức hành chính
 CREATE ROLE ROLE_TCHC;
+
+
+-- GRANT SELECT ON QLDL.DONVI TO ROLE_NV_CTSV; --// để test sinh viên xem thông tin đơn vị
+ GRANT SELECT ON QLDL.NHANVIEN_SEQ to  ROLE_TCHC;
