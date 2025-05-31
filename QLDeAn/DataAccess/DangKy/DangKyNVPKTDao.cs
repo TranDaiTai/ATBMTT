@@ -22,7 +22,39 @@ namespace QLDeAn.DataAccess.DangKy
 
         public bool Delete(object obj)
         {
-            throw new NotImplementedException();
+            if (sqlConnection.State != ConnectionState.Open)
+            {
+                sqlConnection.Open();
+            }
+
+            try
+            {
+                var dangKy = (Model.DangKy)obj;
+
+                string sql = @"DELETE FROM QLDL.DANGKY WHERE MASV = :p_MASV AND MAMM = :p_MAMM";
+
+                using (var cmd = new OracleCommand(sql, sqlConnection))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.Add("p_MASV", OracleDbType.Varchar2).Value = dangKy.maSV;
+                    cmd.Parameters.Add("p_MAMM", OracleDbType.Varchar2).Value = dangKy.maMM;
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
+            finally
+            {
+                if (sqlConnection.State == ConnectionState.Open)
+                    sqlConnection.Close();
+            }
         }
 
         public List<object> Load(object obj)

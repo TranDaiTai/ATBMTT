@@ -23,7 +23,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             SetButtonsByRole();
         }
         private static IDangKyDao dao = null;
-        private static DangKy selected_DangKy = null;
+        private  DangKy selected_DangKy = null;
         public void Load_DangKyhocPhan()
         {
 
@@ -59,7 +59,6 @@ namespace QLDeAn.VIEW_NHANVIEN
             {
                 case "NV PĐT":
                     BTN_CAPNHAT.Visible = true;
-                    BTN_THÊM.Visible = true;
                     BTN_XOA.Visible = true;
 
 
@@ -69,7 +68,6 @@ namespace QLDeAn.VIEW_NHANVIEN
                     break;
                 case "NV PKT":
                     BTN_CAPNHAT.Visible = true;
-                    BTN_THÊM.Visible = false;
                     BTN_XOA.Visible = false;
 
 
@@ -81,7 +79,6 @@ namespace QLDeAn.VIEW_NHANVIEN
                 default:
                     // Ẩn hết nếu không xác định được vai trò
                     BTN_CAPNHAT.Visible = false;
-                    BTN_THÊM.Visible = false;
                     BTN_XOA.Visible = false;
                     break;
             }

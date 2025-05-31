@@ -292,11 +292,23 @@
     <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMDANGKY.Designer.cs">
       <DependentUpon>NHANVIENUI_THEMDANGKY.cs</DependentUpon>
     </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_themmon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_themmon.Designer.cs">
+      <DependentUpon>NHANVIENUI_themmon.cs</DependentUpon>
+    </Compile>
     <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMNHANVIEN.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMNHANVIEN.Designer.cs">
       <DependentUpon>NHANVIENUI_THEMNHANVIEN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMSINHVIEN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIEW_NHANVIEN\NHANVIENUI_THEMSINHVIEN.Designer.cs">
+      <DependentUpon>NHANVIENUI_THEMSINHVIEN.cs</DependentUpon>
     </Compile>
     <Compile Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.cs">
       <SubType>UserControl</SubType>
@@ -431,8 +443,14 @@
     <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_THEMDANGKY.resx">
       <DependentUpon>NHANVIENUI_THEMDANGKY.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_themmon.resx">
+      <DependentUpon>NHANVIENUI_themmon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_THEMNHANVIEN.resx">
       <DependentUpon>NHANVIENUI_THEMNHANVIEN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIENUI_THEMSINHVIEN.resx">
+      <DependentUpon>NHANVIENUI_THEMSINHVIEN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VIEW_NHANVIEN\NHANVIEN_DANGKYHOCPHAN.resx">
       <DependentUpon>NHANVIEN_DANGKYHOCPHAN.cs</DependentUpon>

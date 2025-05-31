@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using QLDeAn.Model;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
+using System.Windows.Forms;
 
 namespace QLDeAn.DataAccess.SinhVien
 {
@@ -88,9 +89,11 @@ namespace QLDeAn.DataAccess.SinhVien
                     return rowsAffected > 0;
                 }
             }
-            catch (Exception ex)
+            catch (OracleException ex)
             {
-                // Có thể log lỗi: ex.Message
+
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
             finally

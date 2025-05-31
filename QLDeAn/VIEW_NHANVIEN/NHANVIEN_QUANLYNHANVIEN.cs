@@ -104,7 +104,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             TB_LUONG.Text = row.Cells["luong"].Value?.ToString() ?? "";
             TB_MADV.Text = row.Cells["maDV"].Value?.ToString() ?? "";
             TB_MANHANVIEN.Text = row.Cells["maNV"].Value?.ToString() ?? "";
-            TB_NGSINH.Text = row.Cells["ngSinh"].Value is DateTime date ? date.ToString("dd/MM/yyyy"): "";
+            TB_NGSINH.Text = row.Cells["ngSinh"].Value is DateTime date ? date.ToString("dd/MMM/yyyy"): "";
             TB_PHUCAP.Text = row.Cells["phuCap"].Value?.ToString() ?? "";
             TB_VAITRO.Text = row.Cells["vaiTro"].Value?.ToString() ?? "";
             TB_PHAI.Text = row.Cells["phai"].Value?.ToString() ?? "";
@@ -148,6 +148,8 @@ namespace QLDeAn.VIEW_NHANVIEN
         {
             NHANVIENUI_THEMNHANVIEN themNhanVienForm = new NHANVIENUI_THEMNHANVIEN();
             themNhanVienForm.Show();
+            Refesh_Nhanvien();
+
         }
         private void Refesh_Nhanvien()
         {

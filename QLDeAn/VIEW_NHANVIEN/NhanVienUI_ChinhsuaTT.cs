@@ -43,7 +43,7 @@ namespace QLDeAn.VIEW_NHANVIEN
                 // Cần thay thế bằng logic thực tế để cập nhật thông tin
                 dao.Update(nv);
                 MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                this.Close(); // Đóng form sau khi cập nhật thành công
             }
         }
 

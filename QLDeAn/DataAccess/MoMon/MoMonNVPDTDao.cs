@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QLDeAn.DataAccess.MoMon
 {
@@ -26,25 +27,27 @@ namespace QLDeAn.DataAccess.MoMon
                     sqlConnection.Open();
                 }
                 Model.MoMon mm = (Model.MoMon)obj;
-                using (var cmd = new OracleCommand("INSERT INTO QLDL.VIEW_MOMON_PDT (MaMM, MaHP, MaGV, HK, NAM) VALUES (:MaMM, :MaHP, :MaGV, :HK, :NAM)", sqlConnection))
+                using (var cmd = new OracleCommand(@"
+                    INSERT INTO QLDL.VIEW_MOMON_PDT (MaMM, MaHP, MaGV, HK, NAM)
+                    VALUES ('MM' || QLDL.momon_seq.NEXTVAL, :MaHP, :MaGV, QLDL.CURRENT_HK(), QLDL.CURRENT_NAM())", sqlConnection))
                 {
-                    cmd.CommandType = CommandType.Text;  // Dùng Text thay vì StoredProcedure
+                    cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add(new OracleParameter("MaMM", OracleDbType.Varchar2)).Value = mm.MAMM;
                     cmd.Parameters.Add(new OracleParameter("MaHP", OracleDbType.Varchar2)).Value = mm.MAHP;
                     cmd.Parameters.Add(new OracleParameter("MaGV", OracleDbType.Varchar2)).Value = mm.MAGV;
-                    cmd.Parameters.Add(new OracleParameter("HK", OracleDbType.Int32)).Value = mm.HK;
-                    cmd.Parameters.Add(new OracleParameter("NAM", OracleDbType.Int32)).Value = mm.NAM;
 
-                    cmd.ExecuteNonQuery();
+                    int row = cmd.ExecuteNonQuery();
                     sqlConnection.Close();
-                    return true;
+                    return row > 0;
                 }
 
+
             }
-            catch (System.Exception e)
+            catch (OracleException ex)
             {
-                sqlConnection.Close();
+
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
         }
@@ -72,9 +75,11 @@ namespace QLDeAn.DataAccess.MoMon
                 }
 
             }
-            catch (System.Exception e)
+            catch (OracleException ex)
             {
-                sqlConnection.Close();
+
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
         }
@@ -139,9 +144,11 @@ namespace QLDeAn.DataAccess.MoMon
                     return rowsAffected > 0;
                 }
             }
-            catch (Exception e)
+            catch (OracleException ex)
             {
-                Console.WriteLine("Error: " + e.Message);
+
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
             finally

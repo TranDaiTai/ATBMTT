@@ -12,6 +12,7 @@ using Oracle.ManagedDataAccess.Client;
 using QLDeAn.Model;
 using QLDeAn.DataAccess;
 using QLDeAn.DataAccess.NhanVien;
+using QLDeAn.DataAccess.DangKy;
 namespace QLDeAn.VIEW_NHANVIEN
 {
     public partial class NhanVienUI : Form
@@ -23,16 +24,16 @@ namespace QLDeAn.VIEW_NHANVIEN
             NHANVIENUI_LOAD();
         }
         public static String roleUser;
-        public static OracleConnection conNow;
+        public  OracleConnection conNow = LoginUI.con;
         private bool isLogout = false;
+        private INhanVienDao dao = null; // Biến để lưu đối tượng DAO tương ứng với vai trò của nhân viên
         private static NhanVien s_nv; // Biến tĩnh để lưu thông tin nhân viên hiện tại
 
         private void NHANVIENUI_LOAD()
         {
-            conNow = LoginUI.con;
 
             // Gọi DAO
-            var dao = new NhanVienNVCBDao(conNow);
+             dao = new NhanVienNVCBDao(conNow);
             List<object> data = dao.Load(null);
 
             if (data.Count > 0)
@@ -46,7 +47,34 @@ namespace QLDeAn.VIEW_NHANVIEN
                 TB_MADV.Text = s_nv.maDV;
                 TB_LUONG.Text = s_nv.luong.HasValue ? s_nv.luong.Value.ToString() : "Chưa cập nhật";
                 TB_MANHANVIEN.Text = s_nv.maNV;
-                TB_NGAYSINH.Text = s_nv.ngSinh.HasValue ? s_nv.ngSinh.Value.ToString("dd/MM/yyyy") : "Chưa cập nhật";
+                TB_NGAYSINH.Text = s_nv.ngSinh.HasValue ? s_nv.ngSinh.Value.ToString("dd/MMM/yyyy") : "Chưa cập nhật";
+                TB_PHAI.Text = s_nv.phai;
+                TB_PHUCAP.Text = s_nv.phuCap.HasValue ? s_nv.phuCap.Value.ToString() : "Chưa cập nhật";
+            }
+            else
+            {
+                Xinchao.Text = "KHÔNG THỂ LẤY THÔNG TIN NHÂN VIÊN!";
+            }
+        }
+        private void NHANVIENUI_REFESH()
+        {
+
+            // Gọi DAO
+            dao = new NhanVienNVCBDao(conNow);
+            List<object> data = dao.Load(null);
+
+            if (data.Count > 0)
+            {
+                s_nv = (NhanVien)data[0]; // Lưu nhân viên hiện tại vào biến tĩnh
+                Xinchao.Text = "XIN CHÀO " + s_nv.hoTen.ToUpper() + "!";
+                TB_COSO.Text = s_nv.coso;
+                TB_VAITRO.Text = s_nv.vaiTro;
+                TB_DT.Text = s_nv.dt;
+                TB_HOTEN.Text = s_nv.hoTen;
+                TB_MADV.Text = s_nv.maDV;
+                TB_LUONG.Text = s_nv.luong.HasValue ? s_nv.luong.Value.ToString() : "Chưa cập nhật";
+                TB_MANHANVIEN.Text = s_nv.maNV;
+                TB_NGAYSINH.Text = s_nv.ngSinh.HasValue ? s_nv.ngSinh.Value.ToString("dd/MMM/yyyy") : "Chưa cập nhật";
                 TB_PHAI.Text = s_nv.phai;
                 TB_PHUCAP.Text = s_nv.phuCap.HasValue ? s_nv.phuCap.Value.ToString() : "Chưa cập nhật";
             }
@@ -210,6 +238,21 @@ namespace QLDeAn.VIEW_NHANVIEN
         {
             NhanVienUI_ChinhsuaTT chinhsuaUI = new NhanVienUI_ChinhsuaTT();
             chinhsuaUI.ShowDialog();
+            NHANVIENUI_REFESH();
+        }
+
+        private void TP_THONGTINNHANVIEN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NhanVienUI_Load(object sender, EventArgs e)
+        {
+            nhanvieN_QUANLYMONHOC1.Load_MoMon();
+            nhanvieN_QUANLYSINHVIEN1.Load_SinhVien();
+            nhanvieN_QUANLYNHANVIEN1.Load_Nhanvien();
+            nhanvieN_DANGKYHOCPHAN1.Load_DangKyhocPhan();
+            nhanVien_ThongBao2.Load_Thongbao();
         }
     }
 }

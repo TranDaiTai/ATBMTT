@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QLDeAn.DataAccess.DangKy
 {
@@ -36,8 +37,11 @@ namespace QLDeAn.DataAccess.DangKy
                 sqlConnection.Close();
                 return true;
             }
-            catch (System.Exception ex)
+            catch (OracleException ex)
             {
+
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
         }
@@ -58,18 +62,19 @@ namespace QLDeAn.DataAccess.DangKy
                 using (var cmd = new OracleCommand(sql, sqlConnection))
                 {
                     cmd.CommandType = CommandType.Text;
-
-                    cmd.Parameters.Add(new OracleParameter("MaSV_", dk.maSV));
                     cmd.Parameters.Add(new OracleParameter("MaMM_", dk.maMM));
+                    cmd.Parameters.Add(new OracleParameter("MaSV_", dk.maSV));
 
                     int rowsAffected = cmd.ExecuteNonQuery();
 
                     return rowsAffected > 0;
                 }
             }
-            catch (Exception ex)
+            catch (OracleException ex)
             {
-                // Có thể log ex nếu cần
+               
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
                 return false;
             }
             finally
@@ -116,7 +121,19 @@ namespace QLDeAn.DataAccess.DangKy
 
         public bool Update(object obj)
         {
-            return true;
+            try
+            {
+                Delete(obj);
+                return Add(obj);
+            }
+            catch (OracleException ex)
+            {
+
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+
         }
     }
 }

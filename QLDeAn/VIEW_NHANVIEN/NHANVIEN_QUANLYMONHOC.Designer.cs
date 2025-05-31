@@ -31,6 +31,7 @@
             this.groupMONHOC = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BTN_DANGKYMON = new System.Windows.Forms.Button();
             this.BTN_THÊM = new System.Windows.Forms.Button();
             this.TB_MAHOCPHAN = new System.Windows.Forms.TextBox();
             this.TB_MAGIAOVIEN = new System.Windows.Forms.TextBox();
@@ -76,20 +77,32 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.BTN_DANGKYMON);
             this.panel1.Controls.Add(this.BTN_THÊM);
             this.panel1.Location = new System.Drawing.Point(14, 437);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(575, 48);
             this.panel1.TabIndex = 6;
             // 
+            // BTN_DANGKYMON
+            // 
+            this.BTN_DANGKYMON.Location = new System.Drawing.Point(166, 12);
+            this.BTN_DANGKYMON.Name = "BTN_DANGKYMON";
+            this.BTN_DANGKYMON.Size = new System.Drawing.Size(115, 23);
+            this.BTN_DANGKYMON.TabIndex = 0;
+            this.BTN_DANGKYMON.Text = "Đăng ký môn";
+            this.BTN_DANGKYMON.UseVisualStyleBackColor = true;
+            this.BTN_DANGKYMON.Click += new System.EventHandler(this.BTN_DANGKYMON_Click);
+            // 
             // BTN_THÊM
             // 
             this.BTN_THÊM.Location = new System.Drawing.Point(18, 12);
             this.BTN_THÊM.Name = "BTN_THÊM";
-            this.BTN_THÊM.Size = new System.Drawing.Size(75, 23);
+            this.BTN_THÊM.Size = new System.Drawing.Size(115, 23);
             this.BTN_THÊM.TabIndex = 0;
-            this.BTN_THÊM.Text = "THÊM";
+            this.BTN_THÊM.Text = "THÊM MÔN HỌC";
             this.BTN_THÊM.UseVisualStyleBackColor = true;
+            this.BTN_THÊM.Click += new System.EventHandler(this.BTN_THÊM_Click);
             // 
             // TB_MAHOCPHAN
             // 
@@ -195,6 +208,7 @@
             this.BTN_XOA.TabIndex = 0;
             this.BTN_XOA.Text = "XOÁ";
             this.BTN_XOA.UseVisualStyleBackColor = true;
+            this.BTN_XOA.Click += new System.EventHandler(this.BTN_XOA_Click);
             // 
             // TB_MAMONHOC
             // 
@@ -265,5 +279,6 @@
         private System.Windows.Forms.TextBox TB_MAMONHOC;
         private System.Windows.Forms.GroupBox GB_MONHOCDUOCCHON;
         private System.Windows.Forms.TextBox TB_NAM;
+        private System.Windows.Forms.Button BTN_DANGKYMON;
     }
 }

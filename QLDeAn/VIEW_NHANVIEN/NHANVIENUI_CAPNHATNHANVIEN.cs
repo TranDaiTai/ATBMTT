@@ -22,7 +22,6 @@ namespace QLDeAn.VIEW_NHANVIEN
         private void BTN_THEM_Click(object sender, EventArgs e)
         {
            
-
             if (TB_DT.Text == "" || TB_HOTEN.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin nhân viên!");
@@ -35,7 +34,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             }
             if (!DateTime.TryParse(TB_NGAYSINH.Text, out DateTime ngSinh))
             {
-                MessageBox.Show("Ngày sinh không hợp lệ! Vui lòng nhập đúng định dạng dd/MM/yyyy.");
+                MessageBox.Show("Ngày sinh không hợp lệ! Vui lòng nhập đúng định dạng dd/MMM/yyyy.");
                 return;
             }
           
@@ -56,12 +55,13 @@ namespace QLDeAn.VIEW_NHANVIEN
             if (dao.Update(nv))
             {
                 MessageBox.Show("câp nhật nhân viên thành công!");
-                this.Close(); // Đóng form sau khi câp nhật thành công
+                this.Close(); // Đóng form sau khi cập nhật thành công
             }
             else
             {
                 MessageBox.Show("câp nhật nhân viên thất bại! Vui lòng kiểm tra lại thông tin.");
             }
+
         }
 
         private void BTN_huy_Click(object sender, EventArgs e)

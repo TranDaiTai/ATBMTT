@@ -108,7 +108,7 @@ namespace QLDeAn.VIEW_NHANVIEN
             CBB_PHAI.Text = row.Cells["phai"].Value?.ToString() ?? "";
             TB_DIACHI.Text = row.Cells["dChi"].Value?.ToString() ?? "";
             CBB_DONVI.Text = row.Cells["khoa"].Value?.ToString() ?? "";
-            TB_NGAYSINH.Text = row.Cells["ngSinh"].Value is DateTime date ? date.ToString("dd/MM/yyyy") : "";
+            TB_NGAYSINH.Text = row.Cells["ngSinh"].Value is DateTime date ? date.ToString("dd/MMM/yyyy") : "";
             TB_MASINHVIEN.Text = row.Cells["maSV"].Value?.ToString() ?? "";
             TB_TINHTRANG.Text = row.Cells["tinhTrang"].Value?.ToString() ?? "";
             TB_SDT.Text = row.Cells["dt"].Value?.ToString() ?? "";
@@ -140,6 +140,11 @@ namespace QLDeAn.VIEW_NHANVIEN
                 MessageBox.Show("Vui lòng chọn nhân viên để cập nhật.");
                 return;
             }
+            if (!DateTime.TryParse(TB_NGAYSINH.Text, out DateTime ngSinh))
+            {
+                MessageBox.Show("Ngày sinh không hợp lệ! Vui lòng nhập đúng định dạng dd/MMM/yyyy.");
+                return;
+            }
             SinhVien sv = new SinhVien
             {
                 maSV = TB_MASINHVIEN.Text,
@@ -149,7 +154,7 @@ namespace QLDeAn.VIEW_NHANVIEN
                 dt = TB_SDT.Text,
                 khoa = CBB_DONVI.SelectedItem.ToString(),
                 coso = CBB_COSO.SelectedItem.ToString(),
-                ngSinh = DateTime.TryParse(TB_NGAYSINH.Text, out DateTime ngSinh) ? ngSinh : (DateTime?)null,
+                ngSinh  = ngSinh,
                 TINHTRANG = TB_TINHTRANG.Text
             };
           
@@ -168,7 +173,9 @@ namespace QLDeAn.VIEW_NHANVIEN
 
         private void BTN_THÊM_Click(object sender, EventArgs e)
         {
-
+            NHANVIENUI_THEMSINHVIEN tHEMSINHVIEN = new NHANVIENUI_THEMSINHVIEN();
+            tHEMSINHVIEN.ShowDialog();
+            Refesh_SinhVien();
         }
         private void Refesh_SinhVien()
         {

@@ -111,8 +111,8 @@
             // 
             this.CBB_COSO.FormattingEnabled = true;
             this.CBB_COSO.Items.AddRange(new object[] {
-            "CƠ SỞ 1",
-            "CƠ SỞ 2"});
+            "Cơ sở 1 ",
+            "Cơ sở 2"});
             this.CBB_COSO.Location = new System.Drawing.Point(162, 325);
             this.CBB_COSO.Name = "CBB_COSO";
             this.CBB_COSO.Size = new System.Drawing.Size(121, 24);

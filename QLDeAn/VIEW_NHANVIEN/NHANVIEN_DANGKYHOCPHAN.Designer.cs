@@ -50,12 +50,10 @@
             this.groupMONHOC = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BTN_THÊM = new System.Windows.Forms.Button();
             this.GB_THÔNGTINCANHAN_GV = new System.Windows.Forms.GroupBox();
             this.panel2.SuspendLayout();
             this.groupMONHOC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.GB_THÔNGTINCANHAN_GV.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -248,21 +246,10 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.BTN_THÊM);
             this.panel1.Location = new System.Drawing.Point(12, 423);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(575, 48);
             this.panel1.TabIndex = 12;
-            // 
-            // BTN_THÊM
-            // 
-            this.BTN_THÊM.Location = new System.Drawing.Point(18, 12);
-            this.BTN_THÊM.Name = "BTN_THÊM";
-            this.BTN_THÊM.Size = new System.Drawing.Size(75, 23);
-            this.BTN_THÊM.TabIndex = 0;
-            this.BTN_THÊM.Text = "THÊM";
-            this.BTN_THÊM.UseVisualStyleBackColor = true;
-            this.BTN_THÊM.Click += new System.EventHandler(this.BTN_THÊM_Click);
             // 
             // GB_THÔNGTINCANHAN_GV
             // 
@@ -302,7 +289,6 @@
             this.panel2.ResumeLayout(false);
             this.groupMONHOC.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.GB_THÔNGTINCANHAN_GV.ResumeLayout(false);
             this.GB_THÔNGTINCANHAN_GV.PerformLayout();
             this.ResumeLayout(false);
@@ -332,7 +318,6 @@
         private System.Windows.Forms.GroupBox groupMONHOC;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BTN_THÊM;
         private System.Windows.Forms.GroupBox GB_THÔNGTINCANHAN_GV;
     }
 }

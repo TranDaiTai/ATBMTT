@@ -84,8 +84,7 @@ namespace QLDeAn.VIEW_NHANVIEN
                     BTN_XOA.Visible = true;
 
                     // Hiển thị các trường thông tin
-                    TB_HOCKI.ReadOnly = false;
-                    TB_NAM.ReadOnly = false;
+                    TB_MAHOCPHAN.ReadOnly = false;
                     TB_MAGIAOVIEN.ReadOnly = false;
                     break;
 
@@ -138,6 +137,50 @@ namespace QLDeAn.VIEW_NHANVIEN
             try
             {
                 if (dao.Update(mm))
+                {
+                    MessageBox.Show("Cập nhật thành công.");
+                    Refesh_MoMon();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại. Vui lòng kiểm tra lại thông tin.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi cập nhật: {ex.Message}");
+            }
+        }
+
+        private void BTN_DANGKYMON_Click(object sender, EventArgs e)
+        {
+            if (selected_momon == null)
+            {
+                MessageBox.Show("Vui lòng chọn một môn học để đăng ký.");
+                return;
+            }
+            NHANVIENUI_THEMDANGKY nHANVIENUI_THEMDANGKY = new NHANVIENUI_THEMDANGKY();
+            nHANVIENUI_THEMDANGKY.Tag = selected_momon; // Gửi thông tin môn học đã chọn
+            nHANVIENUI_THEMDANGKY.ShowDialog(); // Hiển thị form đăng ký môn học
+        }
+
+        private void BTN_THÊM_Click(object sender, EventArgs e)
+        {
+            NHANVIENUI_themmon themmon = new NHANVIENUI_themmon();
+            themmon.ShowDialog();
+            Refesh_MoMon(); // Làm mới danh sách môn học sau khi thêm
+        }
+
+        private void BTN_XOA_Click(object sender, EventArgs e)
+        {
+            if (selected_momon == null)
+            {
+                MessageBox.Show("Vui lòng chọn một môn học để cập nhật.");
+                return;
+            }
+            try
+            {
+                if (dao.Delete(selected_momon))
                 {
                     MessageBox.Show("Cập nhật thành công.");
                     Refesh_MoMon();

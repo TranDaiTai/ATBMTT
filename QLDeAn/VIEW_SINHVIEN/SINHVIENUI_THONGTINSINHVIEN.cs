@@ -47,7 +47,7 @@ namespace QLDeAn.VIEW_SINHVIEN
             TB_PHAI.Text = current_sinhvien.phai ?? "";
             TB_DIACHI.Text = current_sinhvien.dChi ?? "";
             TB_KHOA.Text = current_sinhvien.khoa ?? "";
-            TB_NGAYSINH.Text = current_sinhvien.ngSinh?.ToString("dd/MM/yyyy") ?? "";
+            TB_NGAYSINH.Text = current_sinhvien.ngSinh?.ToString("dd/MMM/yyyy") ?? "";
             TB_MASINHVIEN.Text = current_sinhvien.maSV ?? "";
             TB_TINHTRANG.Text = current_sinhvien.TINHTRANG ?? "";
             TB_SDT.Text = current_sinhvien.dt ?? "";
@@ -75,7 +75,7 @@ namespace QLDeAn.VIEW_SINHVIEN
             TB_PHAI.Text = current_sinhvien.phai ?? "";
             TB_DIACHI.Text = current_sinhvien.dChi ?? "";
             TB_KHOA.Text = current_sinhvien.khoa ?? "";
-            TB_NGAYSINH.Text = current_sinhvien.ngSinh?.ToString("dd/MM/yyyy") ?? "";
+            TB_NGAYSINH.Text = current_sinhvien.ngSinh?.ToString("dd/MMM/yyyy") ?? "";
             TB_MASINHVIEN.Text = current_sinhvien.maSV ?? "";
             TB_TINHTRANG.Text = current_sinhvien.TINHTRANG ?? "";
             TB_SDT.Text = current_sinhvien.dt ?? "";
