@@ -145,3 +145,16 @@ VALUES (thongbao_seq.NEXTVAL, 'Thông báo kế hoạch phát triển khoa Hóa 
 
 
 
+BEGIN
+  -- TRƯỞNG ĐƠN VỊ có toàn quyền (đọc tất cả thông báo)
+ 
+  -- NHÂN VIÊN hành chính – chỉ đọc thông báo hành chính cơ sở 1
+  SA_USER_ADMIN.SET_USER_LABELS(
+    policy_name => 'THONGBAO_POLICY',
+    user_name   => 'SV001',
+    max_read_label => 'SINHVIEN:HOA:COSO1,COSO2'
+  );
+END;
+/
+
+
